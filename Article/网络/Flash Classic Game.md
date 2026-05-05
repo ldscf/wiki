@@ -11,7 +11,7 @@ last_modified: '2025-02-19T05:54:33Z'
 - [ruffle-nightly-2021_11_20-web-extension.zip](http://<!-- template: SERVERNAME -->/soft/swf/ruffle-nightly-2021_11_20-web-extension.zip)
 - 在Chrome地址栏输入“chrome://settings/content”
 
-![Chrome ext.jpg](https://mwbbs.eu.org/wiki/images/d/d3/Chrome ext.jpg)
+![Chrome_ext.jpg](https://mwbbs.eu.org/wiki/images/d/d3/Chrome_ext.jpg)
 
 ### [打企鹅之澳大利亚的旅行](http://<!-- template: SERVERNAME -->/soft/swf/打企鹅/打企鹅之澳大利亚的旅行.swf)
 
@@ -19,4 +19,4 @@ last_modified: '2025-02-19T05:54:33Z'
 
 ### [Yamyo](http://<!-- template: SERVERNAME -->/soft/swf/other/yamyo.swf)
 
-![Yamyo.jpg](https://mwbbs.eu.org/wiki/images/5/59/Yamyo.jpg)![Yamyo 13320.jpg](https://mwbbs.eu.org/wiki/images/7/79/Yamyo 13320.jpg)
+![Yamyo.jpg](https://mwbbs.eu.org/wiki/images/5/59/Yamyo.jpg)![Yamyo_13320.jpg](https://mwbbs.eu.org/wiki/images/7/79/Yamyo_13320.jpg)

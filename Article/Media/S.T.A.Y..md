@@ -10,7 +10,7 @@ A team of explorers travel through a wormhole in space in an attempt to ensure h
 
 > 
 
-![Hans Zimmer.jpg](https://mwbbs.eu.org/wiki/images/b/b2/Hans Zimmer.jpg)
+![Hans_Zimmer.jpg](https://mwbbs.eu.org/wiki/images/b/b2/Hans_Zimmer.jpg)
 
 汉斯·季默(Hans Zimmer)，1957 年 9 月 12 日出生于德国法兰克福，音乐家、电影配乐家、作曲家。因《星际穿越》、《敦刻尔克》、《黑暗骑士》三部曲和《盗梦空间》等作品而闻名。
 - 1988 年，汉斯·季默为电影《雨人》配乐，首度提名奥斯卡最佳电影配乐奖

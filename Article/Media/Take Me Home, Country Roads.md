@@ -4,7 +4,7 @@ categories:
 - Media
 last_modified: '2024-03-09T00:29:41Z'
 ---
-![Country Roads.jpg](https://mwbbs.eu.org/wiki/images/d/d1/Country Roads.jpg)
+![Country_Roads.jpg](https://mwbbs.eu.org/wiki/images/d/d1/Country_Roads.jpg)
 
 中文名： 乡村路带我回家
 

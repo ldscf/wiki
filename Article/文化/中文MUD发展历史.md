@@ -49,4 +49,4 @@ https://dikumud.com/
 ![北大侠客行留言版1.jpeg](https://mwbbs.eu.org/wiki/images/6/6c/北大侠客行留言版1.jpeg)![北大侠客行留言版2.jpeg](https://mwbbs.eu.org/wiki/images/b/bb/北大侠客行留言版2.jpeg)
 - 本站私服: telnet xkx100.tk 32012
 
-![Xkx100 tk.jpeg](https://mwbbs.eu.org/wiki/images/9/97/Xkx100 tk.jpeg)
+![Xkx100_tk.jpeg](https://mwbbs.eu.org/wiki/images/9/97/Xkx100_tk.jpeg)

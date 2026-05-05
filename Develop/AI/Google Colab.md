@@ -46,7 +46,7 @@ https://colab.research.google.com
 
 ### Demo
 
-![Google Colab.jpg](https://mwbbs.eu.org/wiki/images/2/2d/Google Colab.jpg)
+![Google_Colab.jpg](https://mwbbs.eu.org/wiki/images/2/2d/Google_Colab.jpg)
 
 #### GPU
 ```

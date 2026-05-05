@@ -16,7 +16,7 @@ last_modified: '2025-02-16T11:19:07Z'
 
 *牛津大学教授、英国进化生物学家和作家理查德·道金斯(Richard Dawkins)* 
 
-> ![Fred Hoyle.jpg](https://mwbbs.eu.org/wiki/images/f/ff/Fred Hoyle.jpg)
+> ![Fred_Hoyle.jpg](https://mwbbs.eu.org/wiki/images/f/ff/Fred_Hoyle.jpg)
 
 弗雷德·霍伊尔爵士曾担任英国皇家天文学会会长，创建了剑桥大学的理论天文研究所，写下多部学术专著、科普读物、科幻小说、电视剧，以及一部自传，被认为是 20 世纪有影响力的科学家之一。
 

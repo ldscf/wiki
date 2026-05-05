@@ -5,7 +5,7 @@ categories:
 - 文化
 last_modified: '2024-05-29T09:07:04Z'
 ---
-![NORAD Tracks Santa 2023-12-25 01.55.27(NY,UTC-5).jpg](https://mwbbs.eu.org/wiki/images/c/c7/NORAD Tracks Santa 2023-12-25 01.55.27(NY,UTC-5).jpg)
+![NORAD_Tracks_Santa_2023-12-25_01.55.27(NY,UTC-5).jpg](https://mwbbs.eu.org/wiki/images/c/c7/NORAD_Tracks_Santa_2023-12-25_01.55.27(NY,UTC-5).jpg)
 
 圣诞节(Christmas)，是基督徒(Christian)纪念耶稣(Jesus)降生的节日，是西方国家最重要的节日之一，也是全球范围内庆祝最广泛、最热烈的节日之一。
 
@@ -25,7 +25,7 @@ last_modified: '2024-05-29T09:07:04Z'
 
 第一张圣诞贺卡，1843 年在伦敦由亨利·科尔爵士(Sir Henry Cole)印发，约翰·卡尔科特·霍斯利 (John Callcott Horsley)绘制。
 
-![第一张圣诞贺卡 AD1843 Sir Henry Cole.jpeg](https://mwbbs.eu.org/wiki/images/9/99/第一张圣诞贺卡 AD1843 Sir Henry Cole.jpeg)
+![第一张圣诞贺卡_AD1843_Sir_Henry_Cole.jpeg](https://mwbbs.eu.org/wiki/images/9/99/第一张圣诞贺卡_AD1843_Sir_Henry_Cole.jpeg)
 
 #### 圣诞老人
 
@@ -43,11 +43,11 @@ last_modified: '2024-05-29T09:07:04Z'
 
 上校哈里•舒普(Harry Shoup, 1917/9/29 - 2009/3/14)，CONAD 最早的圣诞老人追踪者。
 
-![Santa and Harry Shoup.jpg](https://mwbbs.eu.org/wiki/images/c/c9/Santa and Harry Shoup.jpg)
+![Santa_and_Harry_Shoup.jpg](https://mwbbs.eu.org/wiki/images/c/c9/Santa_and_Harry_Shoup.jpg)
 
 #### 歌曲
 
-![Silent night.jpg](https://mwbbs.eu.org/wiki/images/4/45/Silent night.jpg)
+![Silent_night.jpg](https://mwbbs.eu.org/wiki/images/4/45/Silent_night.jpg)
 
 ## See also
 1. [百度：圣诞老人](https://baike.baidu.com/item/圣诞老人)

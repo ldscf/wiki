@@ -6,15 +6,15 @@ categories:
 - 文学
 last_modified: '2025-12-27T03:18:20Z'
 ---
-![Is There a Santa Claus - The Sun 6.png](https://mwbbs.eu.org/wiki/images/3/3a/Is There a Santa Claus - The Sun 6.png)
+![Is_There_a_Santa_Claus_-_The_Sun_6.png](https://mwbbs.eu.org/wiki/images/3/3a/Is_There_a_Santa_Claus_-_The_Sun_6.png)
 
-![Is There a Santa Claus-1.png](https://mwbbs.eu.org/wiki/images/9/9a/Is There a Santa Claus-1.png)
+![Is_There_a_Santa_Claus-1.png](https://mwbbs.eu.org/wiki/images/9/9a/Is_There_a_Santa_Claus-1.png)
 
-![Is There a Santa Claus-2.png](https://mwbbs.eu.org/wiki/images/5/56/Is There a Santa Claus-2.png)
+![Is_There_a_Santa_Claus-2.png](https://mwbbs.eu.org/wiki/images/5/56/Is_There_a_Santa_Claus-2.png)
 
-![Is There a Santa Claus-3.png](https://mwbbs.eu.org/wiki/images/f/f7/Is There a Santa Claus-3.png)
+![Is_There_a_Santa_Claus-3.png](https://mwbbs.eu.org/wiki/images/f/f7/Is_There_a_Santa_Claus-3.png)
 
-![Is There a Santa Claus-4.png](https://mwbbs.eu.org/wiki/images/5/56/Is There a Santa Claus-4.png)
+![Is_There_a_Santa_Claus-4.png](https://mwbbs.eu.org/wiki/images/5/56/Is_There_a_Santa_Claus-4.png)
 
 1897 年，家住纽约曼哈顿上城西侧，时年八岁的小女孩弗吉尼娅·欧汉伦（Virginia O’Hanlon）问父亲：是否真的有圣诞老人？父亲告诉她：向《纽约太阳报》( The New York Sun)写信问问，便会得知真相。于是弗吉尼娅写了一封短信，寄给报社。
 

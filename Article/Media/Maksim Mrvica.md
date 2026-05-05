@@ -4,7 +4,7 @@ categories:
 - Media
 last_modified: '2024-02-15T08:19:46Z'
 ---
-![Maksim Mrvica.jpg](https://mwbbs.eu.org/wiki/images/8/89/Maksim Mrvica.jpg)
+![Maksim_Mrvica.jpg](https://mwbbs.eu.org/wiki/images/8/89/Maksim_Mrvica.jpg)
 
 马克西姆·姆尔维察（Maksim Mrvica，1975），克罗地亚流行钢琴演奏家。
 

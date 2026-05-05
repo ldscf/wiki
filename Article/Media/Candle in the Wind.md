@@ -4,7 +4,7 @@ categories:
 - Media
 last_modified: '2024-03-19T08:40:48Z'
 ---
-![Candle in the Wind.jpg](https://mwbbs.eu.org/wiki/images/6/6e/Candle in the Wind.jpg)
+![Candle_in_the_Wind.jpg](https://mwbbs.eu.org/wiki/images/6/6e/Candle_in_the_Wind.jpg)
 
 Candle in the Wind - 风中之烛
 ```

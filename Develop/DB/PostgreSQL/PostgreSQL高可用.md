@@ -8,7 +8,7 @@ last_modified: '2023-09-22T14:49:48Z'
 ---
 介绍一种基于 pgpool-II 的方案，实现在双机条件下，pgpool-II 服务的高可用，PostgreSQL 的高可用和负载均衡等功能。
 
-![PostgreSQL pgpool.png](https://mwbbs.eu.org/wiki/images/e/eb/PostgreSQL pgpool.png)
+![PostgreSQL_pgpool.png](https://mwbbs.eu.org/wiki/images/e/eb/PostgreSQL_pgpool.png)
 
 ### 方案架构
 

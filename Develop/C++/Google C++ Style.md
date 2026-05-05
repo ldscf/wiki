@@ -17,11 +17,11 @@ Note that this guide is not a C++ tutorial: we assume that the reader is familia
 
 ### google cpp style
 
-![Google cpp style.png](https://mwbbs.eu.org/wiki/images/8/89/Google cpp style.png)
+![Google_cpp_style.png](https://mwbbs.eu.org/wiki/images/8/89/Google_cpp_style.png)
 
 ### google h style
 
-![Google h style.png](https://mwbbs.eu.org/wiki/images/c/c4/Google h style.png)
+![Google_h_style.png](https://mwbbs.eu.org/wiki/images/c/c4/Google_h_style.png)
 
 ### using namespace std
 

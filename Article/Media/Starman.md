@@ -11,7 +11,7 @@ last_modified: '2024-02-15T08:21:44Z'
 　　在影片火星救援(The Martian)中，随着太阳神号运载火箭升空，响起了舒缓动人的 《Starman》，为马克送去了回家的希望。> 
 ```
 
-![David Bowie.jpeg](https://mwbbs.eu.org/wiki/images/a/ab/David Bowie.jpeg)
+![David_Bowie.jpeg](https://mwbbs.eu.org/wiki/images/a/ab/David_Bowie.jpeg)
 
 大卫·鲍伊(David Bowie, 1947年1月8日-2016年1月10日)，出生于英国伦敦的布里克顿。
 

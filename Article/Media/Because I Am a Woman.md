@@ -4,7 +4,7 @@ categories:
 - Media
 last_modified: '2025-07-15T02:15:49Z'
 ---
-![KISS-Because I Am a Woman.jpg](https://mwbbs.eu.org/wiki/images/a/ae/KISS-Because I Am a Woman.jpg)
+![KISS-Because_I_Am_a_Woman.jpg](https://mwbbs.eu.org/wiki/images/a/ae/KISS-Because_I_Am_a_Woman.jpg)
 
 《因为是女子》是由 KISS 组合（团长 Mini - 金闽熹、主唱 Umji - 吴金枝与合音 Jini -  金智淑）演唱的出道曲，并由韩国一线当红小生申贤俊（68/10/28）主演 MV 音乐录影带，在韩国创下网路下载满档塞车的纪录，唱片在韩国创下破十万张的好成绩，被喻为追求女友及失恋最佳疗伤歌曲。整部影片的唯美画面、情节的起伏高潮，以及背后动人的真实求爱故事，皆为韩国大街小巷议论纷纷的热门话题。女主角为吴慧秀（1982/6/9 或 1981/2/22）。> 阿奔乱语 - 真水无香（节选）
 

@@ -8,13 +8,13 @@ last_modified: '2024-02-15T08:21:27Z'
 
 > 
 
-![Lewis Capaldi.jpg](https://mwbbs.eu.org/wiki/images/2/27/Lewis Capaldi.jpg)
+![Lewis_Capaldi.jpg](https://mwbbs.eu.org/wiki/images/2/27/Lewis_Capaldi.jpg)
 
 路易斯·卡帕尔迪（Lewis Capaldi, 1996），苏格兰创作歌手和音乐家。
 
 《Someone You Loved》在 2020 年获得第 40 届全英音乐奖最佳英国歌曲奖。> 
 
-![Peter Capaldi.jpg](https://mwbbs.eu.org/wiki/images/d/d6/Peter Capaldi.jpg)
+![Peter_Capaldi.jpg](https://mwbbs.eu.org/wiki/images/d/d6/Peter_Capaldi.jpg)
 
 彼得·卡帕尔迪（Peter Capaldi, 1958），英国演员、导演、编剧。
 

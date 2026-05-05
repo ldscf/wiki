@@ -4,7 +4,7 @@ categories:
 - Media
 last_modified: '2024-02-15T08:19:09Z'
 ---
-![Leonard Cohen.jpg](https://mwbbs.eu.org/wiki/images/f/f8/Leonard Cohen.jpg)
+![Leonard_Cohen.jpg](https://mwbbs.eu.org/wiki/images/f/f8/Leonard_Cohen.jpg)
 
 Hallelujah 是加拿大诗人、创作歌手 Leonard Cohen 在1985年创作的歌曲，收录在其专辑 Various Positions 中。
 

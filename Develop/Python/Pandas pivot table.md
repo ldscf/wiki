@@ -12,7 +12,7 @@ The summarization can be upon a variety of statistical concepts like sums, avera
 
 pivot_table(data, index, columns, values/aggfunc, margins)
 
-![Python pivot table.png](https://mwbbs.eu.org/wiki/images/8/83/Python pivot table.png)
+![Python_pivot_table.png](https://mwbbs.eu.org/wiki/images/8/83/Python_pivot_table.png)
 - index, columns, values/aggfunc, margins
 - 蓝、黄、绿、紫/红
 

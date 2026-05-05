@@ -58,7 +58,7 @@ phpbb3(3.3.5)
  GRANT ALL PRIVILEGES ON phpbb.* TO 'phpbbuser'@'%';
 ```
 
-![Phpbb3 email.png](https://mwbbs.eu.org/wiki/images/1/11/Phpbb3 email.png)
+![Phpbb3_email.png](https://mwbbs.eu.org/wiki/images/1/11/Phpbb3_email.png)
 
 #### Email
 - SMTP 服务器地址和协议：smtp-mail.outlook.com
