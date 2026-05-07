@@ -74,11 +74,12 @@ set hive.execution.engine = mr;
 ```
 ```
  # $HIVE_HOME/conf/hive-site.xml
+```
   
     hive.execution.engine
+
     tez
   
-```
 
 #### Sample
  ```

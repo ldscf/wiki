@@ -9,10 +9,16 @@ last_modified: '2023-11-20T06:34:47Z'
 ### 普通表
 ```
  create table test_seq (
+```
+
     ky               int auto_increment,
+
     val              varchar(50),
+
     ver              json,
+
     primary key(ky)
+```
  )
  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE= utf8mb4_0900_ai_ci
  auto_increment = 10000000
@@ -42,17 +48,25 @@ utf8mb4_unicode_ci 是基于标准的 Unicode 来排序和比较，能够在各�
 - auto_increment 也可以使用 double 这种浮点数格式，自增 +1，但可以指定插入 10.1 这种（表中最大自增为 10.1 时，下一个系统自增是 11）
 ```
  insert into test_seq(val, ver) values
-  ('mysql', '{"v1":"10", "v2":"11"}'),
-  ('db2', '{"v1":"8", "v3":"9"}')
 ```
+
+  ('mysql', '{"v1":"10", "v2":"11"}'),
+
+  ('db2', '{"v1":"8", "v3":"9"}')
 
 #### JSON
 ```
  SELECT   ky,
+```
+
           val,
+
           ver ->> '$.v1'   v1,
+
           ver ->> '$.v2'   v2,
+
           ver ->> '$.v3'   v3
+```
  FROM     test_seq
 ```
 - "->" 带引号，"->>"无引号

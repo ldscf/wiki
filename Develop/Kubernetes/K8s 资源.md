@@ -28,15 +28,23 @@ K8s 中的资源类别有很多种，kubectl 可以通过配置文件来创建�
  apiVersion: v1
  kind: Pod
  metadata:
+```
+
    name: myapp-pod
+
    labels:
+
      app: myapp
+```
  spec:
+```
+
    containers:
    - name: myapp-container
+
      image: busybox
+
      command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']
-```
 
 #### 常用属性
 
@@ -125,50 +133,79 @@ volumeMode=xx，可选项包括 Filesystem（文件系统）和 Block（块设�
  apiVersion: v1
  kind: PersistentVolume
  metadata:
-   name: task-pv-volume
-   labels:
-     type: local
- spec:
-   storageClassName: manual
-   capacity:
-     storage: 1Gi
-   accessModes:
-     - ReadWriteOnce
-   hostPath:
-     path: "/mnt/data"
 ```
 
+   name: task-pv-volume
+
+   labels:
+
+     type: local
+```
+ spec:
+```
+
+   storageClassName: manual
+
+   capacity:
+
+     storage: 1Gi
+
+   accessModes:
+     - ReadWriteOnce
+
+   hostPath:
+
+     path: "/mnt/data"
  
 ```
  # pvc - task-pv-claim
  apiVersion: v1
  kind: PersistentVolumeClaim
  metadata:
-   name: task-pv-claim
- spec:
-   storageClassName: manual
-   accessModes:
-     - ReadWriteOnce
-   resources:
-     requests:
-       storage: 1Gi
 ```
 
+   name: task-pv-claim
+```
+ spec:
+```
+
+   storageClassName: manual
+
+   accessModes:
+     - ReadWriteOnce
+
+   resources:
+
+     requests:
+
+       storage: 1Gi
  
 ```
  # POD
  ...
  containers:
+```
+
    - name: rc
+
      imagePullPolicy: IfNotPresent
+
      image: rc:2.1.1
+
      volumeMounts:
        - name: data
+
          mountPath: /opt/rc/data
+```
  volumes:
+```
+
    - name: data
+
      persistentVolumeClaim:
+
        claimName: task-pv-claim
+```
  ...*
 ```
 
@@ -177,34 +214,52 @@ volumeMode=xx，可选项包括 Filesystem（文件系统）和 Block（块设�
  *apiVersion: v1
  kind: PersistentVolume
  metadata:
-   name: pv-test1
- spec:
-   storageClassName: slow
-   capacity:
-     storage: 2Gi
-   volumeMode: Filesystem
-   accessModes:
-     - ReadWriteOnce
-   nfs:
-     path: /home/nfs/disk1/rds2024dev4
-     server: 192.168.0.90
 ```
 
+   name: pv-test1
+```
+ spec:
+```
+
+   storageClassName: slow
+
+   capacity:
+
+     storage: 2Gi
+
+   volumeMode: Filesystem
+
+   accessModes:
+     - ReadWriteOnce
+
+   nfs:
+
+     path: /home/nfs/disk1/rds2024dev4
+
+     server: 192.168.0.90
  
 ```
  ---
  apiVersion: v1
  kind: PersistentVolumeClaim
  metadata:
+```
+
    name: pv-claim-test1
+```
  spec:
+```
+
    storageClassName: slow
+
    accessModes:
      - ReadWriteOnce
+
    resources:
+
      requests:
+
        storage: 1Gi*
-```
 
 ###### 指定 PV
 
@@ -215,48 +270,74 @@ PVC 可以使用 storageClassName 指定连接的 PV。
  *apiVersion: v1
  kind: PersistentVolume
  metadata:
-   name: pv-a1
- spec:
-   storageClassName: pv-a
-   capacity:
-     storage: 2Gi
-   accessModes:
-     - ReadWriteOnce
-   hostPath:
-     path: "/mnt/data/pva"
-     type: DirectoryOrCreate
 ```
 
+   name: pv-a1
+```
+ spec:
+```
+
+   storageClassName: pv-a
+
+   capacity:
+
+     storage: 2Gi
+
+   accessModes:
+     - ReadWriteOnce
+
+   hostPath:
+
+     path: "/mnt/data/pva"
+
+     type: DirectoryOrCreate
  
 ```
  ---
  apiVersion: v1
  kind: PersistentVolume
  metadata:
-   name: pv-b1
- spec:
-   storageClassName: pv-b
-   capacity:
-     storage: 1500Mi
-   accessModes:
-     - ReadWriteOnce
-   hostPath:
-     path: "/mnt/data/pvb"
-     type: DirectoryOrCreate
 ```
 
+   name: pv-b1
+```
+ spec:
+```
+
+   storageClassName: pv-b
+
+   capacity:
+
+     storage: 1500Mi
+
+   accessModes:
+     - ReadWriteOnce
+
+   hostPath:
+
+     path: "/mnt/data/pvb"
+
+     type: DirectoryOrCreate
  
 ```
  ---
  apiVersion: v1
  kind: PersistentVolumeClaim
  metadata:
+```
+
    name: pv-b1-claim
+```
  spec:
+```
+
    accessModes:
      - ReadWriteOnce
+
    storageClassName: pv-b
+
    resources:
+
      requests:
+
        storage: 2Gi*
-```

@@ -39,9 +39,11 @@ last_modified: '2026-03-31T02:30:13Z'
  ...
  # 放在最后
  Match User lds
-     PasswordAuthentication yes
-     PubkeyAuthentication yes
 ```
+
+     PasswordAuthentication yes
+
+     PubkeyAuthentication yes
 
 ##### SSH 证书登录
 ```
@@ -551,9 +553,8 @@ hwclock -w
 tmpfs                 32G   84K  32G   1% /dev/shm
 
 # free
-```
+
             total        used        free      shared  buff/cache  available
-```
 
 Mem:      65808632      762204    64486736       58288      559692   64521436
 
@@ -659,8 +660,12 @@ openssl des3 -d -k PASSWD
 ```
  # 显示路由路径
  tracepath
+```
+
    -n: 不解析主机名，直接显示IP地址
+
    -l: 设置初始数据包长度，默认为65535
+```
  traceroute    # 需要 root 权限
 ```
  
@@ -742,7 +747,10 @@ ldd server_demo | grep "not found"
  # 测试 MTU（最大傳輸單元）
  ping -s 1472 -M do 192.168.0.22
  - 如果 MTU 限制較小，數據包無法傳輸，將會收到以下報錯：
+```
+
   ping: local error: Message too long, mtu=XXXX
+```
  # 实际传输需要加上 ICMP 協議頭（8 字節）和 IP 協議頭（20 字節）
  # 典型的以太網 MTU = 1500 = 1472（data）+ 8(ICMP) + 20(IP)
  # -M do: 強制 不分片（Don't Fragment，DF 標誌）
@@ -862,11 +870,15 @@ Example:
  
 ```
  rsync -avc --no-owner --no-group \
-   --filter=':- .gitignore' \
-   --filter=':- */.gitignore' \
-   --exclude='.gitignore' \
-   ./ bi@mc3.en:/home/bi/github/SRDS/
 ```
+
+   --filter=':- .gitignore' \
+
+   --filter=':- */.gitignore' \
+
+   --exclude='.gitignore' \
+
+   ./ bi@mc3.en:/home/bi/github/SRDS/
 
 P.S. 源目录最后有没有 / 很关键，目标目录最后有没有 / 均可
 * 源路径 SRDS/（带斜杠）：同步目录下的内容。
@@ -882,9 +894,8 @@ P.S. 源目录最后有没有 / 很关键，目标目录最后有没有 / 均可
 ```
 
 只能追加数据，不能删除
-```
+
   chattr +a /var/log/messages
-```
 
 #### tree
 ```

@@ -125,24 +125,42 @@ last_modified: '2025-05-15T02:03:19Z'
 #### Object 判断
 ```
  *public static boolean isnull(Object obj1) {        
+```
+
      if      (obj1 instanceof String)     { return ((String)     obj1).isEmpty(); }
+
      else if (obj1 instanceof List)       { return ((List)       obj1).isEmpty(); }
+
      else if (obj1 instanceof Map)        { return ((Map)        obj1).isEmpty(); }
+
      else if (obj1 instanceof Properties) { return ((Properties) obj1).isEmpty(); }
+
      else                                 { return false; }
+```
  }*
 ```
 ```
  *public static boolean isnull(Object obj1) {
+```
+
      String type1 = obj1.getClass().toString();
+
      type1 = type1.substring(type1.lastIndexOf(".") + 1);
+
      switch (type1) {
+
          case "String"     : return ((String)       obj1).isEmpty();
+
          case "ArrayList"  : return ((ArrayList<?>) obj1).isEmpty();
+
          case "HashMap"    : return ((HashMap<?, ?>)obj1).isEmpty();
+
          case "Properties1": return ((Properties)   obj1).isEmpty();
+
      }
+
      return false;
+```
  }*
 ```
 
@@ -228,7 +246,10 @@ l1.add(new JSONObject(m1));
 ```
  List l1;
  for (String s1 : l1) {
+```
+
      System.out.println(s1);
+```
  }
 ```
 
@@ -237,12 +258,18 @@ l1.add(new JSONObject(m1));
  // Map m1 = new LinkedHashMap<>(Map.of("a", "1"));
  // 用 m1 中的 key-value 替换 s1 中的相应的 %key% 变量
  for (String key : m1.keySet()) {
+```
+
      s1 = s1.replaceAll(String.format("%c%s%c", '%', key, '%'), m1.get(key));
+```
  }
  *// 下面是一种不是很好的 lambda 写法
  // Error: 从lambda 表达式引用的本地变量必须是最终变量或实际上的最终变量
  m1.forEach((key, value) -> {
+```
+
      System.out.println(String.format("key: %s, val: %s", key, value));
+```
  //   s1 = s1.replaceAll(String.format("%c%s%c", '%', key, '%'), value);
  });*
 ```
@@ -251,7 +278,10 @@ l1.add(new JSONObject(m1));
 ```
  // Properties tmp = new Properties();
  for (String key : tmp.stringPropertyNames()) {
+```
+
      System.out.println(key + "=" + tmp.getProperty(key));
+```
  }
 ```
 
@@ -285,10 +315,13 @@ l1.add(new JSONObject(m1));
  Map> val = new HashMap<>();
  List l1 = new ArrayList<>();
  for (i=0;...)
-     l1 = new ArrayList<>();
-     ...
-     val.put(i, l1);
 ```
+
+     l1 = new ArrayList<>();
+
+     ...
+
+     val.put(i, l1);
 
 #### HashMap 顺序
 

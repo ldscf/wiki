@@ -8,10 +8,16 @@ last_modified: '2023-04-01T15:59:29Z'
 多机训练的方法和单机多卡类似，将 MirroredStrategy 更换为适合多机训练的 MultiWorkerMirroredStrategy 即可。不过，由于涉及到多台计算机之间的通讯，还需要进行一些额外的设置。具体而言，需要设置环境变量 TF_CONFIG ，示例如下:
 ```
  os.environ['TF_CONFIG'] = json.dumps({
+```
+
      'cluster': {
+
          'worker': ["localhost:20000", "localhost:20001"]
+
      },
+
      'task': {'type': 'worker', 'index': 0}
+```
  })
 ```
 
@@ -42,10 +48,16 @@ TF_CONFIG 由 cluster 和 task 两部分组成：
 ```
  num_workers = 2
  os.environ['TF_CONFIG'] = json.dumps({
+```
+
      'cluster': {
+
          'worker': ["localhost:20000", "localhost:20001"]
+
      },
+
      'task': {'type': 'worker', 'index': 0}
+```
  })
  strategy = tf.distribute.experimental.MultiWorkerMirroredStrategy()
  batch_size = batch_size_per_replica * num_workers
@@ -53,9 +65,11 @@ TF_CONFIG 由 cluster 和 task 两部分组成：
   
 ```
  def resize(image, label):
-     image = tf.image.resize(image, [224, 224]) / 255.0
-     return image, label
 ```
+
+     image = tf.image.resize(image, [224, 224]) / 255.0
+
+     return image, label
   
 ```
  dataset = tfds.load("cats_vs_dogs", split=tfds.Split.TRAIN, as_supervised=True)
@@ -64,13 +78,19 @@ TF_CONFIG 由 cluster 和 task 两部分组成：
   
 ```
  with strategy.scope():
-     model = tf.keras.applications.MobileNetV2()
-     model.compile(
-         optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
-         loss=tf.keras.losses.sparse_categorical_crossentropy,
-         metrics=[tf.keras.metrics.sparse_categorical_accuracy]
-     )
 ```
+
+     model = tf.keras.applications.MobileNetV2()
+
+     model.compile(
+
+         optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
+
+         loss=tf.keras.losses.sparse_categorical_crossentropy,
+
+         metrics=[tf.keras.metrics.sparse_categorical_accuracy]
+
+     )
   
 ```
  model.fit(dataset, epochs=num_epochs)

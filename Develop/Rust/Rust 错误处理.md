@@ -11,8 +11,12 @@ Box vs anyhow::Result 对比分析
 ```
  // 方式1：标准库方式
  fn main() -> Result<(), Box> {
+```
+
      // 代码...
+
      Ok(())
+```
  }
 ```
  
@@ -23,8 +27,12 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn main() -> Result<()> {
+```
+
      // 代码...
+
      Ok(())
+```
  }
 ```
 
@@ -33,28 +41,34 @@ Box vs anyhow::Result 对比分析
 ### 标准库方式：Box
 ```
  fn std_lib_example() -> Result<(), Box> {
+```
+
      // 需要明确转换错误类型
+
      let file_content = std::fs::read_to_string("file.txt")?;
-```
  
-```
      // 解析数字
+
      let number: i32 = file_content.trim().parse()?;
-```
  
-```
      // 自定义错误需要手动包装
+
      if number < 0 {
+
          return Err(Box::new(std::io::Error::new(
+
              std::io::ErrorKind::InvalidInput,
+
              "Number must be positive"
+
          )));
+
      }
-```
  
-```
      println!("Number: {}", number);
+
      Ok(())
+```
  }
 ```
 
@@ -65,29 +79,30 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn anyhow_example() -> Result<()> {
+```
+
      // 自动转换错误类型
+
      let file_content = std::fs::read_to_string("file.txt")?;
-```
  
-```
      // 自动转换错误
+
      let number: i32 = file_content.trim().parse()?;
-```
  
-```
      // 方便的上下文添加
+
      ensure!(number >= 0, "Number must be positive");
-```
  
-```
      // 或者使用 context 添加信息
+
      let result = some_fallible_function()
+
          .context("Failed to do something")?;
-```
  
-```
      println!("Number: {}", number);
+
      Ok(())
+```
  }
 ```
 
@@ -99,9 +114,14 @@ Box vs anyhow::Result 对比分析
 ```
  // 不需要外部crate
  fn no_dependencies() -> Result<(), Box> {
+```
+
      // 直接使用标准库
+
      let data = std::fs::read("data.bin")?;
+
      Ok(())
+```
  }
 ```
 
@@ -114,16 +134,25 @@ Box vs anyhow::Result 对比分析
 ```
  #[derive(Debug)]
  struct CustomError {
+```
+
      details: String,
+
      code: u32,
+```
  }
 ```
  
 ```
  impl fmt::Display for CustomError {
+```
+
      fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+
          write!(f, "Error {}: {}", self.code, self.details)
+
      }
+```
  }
 ```
  
@@ -133,15 +162,26 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn specific_error_handling() -> Result<(), Box> {
+```
+
      // 可以匹配具体错误类型
+
      match std::fs::read_to_string("config.txt") {
+
          Ok(content) => println!("Config: {}", content),
+
          Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+
              println!("Config file not found, using defaults");
+
          }
+
          Err(e) => return Err(Box::new(e)),
+
      }
+
      Ok(())
+```
  }
 ```
 
@@ -153,39 +193,55 @@ Box vs anyhow::Result 对比分析
 ```
  #[derive(Error, Debug)]
  enum AppError {
+```
+
      #[error("IO error: {0}")]
+
      Io(#[from] std::io::Error),
+
      #[error("Parse error: {0}")]
+
      Parse(#[from] std::num::ParseIntError),
+
      #[error("Custom error: {message}")]
+
      Custom { message: String },
+```
  }
 ```
  
 ```
  fn typed_errors() -> Result<(), AppError> {
+```
+
      let content = std::fs::read_to_string("data.txt")?; // 自动转换为 AppError::Io
+
      let number: i32 = content.trim().parse()?; // 自动转换为 AppError::Parse
-```
  
-```
      if number < 0 {
+
          return Err(AppError::Custom {
+
              message: "Negative number not allowed".to_string()
+
          });
+
      }
-```
  
-```
      Ok(())
+```
  }
 ```
  
 ```
  // 使用具体的错误类型而不是 trait object
  fn main() -> Result<(), AppError> {
+```
+
      typed_errors()?;
+
      Ok(())
+```
  }
 ```
 
@@ -198,35 +254,42 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn concise_syntax() -> Result<()> {
+```
+
      // 创建错误非常简单
+
      let condition = false;
+
      if !condition {
+
          return Err(anyhow!("Something went wrong"));
+
      }
-```
  
-```
      // 使用 bail! 宏
+
      let value = Some(42);
+
      let unwrapped = value.ok_or_else(|| anyhow!("Value is None"))?;
+
      // 或者更简洁：
+
      let unwrapped = value.context("Value is None")?;
-```
  
-```
      // 使用 ensure! 宏
+
      ensure!(unwrapped > 0, "Value must be positive");
-```
  
-```
      // 使用 bail! 返回错误
+
      if unwrapped > 100 {
+
          bail!("Value too large: {}", unwrapped);
+
      }
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -237,30 +300,32 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn automatic_error_conversion() -> Result<()> {
+```
+
      // 不同类型错误自动转换为 anyhow::Error
+
      let file_content = std::fs::read_to_string("file.txt")?; // io::Error → anyhow::Error
+
      let number: i32 = file_content.trim().parse()?; // ParseIntError → anyhow::Error
-```
  
-```
      // 甚至自定义类型也能自动转换（如果实现了 Error trait）
+
      #[derive(Debug, thiserror::Error)]
+
      #[error("Custom error")]
+
      struct MyError;
-```
  
-```
      fn returns_my_error() -> std::result::Result<(), MyError> {
+
          Err(MyError)
+
      }
-```
  
-```
      returns_my_error()?; // MyError → anyhow::Error
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -271,26 +336,30 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn rich_context() -> Result<()> {
+```
+
      // 添加上下文信息到错误链
+
      let config = std::fs::read_to_string("config.toml")
+
          .context("Failed to read config file")?;
-```
  
-```
      let settings: toml::Value = toml::from_str(&config)
+
          .context("Failed to parse config as TOML")?;
-```
  
-```
      let port = settings["server"]["port"]
+
          .as_integer()
+
          .context("Port not specified or invalid")?;
-```
  
-```
      // 错误链会保留所有上下文
+
      println!("Server port: {}", port);
+
      Ok(())
+```
  }
 ```
  
@@ -318,29 +387,36 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn convenient_error_handling() -> Result<()> {
+```
+
      // 处理可选值
+
      let maybe_value: Option = Some(42);
+
      let value = maybe_value.context("Expected value")?;
-```
  
-```
      // 链式调用
+
      let result = std::fs::read_to_string("data.txt")
+
          .context("Failed to read file")?
+
          .trim()
+
          .parse::()
+
          .context("Failed to parse number")?;
-```
  
-```
      // 组合多个操作
+
      let _ = std::fs::read_to_string("a.txt")
+
          .and_then(|_| std::fs::read_to_string("b.txt"))
+
          .context("Failed to read either file")?;
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -353,33 +429,44 @@ Box vs anyhow::Result 对比分析
 ```
  // 性能测试示例
  fn benchmark() {
+```
+
      let iterations = 1_000_000;
-```
  
-```
      // Box 性能
+
      let start = Instant::now();
+
      for _ in 0..iterations {
+
          let _: Result<(), Box> = Err(Box::new(std::io::Error::new(
+
              std::io::ErrorKind::Other,
+
              "error",
+
          )));
+
      }
+
      println!("Box creation: {:?}", start.elapsed());
-```
  
-```
      // anyhow::Error 性能
+
      let start = Instant::now();
+
      for _ in 0..iterations {
+
          let _: anyhow::Result<()> = Err(anyhow::anyhow!("error"));
+
      }
+
      println!("anyhow::Error creation: {:?}", start.elapsed());
-```
  
-```
      // 结论：性能差异通常很小，anyhow 在错误创建上可能稍快
+
      // 但在大多数应用中，这不是瓶颈
+```
  }
 ```
 
@@ -392,17 +479,27 @@ Box vs anyhow::Result 对比分析
  // 库应该暴露具体的错误类型
  #[derive(Debug, thiserror::Error)]
  pub enum MyLibError {
+```
+
      #[error("IO error: {0}")]
+
      Io(#[from] std::io::Error),
+
      #[error("Invalid input: {0}")]
+
      InvalidInput(String),
+```
  }
 ```
  
 ```
  pub fn library_function() -> Result<(), MyLibError> {
+```
+
      // 返回具体的错误类型
+
      Ok(())
+```
  }
 ```
  
@@ -418,15 +515,26 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn precise_error_handling() -> Result<(), Box> {
+```
+
      match std::fs::read_to_string("important.txt") {
+
          Ok(content) => process(&content),
+
          Err(e) if e.kind() == io::ErrorKind::PermissionDenied => {
+
              eprintln!("Permission denied! Need to run as admin.");
+
              std::process::exit(1);
+
          }
+
          Err(e) => return Err(Box::new(e)),
+
      }
+
      Ok(())
+```
  }
 ```
 
@@ -439,14 +547,18 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn main() -> Result<()> {
+```
+
      // 应用程序通常只需要知道"出了错"，不需要区分错误类型
+
      let config = load_config().context("Failed to load configuration")?;
+
      let data = process_data(&config).context("Failed to process data")?;
+
      save_results(data).context("Failed to save results")?;
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -457,16 +569,22 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn quick_script() -> Result<()> {
+```
+
      // 不需要定义复杂的错误类型
+
      let data = fetch_from_api()?;
+
      let processed = transform_data(data)?;
+
      save_to_file(processed)?;
-```
  
-```
      // 简单的错误信息就足够了
+
      println!("Done!");
+
      Ok(())
+```
  }
 ```
 
@@ -477,28 +595,28 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn complex_workflow() -> Result<()> {
+```
+
      // 多步骤操作，每个步骤都可能失败
+
      let input = read_input_file()
+
          .context("Failed to read input file")?;
-```
  
-```
      let parsed = parse_input(&input)
+
          .context("Failed to parse input data")?;
-```
  
-```
      let result = compute_result(parsed)
+
          .context("Failed to compute result")?;
-```
  
-```
      write_output(result)
+
          .context("Failed to write output")?;
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -513,10 +631,16 @@ Box vs anyhow::Result 对比分析
  // 库部分使用具体错误类型
  #[derive(Error, Debug)]
  pub enum DatabaseError {
+```
+
      #[error("Connection failed: {0}")]
+
      Connection(String),
+
      #[error("Query failed: {0}")]
+
      Query(String),
+```
  }
 ```
  
@@ -526,37 +650,42 @@ Box vs anyhow::Result 对比分析
  
 ```
  impl Database {
+```
+
      pub fn query(&self) -> Result {
+
          // 返回具体的错误类型
+
          Ok("result".to_string())
+
      }
+```
  }
 ```
  
 ```
  // 应用部分使用 anyhow
  fn main() -> AnyhowResult<()> {
+```
+
      let db = Database;
-```
  
-```
      // 自动转换库的错误类型
+
      let result = db.query()
+
          .context("Database query failed")?;
-```
  
-```
      println!("Result: {}", result);
-```
  
-```
      // 其他操作使用 anyhow 的便利功能
+
      let config = std::fs::read_to_string("config.json")
+
          .context("Failed to read config")?;
-```
  
-```
      Ok(())
+```
  }
 ```
 
@@ -580,24 +709,32 @@ Box vs anyhow::Result 对比分析
 ```
  // 库 crate
  pub mod lib {
+```
+
      use thiserror::Error;
-```
  
-```
      #[derive(Error, Debug)]
+
      pub enum MyLibError {
+
          #[error("IO error")]
+
          Io(#[from] std::io::Error),
+
          #[error("Network error: {0}")]
+
          Network(String),
+
      }
-```
  
-```
      pub fn lib_function() -> Result<(), MyLibError> {
+
          // 返回具体错误
+
          Ok(())
+
      }
+```
  }
 ```
  
@@ -608,18 +745,20 @@ Box vs anyhow::Result 对比分析
  
 ```
  fn main() -> Result<()> {
+```
+
      // 使用 anyhow 的便利功能
+
      lib::lib_function().context("Library call failed")?;
-```
  
-```
      // 应用逻辑
+
      let result = do_something().context("Operation failed")?;
-```
  
-```
      println!("Success: {:?}", result);
+
      Ok(())
+```
  }
 ```
 

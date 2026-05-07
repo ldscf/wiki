@@ -51,12 +51,13 @@ You can return the answer in any order.
 ```
 
  
-```
      2 <= nums.length <= 104
+
      -109 <= nums[i] <= 109
+
      -109 <= target <= 109
+
      Only one valid answer exists.*
-```
 
 Accepted 13.1M, Submissions 25M, Acceptance Rate 52.6%
 
@@ -69,33 +70,33 @@ If the values of the array are duplicated, a relatively large "index" will be re
 #### Java
 ```
  *class lc001 {
+```
+
      public static int[] twoSum(int[] nums, int target) {
+
          Map<Integer, Integer> m1 = new HashMap<>();
-```
-
  
-```
          for (int i = 0; i < nums.length; i++) {
+
              if (m1.containsKey(target - nums[i]))
+
                  return new int[] {m1.get(target - nums[i]), i};
+
               if(!m1.containsKey(nums[i]))
+
                  m1.put(nums[i], i);
+
          }
-```
-
  
-```
          return new int[] {};
+
      }
-```
-
  
-```
      public static void main(String[] args) {
-         int[] nums = {2,7,11,15};
-         int target = 9;
-```
 
+         int[] nums = {2,7,11,15};
+
+         int target = 9;
  
 ```
  //        int[] nums = {3,2,4};
@@ -116,8 +117,9 @@ If the values of the array are duplicated, a relatively large "index" will be re
 ```
 
  
-```
          System.out.println(Arrays.toString(twoSum(nums, target)));
+
      }
+```
  }*
 ```

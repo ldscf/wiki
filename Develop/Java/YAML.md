@@ -23,23 +23,31 @@ YAML 可以简单表达清单、散列表，标量等数据形态。它使用空
 键值对的集合，又称为映射(mapping)/ 哈希(hashes) / 字典(dictionary)
 ```
  key1: 
+```
+
    key11: value1
+
    key12: value2
+```
  -> key1: {key11: value1, key12: value2}
 ```
  
 ```
  key1: 
+```
+
    key11:
+
      key111: value
+```
  -> key1: {key11: {key111: value}}
 ```
 - 数组：一组按次序排列的值，又称为序列(sequence) / 列表(list)
 ```
  key:
+```
    - value1
    - value2
-```
  
 ```
  -> key: [value1, value2]
@@ -48,23 +56,33 @@ YAML 可以简单表达清单、散列表，标量等数据形态。它使用空
 复杂对象
 ```
  ?  
+```
    - key1
    - key2
+```
  :
+```
    - value1
    - value2
+```
  -> [key1, key2]: [value1, value2]
 ```
 
 组合对象
 ```
  obj:
+```
    - id: 101
+
      name: A1
+
      price: 200
    - id: 102
+
      name: C2
+
      price: 100
+```
  -> obj: [{id: 101, name: A1, price: 200}, {id: 102, name: C2, price: 100}]
 ```
 - 纯量(scalars)：单个的、不可再分的值
@@ -74,12 +92,22 @@ YAML 可以简单表达清单、散列表，标量等数据形态。它使用空
 & 用来建立锚点，<< 表示合并到当前数据，* 用来引用锚点。
 ```
  db1: &db1
+```
+
    adapter:  postgres
+
    host:     localhost
+```
  dev:
+```
+
    database: myapp_development
-   <<: *db1
- test:
-   database: myapp_test
+
    <<: *db1
 ```
+ test:
+```
+
+   database: myapp_test
+
+   <<: *db1

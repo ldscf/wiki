@@ -81,9 +81,8 @@ super, system_variables_admin, session_variables_admin
 -d   --delete             First delete all rows from table.
 
 -L   --local              Read all files through the client.
-```
+
     --ignore-lines=#     Ignore first n lines of data infile.
-```
 
 -l   --lock-tables        Lock all tables for write (this disables threads).
 
@@ -124,30 +123,22 @@ mysqlimport -h n10 -u root -p --local psmm /root/mytbl.sql --fields-terminated-b
 #### # Export Data from oracle
 
 select   PKID                                             ||chr(5)||
-```
+
         CUST_CODE                                        ||chr(5)||
-```
-```
+
         to_char(RMD_CUST_TIME, 'yyyy-mm-dd hh24:mi:ss')   ||chr(5)||
-```
-```
+
         PLAN_DIRECTION                                    ||chr(5)||
-```
-```
+
         to_char(START_DATE, 'yyyy-mm-dd hh24:mi:ss')      ||chr(5)||
-```
-```
+
         to_char(END_DATE, 'yyyy-mm-dd hh24:mi:ss')        ||chr(5)||
-```
-```
+
         IMP_INFO                                         ||chr(5)||
-```
-```
+
         CREATED_BY                                       ||chr(5)||
-```
-```
+
         GRP_ID
-```
 
 from     scsales_prd.t_cm_look_plan
 
@@ -162,30 +153,24 @@ and      rownum < 10
 # '\n' = X'0A'
 
 LOAD DATA LOCAL
-```
+
   INFILE '/u01/tmp/test.dat'
-```
-```
+
   INTO TABLE T_CM_CUST_HOLDER_TEST_1
-```
 
 FIELDS TERMINATED BY X'05'
 
 LINES TERMINATED BY '\n'
-```
+
   (@PKID, CUST_CODE, AGENT_ID, GROUP_ID, AREA_ID, BIG_AREA_ID, POOL_LEVEL, @CREATE_TIME, CREATE_BY, WARZONE_ID, SWZ_ID, @INPOOL_TIME, MARK, @UPDATE_TIME, UPDATE_BY, COMPANY_ID)
-```
 
 SET PKID = IF(@PKID = '', NULL, @PKID),
-```
+
    CREATE_TIME = IF(@CREATE_TIME = '', NULL, @CREATE_TIME),
-```
-```
+
    INPOOL_TIME = IF(@INPOOL_TIME = '', NULL, @INPOOL_TIME),
-```
-```
+
    update_time = IF(@update_time = '', NULL, @update_time)
-```
 
 ;
 

@@ -19,10 +19,14 @@ IntelliJ IDEA 2023
 ```
  IDEA -> Preferences -> Version Control
  -> Git
-  Path to Git executable =     # 设置 Git 所在路径
- -> GitHub
-  Log in via GitHub
 ```
+
+  Path to Git executable =     # 设置 Git 所在路径
+```
+ -> GitHub
+```
+
+  Log in via GitHub
 
 #### POM
 
@@ -32,59 +36,66 @@ IntelliJ IDEA 2023
 ```
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-```
+
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
-```
 
-
-```
     <groupId>com.aaa.udef</groupId>
+
     <artifactId>udefapi</artifactId>
+
     <version>1.0.0</version>
-```
 
-
-```
     <name>udef-api</name>
+
     <url>https://www.mwbbs.tk</url>
+
     <description>UDF API Class</description>
-```
 
-
-```
     <packaging>jar</packaging>
-```
 
-
-```
     <properties>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <maven.compiler.source>17</maven.compiler.source>
+
         <maven.compiler.target>17</maven.compiler.target>
+
     </properties>
-```
 
-
-```
     <dependencies>
-        <!-- 日志 API 与桥接实现 -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.5.6</version>
-        </dependency>
-        <!-- 其他依赖声明 -->
-    </dependencies>
-```
 
+        <!-- 日志 API 与桥接实现 -->
+
+        <dependency>
+
+            <groupId>org.slf4j</groupId>
+
+            <artifactId>slf4j-api</artifactId>
+
+            <version>2.0.9</version>
+
+        </dependency>
+
+        <dependency>
+
+            <groupId>ch.qos.logback</groupId>
+
+            <artifactId>logback-classic</artifactId>
+
+            <version>1.5.6</version>
+
+        </dependency>
+
+        <!-- 其他依赖声明 -->
+
+    </dependencies>
 
 </project>
 
@@ -98,62 +109,68 @@ IntelliJ IDEA 2023
 <!--mysql-->
 
 <dependency>
-```
+
     <groupId>com.mysql</groupId>
+
     <artifactId>mysql-connector-j</artifactId>
+
     <version>8.0.33</version>
-```
 
 </dependency>
 
 <!--h2-->
 
 <dependency>
-```
+
     <groupId>com.h2database</groupId>
+
     <artifactId>h2</artifactId>
+
     <version>2.1.212</version>
-```
 
 </dependency>
 
 <!--Json-->
 
 <dependency>
-```
+
     <groupId>com.google.code.gson</groupId>
+
     <artifactId>gson</artifactId>
+
     <version>2.8.9</version>
-```
 
 </dependency>
 
 <!--Kafka-->
 
 <dependency>
-```
+
     <groupId>org.apache.kafka</groupId>
+
     <artifactId>kafka-clients</artifactId>
+
     <version>2.0.0</version>
-```
 
 </dependency>
 
 <dependency>
-```
+
     <groupId>org.apache.kafka</groupId>
+
     <artifactId>kafka_2.11</artifactId>
+
     <version>0.10.0.1</version>
-```
 
 </dependency>
 
 <dependency>
-```
+
     <groupId>org.apache.kafka</groupId>
+
     <artifactId>kafka-streams</artifactId>
+
     <version>1.0.0</version>
-```
 
 </dependency>
 
@@ -204,8 +221,12 @@ Responses are limited to 2,000 code completions and 50 chat messages per month.
 ##### [Continue](https://www.continue.dev/)
 ```
  *```
+```
+
    ______                   __     _
+
   / ____/ ____    ____   __/ /_   (_)  ____    __  __  _____ 
+```
  / /     / __ \  / __ \ /_  __/  / /  / __ \  / / / / /____/  
 ```
 
@@ -291,14 +312,17 @@ Tools -> Generate JavaDoc
  可以在 idea Java编译器配置中修改，但会被 pom 覆盖。
  # pom.xml
  
+```
      
          
              
                  1.8
+
                  1.8
              
          
      
+```
  
 ```
 
@@ -309,14 +333,13 @@ Tools -> Generate JavaDoc
 ##### H2 版本兼容性
 
 v2.2.224 生成/修改的 H2 数据文件，对于有些 db tools 不兼容，如 < dbeaver 24.0.4。（v2.1.212 OK）
-```
         
             com.h2database
+
             h2
+
             2.1.212
         
-```
-
 v2.2.224 读以前版本的数据文件报错：
 ```
  Unsupported database file version or invalid file header

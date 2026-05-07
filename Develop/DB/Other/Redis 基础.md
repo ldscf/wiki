@@ -18,9 +18,14 @@ set key value/get key
 - C 语言的字符串是 char[] 实现的，而 Redis 使用 SDS(Simple Dynamic String)结构：
 ```
  struct sdshdr {
+```
+
     unsigned int len;  // 字符串长度
+
     unsigned int free; // 空闲长度
+
     char buf[];        // 字符串
+```
  }
 ```
 

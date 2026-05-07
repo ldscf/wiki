@@ -22,9 +22,11 @@ Python 多线程
 ```
  # with 在代码块执行前自动获取锁，结束后自动释放锁
  with lock:
-    # code
-    pass
 ```
+
+    # code
+
+    pass
 
 ### GIL（Global Interpreter Lock，全局解释器锁）
 
@@ -62,34 +64,47 @@ Python解释器还有 PyPy，Psyco，JPython，IronPython 等。
 ```
  lock = threading.Lock()
  def __thread(thread_id):
-     global gi
-     for i in range(CS):
-         lock.acquire()
-         gi = gi + 1
-         lock.release()
 ```
+
+     global gi
+
+     for i in range(CS):
+
+         lock.acquire()
+
+         gi = gi + 1
+
+         lock.release()
  
 ```
  threads=[]
  for i in range(p):
-     threads.append(threading.Thread(target = __thread, args = (i,)))
 ```
+
+     threads.append(threading.Thread(target = __thread, args = (i,)))
  
 ```
  for th in threads:
-     th.start()
 ```
+
+     th.start()
  
 ```
  k=0
  while True:
-     if gi + 1 > p*CS:
-         break
-     time.sleep(0.1)
-     k = k + 1
-     if k > 200:
-         break
 ```
+
+     if gi + 1 > p*CS:
+
+         break
+
+     time.sleep(0.1)
+
+     k = k + 1
+
+     if k > 200:
+
+         break
  
 ```
  te = datetime.datetime.now()

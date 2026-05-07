@@ -31,11 +31,18 @@ last_modified: '2024-01-22T05:13:59Z'
 - MySQL
 ```
  with recursive seq(no) as(
+```
+
      select   1  no
+
      union all
+
      select   no+1  no
+
      from     seq
+
      where    no < 100
+```
  )
  select   no
  from     seq
@@ -43,38 +50,72 @@ last_modified: '2024-01-22T05:13:59Z'
 - MySQL, Doris, Oracle
 ```
  with t1 as (
+```
+
     with a as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     ),
+
     b as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     )
+
     select 1 from a, b
+```
  ),
  t2 as (
+```
+
     with a as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     ),
+
     b as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     )
+
     select 1 from a, b
+```
  ),
  t3 as (
+```
+
     with a as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     ),
+
     b as (
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL 
+
        SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5
+
     )
+
     select 1 from a, b
+
     limit 100
+```
  )
  select 1 from t1, t2, t3
 ```

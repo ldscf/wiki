@@ -11,65 +11,72 @@ Greenplum 安装、配置
 ## INIT
 
 ### Check
-```
+
   ./rrun ip_gp 'sestatus'
+
   ./rrun ip_gp 'cat /etc/
+
   ./rrun ip_gp 'systemctl
+
   ./rrun ip_gp 'hostname'
-```
 
 ### sestatus
-```
+
   SELinux status: disabled
+
   Disabling SELinux and Firewall Software
-```
-```
+
   SELinux 临时关闭（不一定管用，P.S. 根本不管用。SELinux只能重启;好像管用）
+
   setenforce 0
-```
-```
+
   vi /etc/selinux/config
+
   SELINUX=disabled
-```
 
 ### firewalld
-```
+
   systemctl status firewalld
+
   systemctl stop firewalld
+
   systemctl disable firewalld
-```
 
 ### Set the required operating system parameters
-```
+
   The hosts File
-```
 
 ### The sysctl.conf File
-```
+
   Set the parameters in the /etc/sysctl.conf file and reload with sysctl -p
+
   echo $(expr $(getconf _PHYS_PAGES) / 2) 
+
   echo $(expr $(getconf _PHYS_PAGES) / 2 \* $(getconf PAGE_SIZE))
+
   kernel.shmall = _PHYS_PAGES / 2 # See Shared Memory Pages
+
   kernel.shmmax = kernel.shmall * PAGE_SIZE 
-```
-```
+
   vm.overcommit_memory = 2 # See Segment Host Memory
+
   vm.overcommit_ratio = 80 # See Segment Host Memory
-```
 
 ### >= 64G
-```
+
   vm.dirty_background_ratio = 0 # See System Memory
+
   vm.dirty_ratio = 0
+
   vm.dirty_background_bytes = 1610612736 ＃1.5GB
+
   vm.dirty_bytes = 4294967296 ＃4GB
-```
 
 ### < 64G
-```
+
   vm.dirty_background_ratio = 3
+
   vm.dirty_ratio = 10
-```
 
 20210916, Adam, Greenplum 6.17
 - shmall, shmmax 根据内存调整
@@ -78,35 +85,60 @@ Greenplum 安装、配置
 - sysctl设置不正确，会造成部分节点生成不成功    # 2022/6/15
 
 ### sysctl.conf
-```
+
   kernel.shmall = 32920550
+
   kernel.shmmax = 134842572800
+
   kernel.shmmni = 4096
+
   vm.overcommit_memory = 2
+
   vm.overcommit_ratio = 80
+
   net.ipv4.ip_local_port_range = 10000 65535
+
   kernel.sem = 500 2048000 200 4096
+
   kernel.sysrq = 1
+
   kernel.core_uses_pid = 1
+
   kernel.msgmnb = 65536
+
   kernel.msgmax = 65536
+
   kernel.msgmni = 2048
+
   net.ipv4.tcp_syncookies = 1
+
   net.ipv4.conf.default.accept_source_route = 0
+
   net.ipv4.tcp_max_syn_backlog = 4096
+
   net.ipv4.conf.all.arp_filter = 1
+
   net.core.netdev_max_backlog = 10000
+
   net.core.rmem_max = 2097152
+
   net.core.wmem_max = 2097152
+
   vm.swappiness = 10
+
   vm.zone_reclaim_mode = 0
+
   vm.dirty_expire_centisecs = 500
+
   vm.dirty_writeback_centisecs = 100
+
   vm.dirty_background_ratio = 0
+
   vm.dirty_ratio = 0
+
   vm.dirty_background_bytes = 1610612736
+
   vm.dirty_bytes = 4294967296
-```
 
 ### System Resources Limits
 1. soft表示软限制；hard表示硬限制；nproc进程数；nofile文件数
@@ -126,20 +158,24 @@ Greenplum 安装、配置
 ./lrun ip_gp 'scp gp/20-nproc.conf %VAR%:/etc/security/limits.d/20-nproc.conf'
 
 ### Disk I/O Settings
-```
+
   ./rrun ip_gp '/sbin/blockdev --setra 16384 /dev/sda
+
   # /sbin/blockdev --getra /dev/sda
+
   DEV=/dev/mapper/centos-home
+
   DEV=/dev/sdb
+
   IP=10.10.139.12
+
   ssh $IP "/sbin/blockdev --setra 16384 ${DEV}"
+
   ssh $IP "/sbin/blockdev --getra ${DEV}"
-```
  
-```
   vi /etc/rc.d/rc.local
+
   ulimit -SHn 131072
-```
 
 ### Disk I/O scheduler
 1. CentOS 7.x默认支持的就是deadline算法

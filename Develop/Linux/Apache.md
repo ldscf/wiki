@@ -19,12 +19,20 @@ Centos7 系统自带的 Apache 安装
 ```
  Alias /dev "/u01/Dev"
  
+```
+
      Options Indexes MultiViews FollowSymLinks
+
      IndexOptions +Charset=utf-8
+
      Allow from all
+
      Order allow,deny
+
      AllowOverride All
+
      Require all granted
+```
  
 ```
 

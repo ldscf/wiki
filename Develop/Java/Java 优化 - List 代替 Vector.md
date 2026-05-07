@@ -10,11 +10,18 @@ last_modified: '2025-07-29T06:22:40Z'
 - Vector 在长度不够用时在原来的基础上扩展 100%，ArrayList 扩展 50%
 ```
  private static Vector splitString(String src) {
+```
+
      Vector spliter = new Vector<>();
+
      if (src == null) {
+
          return spliter;
+
      }
+
      ...
+```
  }
 ```
 1. 使用 ArrayList 代替 Vector，提供了更好的性能，Vector 是较旧且效率较低的方法
@@ -23,11 +30,18 @@ last_modified: '2025-07-29T06:22:40Z'
 修改后，代码效率提升 20% 以上。
 ```
  private static List splitString(String src) {
+```
+
      if (src==null||(src.equals(""))) {
+
          return Collections.emptyList();
+
      }
+
      List spliter = new ArrayList<>();
+
      ...
+```
  }
 ```
 

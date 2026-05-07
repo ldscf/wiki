@@ -68,9 +68,8 @@ https://cdn.mysql.com/archives/mysql-connector-java-8.0/mysql-connector-j_8.0.31
 - 在 Language Structure - Schema Object Names - Identifier Case Sensitivity 有记录：
 - lower_case_table_names can only be configured when initializing the server. Changing the lower_case_table_names setting after the server is initialized is prohibited.
 - 只能在初始化时指定 lower_case_table_names 参数，初始化之后该参数不允许修改。5.7 版本支持在初始化之后修改 lower_case_table_names 参数，而且还给出了在不同值下创建的数据库的迁移方案。而到了 8.0，只支持初始化时指定该参数，初始化之后，如果修改了该参数，启动就会报错，因为不允许在初始化之后修改这个值了。
-```
+
 　　如果不需要数据迁移：删除 data 目录下的所有文件，重新初始化。\\　　指定 lower_case_table_names 大小写不敏感的两种方式：
-```
 - 初始化设置 lower_case_table_names=1
   - /usr/local/mysql/bin/mysqld  --defaults-file=/etc/my.cnf --initialize-insecure --user=mysql --initialize --lower-case-table-names=1
   - my.cnf，在 [mysqld] 配置节点下添加 lower-case-table-names=1

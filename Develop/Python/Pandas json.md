@@ -29,7 +29,10 @@ area_proc.csv
 ```
  ...
  df1 = pd.read_csv(u'area_proc.csv')
+```
+
     area_id area_name prod_type prod_name  num  unit  total
+```
  0       10       PEK        P1     Apple   12   5.2   62.4
  1       10       PEK        P2      Pear   20   3.3   66.0
  2       11       SHA        P1     Apple    8   4.5   36.0

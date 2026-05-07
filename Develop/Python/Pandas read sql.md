@@ -38,8 +38,8 @@ Read SQL query or database table into a DataFrame.
  df1 = pd.read_sql(ssql, conn)
 ```
  
-```
      K_TYPE  K_ID          K_NAME                                              VALUE  ...    CA                  CT     UA    UT
+```
  0     1002  0100            1101                                                 e9  ...  None 2017-04-13 13:48:32   None  None
  1     1001  0080          etl_e0  select   proc_id, proc_desc\r\nfrom     s_proc...  ...   sys 2017-05-03 19:43:41   None  None
  2     1002  0060            1006                                                 e6  ...  None 2017-05-04 11:25:53   None  None

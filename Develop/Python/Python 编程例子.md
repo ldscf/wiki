@@ -9,18 +9,27 @@ last_modified: '2025-08-05T03:14:00Z'
 ```
  a, b = 0,1
  while a < 10:
-     print(a)
-     a, b= b, a+b
 ```
+
+     print(a)
+
+     a, b= b, a+b
 
 或者
 ```
  def fab(max): 
+```
+
      n, a, b = 0, 0, 1 
+
      while n < max: 
+
          print b 
+
          a, b = b, a + b 
+
          n = n + 1
+```
  fab(5)
 ```
 
@@ -70,18 +79,29 @@ last_modified: '2025-08-05T03:14:00Z'
 ```
 ```
  ['1 of diamond',
-  '1 of clubs',
-  '1 of hearts',
-  '1 of spades',
-  '2 of diamond',
-  '2 of clubs',
-  '2 of hearts',
-  '2 of spades',
-  '3 of diamond',
-  '3 of clubs',
-  '3 of hearts',
-  '3 of spades']
 ```
+
+  '1 of clubs',
+
+  '1 of hearts',
+
+  '1 of spades',
+
+  '2 of diamond',
+
+  '2 of clubs',
+
+  '2 of hearts',
+
+  '2 of spades',
+
+  '3 of diamond',
+
+  '3 of clubs',
+
+  '3 of hearts',
+
+  '3 of spades']
 ```
  from random import shuffle #
  shuffle(deck)              #序列元素随机排序
@@ -89,18 +109,29 @@ last_modified: '2025-08-05T03:14:00Z'
 ```
 ```
  ['5 of hearts',
-  '1 of hearts',
-  '1 of diamond',
-  '6 of clubs',
-  'Jack of spades',
-  '2 of diamond',
-  'King of spades',
-  '8 of diamond',
-  'Queen of clubs',
-  '6 of diamond',
-  '9 of clubs',
-  '9 of spades']
 ```
+
+  '1 of hearts',
+
+  '1 of diamond',
+
+  '6 of clubs',
+
+  'Jack of spades',
+
+  '2 of diamond',
+
+  'King of spades',
+
+  '8 of diamond',
+
+  'Queen of clubs',
+
+  '6 of diamond',
+
+  '9 of clubs',
+
+  '9 of spades']
 
 ### 计算圆周率 π
 ```
@@ -112,10 +143,16 @@ last_modified: '2025-08-05T03:14:00Z'
  s = x1+x2                                    #求第一大项
  n *= 2                                       #设置下面循环的终点，即共计算n项
  for i in range(3, n, 2):                     #循环初值=3，末值n,步长=2
+```
+
      x1 //= -25                               #取整求每个含1/5的项及符号
+
      x2 //= -57121                            #取整求每个含1/239的项及符号
+
      x = (x1+x2) // i                         #求两项之和，除以对应因子，取整
+
      s += x                                   #求总和
+```
  pai = s*4                                    #求出π
  pai //= 10**10                               #舍掉后十位
  print(pai)                                   #输出圆周率π的值，不带小数点

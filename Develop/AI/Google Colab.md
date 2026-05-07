@@ -81,8 +81,9 @@ https://colab.research.google.com
 ```
  Tensorflow version 2.12.0
  [PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU'),
-  PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
 ```
+
+  PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')]
 
 #### TPU
 ```
@@ -92,11 +93,16 @@ https://colab.research.google.com
  
 ```
  try:
-     tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
-     print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
- except ValueError:
-     raise BaseException('ERROR: Not connected to a TPU runtime; please see the previous cell in this notebook for instructions!')
 ```
+
+     tpu = tf.distribute.cluster_resolver.TPUClusterResolver()  # TPU detection
+
+     print('Running on TPU ', tpu.cluster_spec().as_dict()['worker'])
+```
+ except ValueError:
+```
+
+     raise BaseException('ERROR: Not connected to a TPU runtime; please see the previous cell in this notebook for instructions!')
  
 ```
  tf.config.experimental_connect_to_cluster(tpu)

@@ -75,20 +75,27 @@ java 以前使用 --version 来查看版本的；java8 以后变更为 -version�
 ##### core-site.xml (Common组件)
 ```
  
+```
    
      <!-- 配置hdfs地址 -->
+
      fs.defaultFS
+
      hdfs://**g2-hdfs-01:9000**
    
    
      io.file.buffer.size
+
      131072
    
    
          <!-- 保存临时文件目录 -->
+
      hadoop.tmp.dir
+
      /u01/hdfs/tmp
    
+```
  
 ```
 
@@ -96,120 +103,151 @@ java 以前使用 --version 来查看版本的；java8 以后变更为 -version�
 - 修改 dfs.replication 不影响历史文件的备份数。修改历史文件备份数：hadoop fs -setrep -R 3 
 ```
  
+```
    
      <!-- 主节点地址 -->
+
      dfs.namenode.http-address
+
      **g2-hdfs-01:9870**
    
    
          <!-- 第二节点地址 -->
+
      dfs.namenode.secondary.http-address
+
      **g2-hdfs-02:9870**
    
    
      dfs.namenode.name.dir
+
      file:/u01/hdfs/dfs/nn
    
    
      dfs.datanode.data.dir
+
      file:/u01/hdfs/dfs/dn
    
     
      dfs.webhdfs.enabled 
+
      true 
    
    
          <!-- 配置false后，无需权限即可生成dfs上的文件 -->
+
      dfs.permissions
+
      false
    
    
              <!-- 在文件中出现的主机会被下线 -->
+
      dfs.hosts.exclude
+
      /opt/hadoop/etc/hadoop/workers.exclude
    
+```
  
 ```
  
 ```
  -- del
+```
    
          <!-- 备份数为默认值3 -->
+
      dfs.replication
+
      3
    
    
      dfs.blocksize
+
      268435456
    
    
      dfs.namenode.handler.count
+
      100
    
-```
 
 ##### mapred-site.xml
 ```
  
+```
    
      mapreduce.framework.name
+
      yarn 
    
+```
  
 ```
  
 ```
  -- del
+```
    
       mapreduce.jobhistory.address
+
       g2-hdfs-01:10020
    
    
       mapreduce.jobhistory.webapp.address
+
       g2-hdfs-01:19888
    
    
       mapreduce.application.classpath
+
       $HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/ hadoop/mapreduce/lib/*
    
-```
 
 ##### yarn-site.xml
 ```
  
+```
    
      yarn.resourcemanager.hostname
+
      **g2-hdfs-01**
    
    
      yarn.nodemanager.aux-services  
+
      mapreduce_shuffle
    
    
      yarn.resourcemanager.webapp.address
+
      **g2-hdfs-01:8088**
    
    
      yarn.scheduler.maximum-allocation-mb
+
      32768
    
    
      yarn.nodemanager.vmem-check-enabled
+
      false
    
    
      yarn.nodemanager.env-whitelist
+
      JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPE ND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME
    
- 
 ```
+ 
 ```
    
      yarn.resourcemanager.webapp.address
+
      hadoop01/192.168.44.5:8088
+
      配置外网只需要替换外网ip为真实ip，否则默认为 localhost:8088
    
-```
  
 ```
  yarn.resourcemanager.hostname

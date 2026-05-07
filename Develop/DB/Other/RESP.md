@@ -77,42 +77,30 @@ COMMAND
 $4
 
 DOCS
-```
+
   2)  1) "summary"
-```
-```
+
       2) "Returns the expiration time of a key as a Unix milliseconds timestamp."
-```
-```
+
       3) "since"
-```
-```
+
       4) "7.0.0"
-```
-```
+
       5) "group"
-```
-```
+
       6) "generic"
-```
-```
+
       7) "complexity"
-```
-```
+
       8) "O(1)"
-```
-```
+
       9) "arguments"
-```
-```
+
      10) 1) 1) "name"
-```
-```
+
             2) "key"
-```
-```
+
             3) "type"
-```
 
 ...
 

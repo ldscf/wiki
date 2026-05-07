@@ -38,8 +38,9 @@ Oracle Cloud ADW - Autonomous Database details
  cur=conn.cursor()
  res=cur.execute("select count(*) from tab")
  for TN in res:
-     print(TN)
 ```
+
+     print(TN)
 
 ### Run Toad/PLSQL With a Wallet
 
@@ -85,16 +86,26 @@ See Also: [[DBeaver#Run DBeaver With a Datafuse jar|DBeaver]]
 ```
 ```
  Collecting pyOpenSSL
+```
+
    Downloading pyOpenSSL-22.1.0-py3-none-any.whl (57 kB)
+
       |████████████████████████████████| 57 kB 5.5 MB/s 
+```
  Requirement already satisfied, skipping upgrade: cryptography<39,>=38.0.0 in /usr/local/lib/python3.8/dist-packages ( from pyOpenSSL) (38.0.4)
  Requirement already satisfied, skipping upgrade: cffi>=1.12 in /usr/local/lib/python3.8/dist-packages (from  cryptography<39,>=38.0.0->pyOpenSSL) (1.15.0)
  Requirement already satisfied, skipping upgrade: pycparser in /usr/local/lib/python3.8/dist-packages (from  cffi>=1.12->cryptography<39,>=38.0.0->pyOpenSSL) (2.21)
  Installing collected packages: pyOpenSSL
+```
+
    Attempting uninstall: pyOpenSSL
+
      Found existing installation: pyOpenSSL 19.0.0
+
      Not uninstalling pyopenssl at /usr/lib/python3/dist-packages, outside environment /usr
+
      Can't uninstall 'pyOpenSSL'. No files were found to uninstall.
+```
  Successfully installed pyOpenSSL-22.1.0
 ```
 

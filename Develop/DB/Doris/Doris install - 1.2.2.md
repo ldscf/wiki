@@ -88,8 +88,12 @@ DORIS_HOME 在 conf/fe.conf 中使用，如：LOG_DIR、JAVA_OPTS**、(# meta_di
  curdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
  ...
  DORIS_HOME="$(
+```
+
     cd "${curdir}/.."
+
     pwd
+```
  )"
  export DORIS_HOME
  也就是说，在 .profile 中设置了也无用（FE/BE 相同）。
@@ -266,7 +270,10 @@ Broker 以插件的形式，独立于 Doris 部署。如果需要从第三方存
 log/be.out
 ```
  中有错误信息，若正常启动，则只有一条启动时间：
+```
+
   start time: Tue Mar  7 14:45:45 UTC 2023
+```
  停止则无记录。
 ```
 

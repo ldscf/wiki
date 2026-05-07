@@ -9,15 +9,23 @@ last_modified: '2024-03-18T08:11:03Z'
 ```
  // Hello, World!
  func fun1(str1:String) {
+```
+
     println("Output " + str1 + " from fun1.\n")
+```
  }
 ```
  
 ```
  main() {
+```
+
     var s1 = "Hello, World!"
+
     println(s1)
+
     fun1("test")
+```
  }
 ```
 ```
@@ -39,27 +47,38 @@ last_modified: '2024-03-18T08:11:03Z'
 编译时，会使用 C 库，如：gcc lib path: /lib/gcc/x86_64-linux-gnu/9。用 cjc ... -V 查看。
 ```
  *foreign {
+```
+
      func srand(n: Int32): Unit
+
      func time(): Int32
+
      func rand(): Int32
+```
  }
 ```
 
  
 ```
  main() {
-    unsafe {
-       var n1:Int32 = time()
-       srand(n1)
-    }
 ```
 
- 
-```
-    let r1 = unsafe {
-       rand()
+    unsafe {
+
+       var n1:Int32 = time()
+
+       srand(n1)
+
     }
+ 
+    let r1 = unsafe {
+
+       rand()
+
+    }
+
     println(r1)
+```
  }*
 ```
 
@@ -75,26 +94,36 @@ last_modified: '2024-03-18T08:11:03Z'
  
 ```
  public func urand(): UInt32 {
-     unsafe {
-         var n1:Int32 = time()
-         srand(n1)
-     }
 ```
 
- 
-```
-     let r1 = unsafe {
-         rand()
+     unsafe {
+
+         var n1:Int32 = time()
+
+         srand(n1)
+
      }
+ 
+     let r1 = unsafe {
+
+         rand()
+
+     }
+
      UInt32(r1)
+```
  }
 ```
 
 
 ```
  main() {
+```
+
      var n1 = urand()
+
      println(n1)
+```
  }*
 ```
 
@@ -106,31 +135,46 @@ last_modified: '2024-03-18T08:11:03Z'
  foreign {func time(): Int32}
  foreign {func rand(): Int32}
  public struct UDEF {
-     //-- rand    
-     public func urand(): UInt32 {
-         unsafe {
-             var n1:Int32 = time()
-             srand(n1)
-         }
 ```
 
-     
-```
-         let r1 = unsafe {
-             rand()
+     //-- rand    
+
+     public func urand(): UInt32 {
+
+         unsafe {
+
+             var n1:Int32 = time()
+
+             srand(n1)
+
          }
+     
+         let r1 = unsafe {
+
+             rand()
+
+         }
+
          UInt32(r1)
+
      }
+
      //== rand
+```
  }
 ```
 
 
 ```
  main() {
+```
+
      var udef1 = UDEF()
+
      var n1 = udef1.urand()
+
      println(n1)
+```
  }*
 ```
 
@@ -144,29 +188,54 @@ last_modified: '2024-03-18T08:11:03Z'
 1. 第二步执行后，在 release 中生成 usys 目录及相应 .cjo 文件
 ```
  {
+```
+
    "cjc_version": "0.45.2",
+
    "organization": "UDEF",
+
    "name": "usys",
+
    "description": "nothing here",
+
    "version": "1.0.0",
+
    "build_dir": "",
+
    "src_dir": "",
+
    "dependencies": {},
+
    "requires": {},
+
    "dev_requires": {},
+
    "package_requires": {
+
      "path_option": [],
+
      "package_option": {}
+
    },
+
    "foreign_requires": {},
+
    "output_type": "static",
+
    "command_option": "",
+
    "condition_option": {},
+
    "link_option": "",
+
    "cross_compile_configuration": {},
+
    "scripts": {},
+
    "package_configuration": {},
+
    "lto": ""
+```
  }
 ```
 ```

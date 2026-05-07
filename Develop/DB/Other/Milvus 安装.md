@@ -69,19 +69,28 @@ lock pid file: /run/milvus/standalone.pid
 ```
  # 设置配置文件和工作目录
  /u01/milvus/conf
+```
+
    : conf      # [server_config.yaml](https://github.com/milvus-io/milvus/blob/v0.10.1/core/conf/demo/server_config.yaml)
+
    : db        # 索引与向量存储
+
    : logs      # 日志
+
    : wal       # 预写式日志
 ```
-```
  docker run -td --name mymilvus -e "TZ=Asia/Shanghai" -p 19530:19530 -p 19121:19121 \
-  -v /u01/milvus/db:/var/lib/milvus/db \
-  -v /u01/milvus/wal:/var/lib/milvus/wal \
-  -v /u01/milvus/logs:/var/lib/milvus/logs \
-  -v /u01/milvus/conf:/var/lib/milvus/conf \
-  milvusdb/milvus:cpu-latest
 ```
+
+  -v /u01/milvus/db:/var/lib/milvus/db \
+
+  -v /u01/milvus/wal:/var/lib/milvus/wal \
+
+  -v /u01/milvus/logs:/var/lib/milvus/logs \
+
+  -v /u01/milvus/conf:/var/lib/milvus/conf \
+
+  milvusdb/milvus:cpu-latest
 ```
  *<small># docker ps
  CONTAINER ID   IMAGE                        COMMAND                  CREATED         STATUS          PORTS                                                                                          NAMES
@@ -92,12 +101,15 @@ lock pid file: /run/milvus/standalone.pid
  
 ```
  # docker logs f8e350986ef4
-     __  _________ _   ____  ______    
-    /  |/  /  _/ /| | / / / / / __/    
-   / /|_/ // // /_| |/ / /_/ /\ \    
-  /_/  /_/___/____/___/\____/___/     
 ```
 
+     __  _________ _   ____  ______    
+
+    /  |/  /  _/ /| | / / / / / __/    
+
+   / /|_/ // // /_| |/ / /_/ /\ \    
+
+  /_/  /_/___/____/___/\____/___/     
  
 ```
  Welcome to use Milvus!

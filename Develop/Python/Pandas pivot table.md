@@ -33,8 +33,8 @@ pivot_table(data, index, columns, values/aggfunc, margins)
  df1 = pd.read_csv('area_proc_en.csv')
 ```
  
-```
     area_id area_name prod_type prod_name  num  unit  total
+```
  0       10       PEK        P1     Apple   12   5.2   62.4
  1       10        TJ        P1      Pear   20   3.3   66.0
  2       10       PEK        P2      Fish   32  20.0  640.0
@@ -46,11 +46,18 @@ pivot_table(data, index, columns, values/aggfunc, margins)
 ```
  # cross table
  pt1 = pd.pivot_table( df1,
+```
+
   index      =['area_id', 'area_name', 'prod_type'],
+
   columns    =['prod_name'], 
+
   values     ='num', 
+
   aggfunc    ={'num':'sum'}, 
+
   fill_value = 0
+```
  )
 ```
  
@@ -58,8 +65,12 @@ pivot_table(data, index, columns, values/aggfunc, margins)
  prod_name                    Apple  Fish  Pear
  area_id area_name prod_type                   
  10      PEK       P1            12     0     0
+```
+
                    P2             0    32     0
+
          TJ        P1             0     0    20
+```
  11      SHA       P1             8     0    15
 ```
  
@@ -67,8 +78,12 @@ pivot_table(data, index, columns, values/aggfunc, margins)
 ```
  # Add Total, sub Total
  pt2 = pd.concat([
+```
+
      d.append(d.sum().rename((k, '小计')))
+
      for k, d in pt1.groupby(level=0)
+```
  ]).append(pt1.sum().rename(('全国', '合计')))
 ```
  
@@ -94,18 +109,32 @@ pivot_table(data, index, columns, values/aggfunc, margins)
 #### Cross Table(multi value)
 ```
  pt2 = pd.pivot_table( df1,
+```
+
   index      =['area_id', 'area_name', 'prod_type'],
+
   columns    =['prod_name'], 
+
   values     =['num', 'unit', 'total'], 
+
   aggfunc    ={'num':'sum', 'unit':'mean', 'total':'sum'}, 
+
   fill_value = 0
+```
  )
+```
+
                               num           total             unit          
+```
  prod_name                   Apple Fish Pear Apple Fish  Pear Apple Fish Pear
  area_id area_name prod_type                                                 
  10      PEK       P1           12    0    0  62.4    0   0.0   5.2    0  0.0
+```
+
                    P2            0   32    0   0.0  640   0.0   0.0   20  0.0
+
          TJ        P1            0    0   20   0.0    0  66.0   0.0    0  3.3
+```
  11      SHA       P1            8    0   15  36.0    0  37.5   4.5    0  2.5
 ```
  
@@ -113,13 +142,17 @@ pivot_table(data, index, columns, values/aggfunc, margins)
 ```
  # Add Total, sub Total
  pt3 = pd.concat([
+```
+
      d.append(d.sum().rename((k, '小计')))
+
      for k, d in pt3.groupby(level=0)
+```
  ]).append(pt3.sum().rename(('全国', '合计')))
 ```
  
-```
                  num                   total                       unit                 
+```
  prod_name     Apple  Fish  Pear   All Apple   Fish   Pear    All Apple  Fish Pear   All
  (10, PEK, P1)  12.0   0.0   0.0  12.0  62.4    0.0    0.0   62.4   5.2   0.0  0.0   5.2
  (10, PEK, P2)   0.0  32.0   0.0  32.0   0.0  640.0    0.0  640.0   0.0  20.0  0.0  20.0
@@ -142,22 +175,34 @@ pivot_table(data, index, columns, values/aggfunc, margins)
 #### Cross Table(margins)
 ```
  pt2 = pd.pivot_table( df1,
+```
+
   index      =['area_id', 'area_name', 'prod_type'],
+
   columns    =['prod_name'], 
+
   values     =['num', 'unit', 'total'], 
+
   aggfunc    ={'num':'sum', 'unit':'mean', 'total':'sum'}, 
+
   margins    = True,
+
   fill_value = 0
+```
  )
 ```
  
-```
                                num               total                     unit                
+```
  prod_name                   Apple Fish Pear All Apple Fish   Pear    All Apple Fish Pear   All
  area_id area_name prod_type                                                                   
  10      PEK       P1           12    0    0  12  62.4    0    0.0   62.4  5.20    0  0.0   5.2
+```
+
                    P2            0   32    0  32   0.0  640    0.0  640.0  0.00   20  0.0  20.0
+
          TJ        P1            0    0   20  20   0.0    0   66.0   66.0  0.00    0  3.3   3.3
+```
  11      SHA       P1            8    0   15  23  36.0    0   37.5   73.5  4.50    0  2.5   3.5
  All                            20   32   35  87  98.4  640  103.5  841.9  4.85   20  2.9   7.1
 ```

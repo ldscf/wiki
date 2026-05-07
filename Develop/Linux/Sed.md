@@ -73,40 +73,30 @@ vmstat 1 2 |sed '1,3d'|awk '{print $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$1
 
 #多行合并成一行
 1. 采用awk
-```
+
     awk BEGIN{RS=EOF}'{gsub(/\n/," ");print}' file
-```
-```
+
     说明：awk默认将记录分隔符（record separator即RS）设置为\n，此行代码将RS设置为EOF（文件结束），也就是把文件视为一个记录，然后通过gsub函数将\n替换成空格，最后输出。
-```
 2. 采用sed
-```
+
     sed ':a; N;s/\n/ /; t a; ' file
-```
-```
+
     说明：sed默认只按行处理，N可以让其读入下一行，再对\n进行替换，这样就可以将两行并做一行。但是怎么将所有行并作一行呢？可以采用sed的跳转功能。:a 在代码开始处设置一个标记a，在代码执行到结尾处时利用跳转命令t a重新跳转到标号a处，重新执行代码，这样就可以递归的将所有行合并成一行。
-```
 3. cat file | xargs
-```
+
     xargs reads argu-
-```
-```
+
     ments from the standard input, delimited by blanks (which can be pro-
-```
-```
+
     tected with double or single quotes or a backslash) or newlines
-```
 
 将file中的内容作为参数传给X程序
-```
+
     如果用echo作为X程序，则命令为：
-```
-```
+
     cat file | xargs echo
-```
-```
+
     此命令和cat file | xargs 行为一致，因为xargs的默认行为就是打印输出。
-```
 
 #计算一列数字
 

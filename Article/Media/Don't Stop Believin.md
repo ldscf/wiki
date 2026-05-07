@@ -27,9 +27,7 @@ last_modified: '2025-04-12T14:05:20Z'
 乐队的音乐风格主要为竞技场摇滚 (Arena Rock)、硬摇滚 (Hard Rock) 和软摇滚 (Soft Rock)。
 
 Journey 以主唱史蒂夫·佩里 (Steve Perry) 极具穿透力的高亢嗓音、尼尔·肖恩 (Neal Schon) 精湛的吉他演奏以及乔纳森·凯恩 (Jonathan Cain) 标志性的键盘编排为特色，在 20 世纪 70 年代末到 80 年代中期取得了巨大的商业成功。
-```
+
 　　Video: [Dont Stop Believin' - Journey - 1981](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=/Journey/Dont_Stop_Believin-Journey-1981.mp4)
-```
-```
+
 　　Video: [Dont Stop Believin' - Richard Goodall - 2024](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=/Journey/Dont_Stop_Believin-Richard_Goodall-2024.mp4)
-```

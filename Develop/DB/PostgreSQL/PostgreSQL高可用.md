@@ -72,10 +72,14 @@ PostgreSQL10 开始，实现了基于表级别的复制
 ```
  # 压缩的归档日志
  如果担心归档存储的尺寸，你可以使用gzip来压缩归档文件：
-  archive_command = 'gzip < %p > /var/lib/pgsql/archive/%f'
- 那么在恢复时你将需要使用gunzip：
-  restore_command = 'gunzip < /mnt/server/archivedir/%f > %p'
 ```
+
+  archive_command = 'gzip < %p > /var/lib/pgsql/archive/%f'
+```
+ 那么在恢复时你将需要使用gunzip：
+```
+
+  restore_command = 'gunzip < /mnt/server/archivedir/%f > %p'
 - max_wal_senders - 最大WAL发送进程数，从库个数 <= max_wal_senders < max_connections 
 - wal_keep_segments - pg_wal 目录下保留 WAL 日志的个数。每个 WAL 文件默认 16M，为保障从库能在应用归档落后时依旧能追上主库，可以设置较大一些。13.0 以后版本将 wal_keep_segments 重命名为 wal_keep_size，让用户指定 WAL 大小而不是 WAL 文件个数。
 - wal_keep_size - in megabytes; 0 disables,  Valid units for this parameter are "B", "kB", "MB", "GB", and "TB".

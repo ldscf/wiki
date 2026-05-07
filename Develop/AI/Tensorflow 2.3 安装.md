@@ -81,8 +81,8 @@ Anaconda Prompt
  
 ```
  channels:
-   - defaults
 ```
+   - defaults
 - 恢复默认源
 ```
  conda config --remove-key channels
@@ -90,10 +90,12 @@ Anaconda Prompt
 - 清华源
 ```
  channels:
+```
    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+```
  ssl_verify: true
 ```
 

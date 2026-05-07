@@ -3,7 +3,7 @@ source_title: Find
 categories:
 - Develop
 - Linux
-last_modified: '2025-06-25T06:34:12Z'
+last_modified: '2026-05-06T14:15:01Z'
 ---
 Linux find 命令用于在指定目录下查找文件和目录。
 
@@ -23,8 +23,12 @@ Expression: 可选参数，用于指定查找的条件，可以是文件名、�
 - 指定目录层级  : -maxdepth 1 当前目录下一级
 
 动作: 可选参数，用于对匹配到的文件执行操作，比如删除、复制等
-- 列出它们的完整路径: -exec ls -l {} \;
-- 执行删除操作: -exec rm {} \;  # 建议使用"|xargs rm -f;"
+- 列出完整路径: -exec ls -l {} \;  
+
+注：{} 代表匹配到的文件名，\; 表示命令结束。
+- 删除: -delete  
+
+如：find . -name ".DS_Store" -type f **-delete**
 
 表达式关系运算:
 - 默认关系间是逻辑与，如：-mtime +0 -mtime -3 表示 1 天以上，4 天以下

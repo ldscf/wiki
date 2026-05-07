@@ -16,9 +16,7 @@ last_modified: '2025-11-08T15:27:29Z'
 - 登上英国单曲榜前五，美国告示牌热门单曲榜 Top 30
 - 迈克尔在多次演唱会与慈善活动中表演此曲
 - 被联合国儿童基金会多次用于公益活动，是环保、和平与儿童权利主题活动的经典背景曲之一
-```
+
 　　Video: [Heal The World - MJ In Munich](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=MJ/Heal.The.World_MJ.In.Munich.mp4)
-```
-```
+
 　　Video: [Heal The World - Emma Kok](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=MJ/Heal.The.World_Emma.Kok.mp4)
-```

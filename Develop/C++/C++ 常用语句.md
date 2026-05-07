@@ -79,16 +79,25 @@ P.S. char buffer[msg_len + 1] = {"a"}    // "a", \0, \0...
  
 ```
  if (map1.count("key1")) {
+```
+
      ...
+```
  }
 ```
 
 #### try
 ```
  try {
+```
+
      return stoi(str1);
+```
  } catch (exception e) {
+```
+
      return 0;
+```
  }
 ```
 
@@ -106,18 +115,16 @@ P.S. char buffer[msg_len + 1] = {"a"}    // "a", \0, \0...
 ```
 
 for (const auto& pair1 : map1) {
-```
+
     cout << pair1.first << ": " << pair1.second << endl;
-```
 
 }
 
 # 基本方法：迭代器
 
 for (map<int, string>::iterator it = map1.begin(); it != map1.end(); ++it) {
-```
+
     cout << it->first << ": " << it->second << endl;
-```
 
 }
 
@@ -126,9 +133,8 @@ for (map<int, string>::iterator it = map1.begin(); it != map1.end(); ++it) {
 #include <algorithm>
 
 void printPair(const pair<int, string>& p) {
-```
+
     cout << p.first << ": " << p.second << endl;
-```
 
 }
 

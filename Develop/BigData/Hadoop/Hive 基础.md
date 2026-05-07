@@ -65,25 +65,33 @@ SELECT * FROM ${hiveconf:tbl};
  # 或者在 $HIVE_HOME/conf/hive-site.xml
  hive.server2.logging.operation.enabled: [true|false]
  hive.server2.logging.operation.level:
-  NONE：忽略任何日志记录
-  EXECUTION：记录任务完成情况
-  PERFORMANCE: 执行+性能日志
-  VERBOSE：所有日志
- hive.server2.logging.operation.log.location:
-  /opt/hive/log*
 ```
+
+  NONE：忽略任何日志记录
+
+  EXECUTION：记录任务完成情况
+
+  PERFORMANCE: 执行+性能日志
+
+  VERBOSE：所有日志
+```
+ hive.server2.logging.operation.log.location:
+```
+
+  /opt/hive/log*
 
 ### 分割符
 
 Hive中默认的分割符为：
-* 列：^A
-* 行：\n
+- 列：^A
+- 行：\n
 
 在数据文件中显示为："1000^AHello, World!\n"，数据中如果包含："\001"，"\n"等分隔符，需要提前处理掉。
 
 如果需要自定义分隔符，需要设置：
  ```
-1. 分隔符为逗号，字符串中有特殊字符用双引号引起来
+
+# 分隔符为逗号，字符串中有特殊字符用双引号引起来
 create table test_csv(
   ky int,
   val string,
@@ -137,8 +145,8 @@ Hive从0.7.0版本开始加入了索引，0.8版本后增加 bitmap 索引。索
 #### 分区
 
 表分区是指将数据按照物理分层的方式进行区分开，加快查询的速度，同时也起到数据快照的作用。可以指定单个字段也可以指定多个字段；
-* 静态分区是在创建表时手动指定
-* 动态分区是通过数据来进行判断，只有在 SQL 执行时才能确定。动态分区不能使用 load 加载数据，需要使用 insert into
+- 静态分区是在创建表时手动指定
+- 动态分区是通过数据来进行判断，只有在 SQL 执行时才能确定。动态分区不能使用 load 加载数据，需要使用 insert into
 
 默认创建的分区是静态分区，如果要指定动态分区需要配置系统参数。
 
@@ -151,9 +159,9 @@ Hive从0.7.0版本开始加入了索引，0.8版本后增加 bitmap 索引。索
 指定分桶的字段：clustered by (uid)
 
 #### 区别
-* 分区使用的是表外字段，分桶使用的是表内字段
-* 分桶是更细粒度的划分、管理数据，更多用来做数据抽样、JOIN操作
-* 分区是粗粒度的将数据隔离，分桶是更加细粒度的将数据隔离
+- 分区使用的是表外字段，分桶使用的是表内字段
+- 分桶是更细粒度的划分、管理数据，更多用来做数据抽样、JOIN操作
+- 分区是粗粒度的将数据隔离，分桶是更加细粒度的将数据隔离
 
 ### Data
 
@@ -167,12 +175,13 @@ Hive从0.7.0版本开始加入了索引，0.8版本后增加 bitmap 索引。索
 CSV 导入模式是先导入成 textfile, 之后再从临时表 insert 成 parquet。
 
 注意：若 Load CSV 无报错，但导入皆为 NULL，此种情况一般为格式问题（如导入 iceberg 格式表时，需要先导入 LazySimpleSerDe/OpenCSVSerde 格式表）。
-* 有 LOCAL 表示从本地文件系统加载（文件会被拷贝到 HDFS 中）
-* 无 LOCAL 表示从 HDFS 中加载数据（注意：文件直接被移动到 Hive 相应库下，而不是拷贝）
-* OVERWRITE 表示是否覆盖表中数据（或指定分区的数据）（没有 OVERWRITE 则 APPEND）
-* 若加载同样文件名的文件，会被自动重命名
+- 有 LOCAL 表示从本地文件系统加载（文件会被拷贝到 HDFS 中）
+- 无 LOCAL 表示从 HDFS 中加载数据（注意：文件直接被移动到 Hive 相应库下，而不是拷贝）
+- OVERWRITE 表示是否覆盖表中数据（或指定分区的数据）（没有 OVERWRITE 则 APPEND）
+- 若加载同样文件名的文件，会被自动重命名
  ```
-1. test_csv.csv
+
+# test_csv.csv
 ky,val,ct,memo
 1001,Hello,2021-1-1,Test
 0002,Hi,2021-1-2 1:00,test1
@@ -205,8 +214,8 @@ alter table test.test_csv set TBLPROPERTIES('skip.header.line.count'='1');
 ### 注意
 
 #### Select
-* order by 中的字段, 必须在 select 中出现
-* 子查询表必须有别名
+- order by 中的字段, 必须在 select 中出现
+- 子查询表必须有别名
 
 #### Set
 ```

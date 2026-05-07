@@ -124,12 +124,20 @@ deepseek-r1:32b model requires more system memory (21.5 GiB) than is available.
 #### Instructions
 ```
  curl http://192.168.0.100:11434/api/generate -d '{
+```
+
    "model": "llama3",
+
    "prompt": "Why is the sky blue?",
+
    "stream": false,
+
    "options": {
+
      "num_ctx": 4096
+
    }
+```
  }'
 ```
 

@@ -33,14 +33,22 @@ Duplicate 类型表数据无法修改，有主键表无法修改主键列值。
 ```
  create table test_a
  (
+```
+
     ky   int,
+
     name varchar(10),
+
     val  int sum default "0" 
+```
  )
  aggregate key(ky, name)
  distributed by hash(`ky`) buckets 1
  properties (
+```
+
     "replication_allocation" = "tag.location.default: 1"
+```
  )
 ```
 
@@ -53,15 +61,24 @@ Duplicate 类型表数据无法修改，有主键表无法修改主键列值。
 ```
  create table test_u
  (
+```
+
     ky   int,
+
     name varchar(10),
+
     val  int
+```
  )
  unique key(ky, name)
  distributed by hash(ky) buckets 1
  properties (
+```
+
     "replication_allocation" = "tag.location.default: 1",
+
     "enable_unique_key_merge_on_write" = "true"
+```
  )
 ```
 
@@ -73,14 +90,23 @@ Duplicate 类型表数据无法修改，有主键表无法修改主键列值。
 ```
  create table test
  (
+```
+
     ky   int,
+
     name varchar(10),
+
     val  int
+```
  )
  distributed by hash(ky) buckets 1
  properties (
+```
+
     "replication_allocation" = "tag.location.default: 1",
+
     "enable_duplicate_without_keys_by_default" = "true"
+```
  )
 ```
 
@@ -91,53 +117,92 @@ Duplicate 类型表数据无法修改，有主键表无法修改主键列值。
 ```
  create table test_p
  (
+```
+
     part tinyint not null,
+
     ky   int,
+
     name varchar(10),
+
     val  int
+```
  )
  duplicate key(part, ky)
  partition by list(part)
  (
+```
+
     partition p_0 values in(0),
+
     partition p_1 values in(1),
+
     partition p_2 values in(2),
+
     partition p_3 values in(3),
+
     partition p_4 values in(4),
+
     partition p_5 values in(5),
+
     partition p_6 values in(6),
+
     partition p_7 values in(7),
+
     partition p_8 values in(8),
+
     partition p_9 values in(9)
+
     -- partition p_0 values in(2,4,6,8,0),
+
     -- partition p_1 values in(1,3,5,7,9)
+```
  )
  distributed by hash(ky) buckets 6
  properties (
+```
+
     "replication_allocation" = "tag.location.default: 3"
+```
  )
 ```
 - range
 ```
  create table test1
  (
+```
+
     part tinyint not null,
+
     ky   int,
+
     name varchar(10),
+
     val  int
+```
  )
  duplicate key(part, ky)
  partition by range(part)
  (
+```
+
     partition p_0 VALUES less than (5),
+
     partition p_1 VALUES less than (10),
+
     partition p_9 VALUES less than maxvalue
+
     -- partition p_0 VALUES [(0), (5)),
+
     -- partition p_1 VALUES [(6), (10))
+```
  )
  distributed by hash(ky) buckets 6
  properties (
+```
+
     "replication_allocation" = "tag.location.default: 3"
+```
  )
 ```
 

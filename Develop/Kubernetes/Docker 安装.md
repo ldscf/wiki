@@ -32,9 +32,11 @@ Docker 从 17.03 版本之后分为 CE（Community Edition: 社区版） 和 EE�
  
 ```
  echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
  
 ```
  apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
@@ -44,11 +46,18 @@ Docker 从 17.03 版本之后分为 CE（Community Edition: 社区版） 和 EE�
 ```
  /etc/docker/daemon.json
  {
+```
+
    "registry-mirrors": [
+
      "https://hub-mirror.c.163.com",
+
      "https://mirror.baidubce.com"
+
    ],
+
    "registry-mirrors":["http://192.168.0.242:5000"]
+```
  }
 ```
  
@@ -211,20 +220,36 @@ Docker Engine 的配置管理文件, 里面几乎涵盖了所有 docker 命令�
 ```
  cat > /etc/docker/daemon.json << EOF
  {
+```
+
      "registry-mirrors": [
+
          "https://mirror.baidubce.com",
+
          "http://hub-mirror.c.163.com",
+
          "https://docker.mirrors.sjtug.sjtu.edu.cn"
+
      ],
+
      "exec-opts": ["native.cgroupdriver=systemd"],
+
      "max-concurrent-downloads": 10,
+
      "max-concurrent-uploads": 5,
+
      "log-level": "info",
+
      "log-opts": {
+
          "max-size": "100m",
+
          "max-file": "2"
+
      },
+
      "live-restore": true
+```
  }
  EOF
 ```
@@ -252,10 +277,16 @@ Docker Engine 的配置管理文件, 里面几乎涵盖了所有 docker 命令�
  docker run hello-world      # 创建一个新的容器
  docker run -itd ubuntu:20.04 /bin/bash
  <-i: 交互式操作
+```
+
    -t: 终端
+
    -d: 指定容器的运行模式为后台
+
    ubuntu: ubuntu 镜像
+
    /bin/bash: 命令，指定使用 /bin/bash 作为交互式 Shell
+```
  # 以上是创建一个新的容器，如果已经创建，只是停止(在 ps -a 中可见)，启动命令是：docker start CONTAINER_ID
 ```
  

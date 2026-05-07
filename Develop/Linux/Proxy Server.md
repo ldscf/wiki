@@ -33,9 +33,11 @@ last_modified: '2026-04-07T15:07:03Z'
 ```
  確保有一條路由，將流量發送到 VPN 的網卡
  route print
-   Network Destination    Netmask        Gateway          Interface    Metric
-   0.0.0.0                0.0.0.0        10.0.0.10        [VPN Interface]
 ```
+
+   Network Destination    Netmask        Gateway          Interface    Metric
+
+   0.0.0.0                0.0.0.0        10.0.0.10        [VPN Interface]
 
 #### 設置 137 網段的主機
 ```
@@ -82,11 +84,18 @@ netplan apply   # 或者重启
 ```
  # 設置 NAT，讓來自 192.168.0 網段的流量通過 u31（10.0.0.10）轉發
  iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o u31 -j MASQUERADE
+```
+
    -t nat：使用 NAT 表
+
    -A POSTROUTING：在 POSTROUTING 鏈中添加規則
+
    -s 192.168.0.0/24：源地址是 192.168.0 網段
+
    -o u31：指定 VPN 網卡（通过 wg-quick up u31 产生，u31 是 /etc/wireguard/u31.conf，可以通過 ip a 检查確認）
+
    -j MASQUERADE：啟用地址偽裝
+```
  # 删除：iptables -t nat -D POSTROUTING -s 192.168.0.0/24 -o u31 -j MASQUERADE
  # 清空：iptables -t nat -F POSTROUTING
  # 更通用的写法（不限制源 IP 网段）：**iptables -t nat -A POSTROUTING -o u31 -j MASQUERADE**

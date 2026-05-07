@@ -17,7 +17,10 @@ Oracle 远程执行 DDL 语句，可以通过 dbms_utility 包中的过程完成
 ```
 ```
  begin
+```
+
     dbms_utility.EXEC_DDL_STATEMENT@dgdb22('create table bi.test(key number(10), val varchar2(100))');
+```
  end;
 ```
 ```
@@ -28,6 +31,9 @@ Oracle 远程执行 DDL 语句，可以通过 dbms_utility 包中的过程完成
 ```
 ```
  begin
+```
+
     dbms_utility.EXEC_DDL_STATEMENT@dgdb22('truncate table bi.test');
+```
  end;
 ```

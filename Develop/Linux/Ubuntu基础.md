@@ -21,26 +21,38 @@ Ubuntu版本编号以“年份的最后一位.发布月份”的格式命名。�
  
 ```
  network:
+```
+
    ethernets:
+
      ens33:
+
        addresses: [192.168.47.10/24]
+
        routes:
         - to: default
+
           via: 192.168.47.2
+
        nameservers:
+
          addresses: [192.168.47.2]
+
    version: 2
-```
  
 ```
  ## Default dhcp
  # This is the network config written by 'subiquity'
  network:
-   ethernets:
-     ens33:
-       dhcp4: true
-   version: 2
 ```
+
+   ethernets:
+
+     ens33:
+
+       dhcp4: true
+
+   version: 2
 
 #### 修改网卡名称
 

@@ -33,8 +33,9 @@ P.S. hadoop-3.4.1+Hive4.0.1 在安装 Tez(0.10.4) 上遇到问题，查询汇总
 ```
  beeline -u jdbc:hive2://192.168.0.249:10000/ -n hdfs
  beeline
-   !connect jdbc:hive2://192.168.0.249:10000/
 ```
+
+   !connect jdbc:hive2://192.168.0.249:10000/
 
 ### iceberg
 
@@ -63,27 +64,24 @@ Hive 引擎从 Map Reduce 替换为 Spark RDD。
 #### User: hdfs is not allowed to impersonate anonymous
 
 $HIVE_HOME/conf/hive-site.xml
-```
   
     hive.server2.enable.doAs
+
     false
   
-```
-
 需要重启 metastore, hiveserver2
 
 可能需要：$HADOOP_HOME/etc/hadoop/core-site.xml
-```
   
     hadoop.proxyuser.hdfs.hosts
+
     *
   
   
     hadoop.proxyuser.hdfs.groups
+
     *
   
-```
-
 需要重启 dfs, yarn
 
 #### SLF4J: Class path contains multiple SLF4J bindings
@@ -209,7 +207,10 @@ mkdir:'hdfs://xxxx:9000/user/hive':No such file or directory ...... chmod: `/use
 derby 初始化hive仓库时如果报错:
 ```
  Exception in thread "main" java.lang.NoSuchMethodError: 
+```
+
   com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;Ljava/lang/Object;)
+```
  因为 hive 依赖的 juava.jar 和 hadoop 版本不一致造成的，统一成版本高的。
 ```
 1. hive guava.jar: /opt/hive/lib

@@ -25,23 +25,36 @@ random 中出现，下列代码有很大机率出现错误。
 ```
  <// rand, random
  public func rand(l : UInt64) : UInt64 {
+```
+
      let r: Random = Random()
+
      r.seed = dt()
+
      var i : UInt64 = 0
+
      var flag : Bool = true
+
      while (flag) {
+
          try {
+
              i = UInt64(r.nextInt64())
+
              flag = false
+
          } catch (e: Exception) {
+
              println(e)
+
              i = 0
+
          }
+
      }
-```
      
-```
      UInt64(i % UInt64(10 ** l))
+```
  }
 ```
 

@@ -25,15 +25,17 @@ Apache 是以进程为基础的结构，进程要比线程消耗更多的系统�
 ### 增加子目录
 
 *''/etc/apache2/sites-available/000-default.conf''*
-```
+
      Alias /wiki "/u01/web/wiki/"
+
      Alias /soft "/u01/web/soft/"
      
        Options FollowSymlinks
+
        AllowOverride None
+
        Require all granted
      
-```
 
 ### 为访问Apache2 目录及文件增加用户名密码验证
 
@@ -50,12 +52,20 @@ Apache 是以进程为基础的结构，进程要比线程消耗更多的系统�
 ```
  Alias /backup "/u01/web/backup/"
  
+```
+
      Options Indexes FollowSymLinks
+
      AllowOverride None
+
      '''AuthType Basic
+
      AuthName Authorize
+
      AuthUserFile /u01/web/backup/.htpasswd
+
      Require user bi
+```
  
 ```
 

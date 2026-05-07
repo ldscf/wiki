@@ -46,34 +46,60 @@ firewall-cmd --query-masquerade
  
 ```
  if [ "$1" == "add" ]; then
+```
+
      OT="add"
+```
  elif [ "$1" == "remove" ]; then
+```
+
      OT="remove"
+```
  else
+```
+
      echo "Not Parameter."
+
      exit 1
+```
  fi
 ```
  
 ```
  if [ "$2" == "" ]; then
+```
+
      LN_NAME="fw.txt"
+```
  else
+```
+
      LN_NAME=$2
+```
  fi
 ```
  
 ```
  cat ${LN_NAME} | while read LN
  do
+```
+
      LN=`echo ${LN} |awk -F"#" '{print \$1}'`
+
      if [ "${LN}" == "" ]; then
+
          echo ${OT} ${LN}
+
      else
+
          echo ${OT} ${LN}
+
          firewall-cmd --${OT}-forward-port=${LN}
+
          firewall-cmd --${OT}-forward-port=${LN} --permanent
+
      fi
+```
  done
 ```
 

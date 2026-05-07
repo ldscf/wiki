@@ -24,13 +24,21 @@ last_modified: '2023-11-25T10:18:59Z'
 | G | 300 |
 ```
  /* Q1: Temp Table 车俩销售日志
+```
   * 若含有中文数值，改为 nvarchar
+
   *
   * 2023/8/8 Adam
+
   */
+```
  create table #tmp_salelog (
+```
+
     d_model   varchar(8),
+
     v_cnt     int
+```
  )
  ;
 ```
@@ -50,7 +58,10 @@ last_modified: '2023-11-25T10:18:59Z'
 ```
  -- 问：查询总销售量大于100，且总销售辆最少的3个型号的车及其总销售量
  select   top 3
+```
+
           d_model, sum(v_cnt) v_cnt_total
+```
  from     #tmp_salelog
  group by d_model
  having   sum(v_cnt) > 100
@@ -67,12 +78,19 @@ last_modified: '2023-11-25T10:18:59Z'
 问2：打包购买游戏时，分别计算出2个打包，3个打包和4个打包时价格最贵的包。要求最终用一个查询得出结果
 ```
  /* Q2: Temp Table 游戏价格
+```
   * 若含有中文数值，改为 nvarchar
   * 2023/8/8 Adam
+
   */
+```
  create table #tmp_games (
+```
+
     d_gname   varchar(8),
+
     v_amt     numeric(8,2)
+```
  )
  ;
 ```
@@ -88,8 +106,11 @@ last_modified: '2023-11-25T10:18:59Z'
 ```
 ```
  /*
+```
   * tmp_games 中数据，关于 gname 应该唯一。否则需要预警及去重
+
   */
+```
  -- 问1：计算有多少种(个数)不同的打包组合方式
  -- 如果游戏比较多（大于 300 时，本写法产生的笛卡尔积将达到三千万），需要另外一种的写法：通过排列组合计算
 ```
@@ -139,9 +160,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '2' type_id,
+
           t1.d_gname + t2.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt)*0.9) amt_total
+```
  from     #tmp_games t1, #tmp_games t2
  where    t1.d_gname <= t2.d_gname
  order by 3 desc
@@ -150,9 +176,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '3' type_id,
+
           t1.d_gname + t2.d_gname + t3.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt + t3.v_amt)*0.8) amt_total
+```
  from     #tmp_games t1, #tmp_games t2, #tmp_games t3
  where    t1.d_gname <= t2.d_gname
  and      t2.d_gname <= t3.d_gname
@@ -162,9 +193,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '4' type_id,
+
           t1.d_gname + t2.d_gname + t3.d_gname + t4.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt + t3.v_amt + t4.v_amt)*0.6) amt_total
+```
  from     #tmp_games t1, #tmp_games t2, #tmp_games t3, #tmp_games t4
  where    t1.d_gname <= t2.d_gname
  and      t2.d_gname <= t3.d_gname
@@ -181,9 +217,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '2' type_id,
+
           t1.d_gname + t2.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt)*0.9) amt_total
+```
  from     #tmp_games t1, #tmp_games t2
  where    t1.d_gname < t2.d_gname
  order by 3 desc
@@ -192,9 +233,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '3' type_id,
+
           t1.d_gname + t2.d_gname + t3.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt + t3.v_amt)*0.8) amt_total
+```
  from     #tmp_games t1, #tmp_games t2, #tmp_games t3
  where    t1.d_gname < t2.d_gname
  and      t2.d_gname < t3.d_gname
@@ -204,9 +250,14 @@ last_modified: '2023-11-25T10:18:59Z'
  select   *
  from     (
  select   top 1
+```
+
           '4' type_id,
+
           t1.d_gname + t2.d_gname + t3.d_gname + t4.d_gname d_game_group,
+
           Convert(decimal(18,2), (t1.v_amt + t2.v_amt + t3.v_amt + t4.v_amt)*0.6) amt_total
+```
  from     #tmp_games t1, #tmp_games t2, #tmp_games t3, #tmp_games t4
  where    t1.d_gname < t2.d_gname
  and      t2.d_gname < t3.d_gname
@@ -253,16 +304,27 @@ CREDIT_LIMIT_INFO 表维护每个授信协议的额度金额
 | TEST_04 | ID_004 | SHANGHAI HUANGPU | 100 | 700 |
 ```
  /* Q3: Temp Table 经销商信息
+```
   * 若含有中文数值，改为 nvarchar
   * 2023/8/8 Adam
+
   */
+```
  create table #tmp_dealer_info (
+```
+
     d_dealer_number    varchar(8),
+
     d_dealer_name      varchar(100),
+
     d_dealer_id_no     varchar(8),
+
     d_address          varchar(200),
+
     v_stuff_number     INT,
+
     d_modify_date      date
+```
  )
  ;
 ```
@@ -282,9 +344,14 @@ CREDIT_LIMIT_INFO 表维护每个授信协议的额度金额
  
 ```
  create table #tmp_credit_limit_info (
+```
+
     d_dealer_number    varchar(8),
+
     d_brand            varchar(100),
+
     v_utilized_limit   INT
+```
  )
  ;
 ```
@@ -305,30 +372,57 @@ CREDIT_LIMIT_INFO 表维护每个授信协议的额度金额
  -- 证件号码为唯一标识，为两表关联条件、分组排序条件
  -- P.S. 有可能出现""协议号码""未使用额度（无记录），显示为零
  select   --
+```
+
           o1.d_dealer_name,
+
           o1.d_dealer_id_no,
+
           o1.d_address,
+
           o1.v_stuff_number,
+
           o2.v_utilized_limit_total
+```
  from     (
+```
+
           -- 按经销商证件号分组，倒排信息维护日期, rn=1 为最后修改记录
+
           select   d_dealer_number,
+
                    d_dealer_name,
+
                    d_dealer_id_no,
+
                    d_address,
+
                    v_stuff_number,
+
                    d_modify_date,
+
                    row_number() over(partition BY d_dealer_id_no order BY d_modify_date desc) rn
+
           from     #tmp_dealer_info
+
           ) o1,
+
          (
+
          -- 客户已用额度总和，若未使用额度（无记录），显示为零
+
          select   t1.d_dealer_id_no,
+
                   isnull(sum(t2.v_utilized_limit), 0)  v_utilized_limit_total
+
          from     #tmp_dealer_info t1
+
          left join #tmp_credit_limit_info t2 on t1.d_dealer_number = t2.d_dealer_number
+
          group by t1.d_dealer_id_no
+
          ) o2
+```
  where    o1.d_dealer_id_no = o2.d_dealer_id_no
  and      o1.rn = 1
  ;

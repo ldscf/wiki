@@ -305,5 +305,6 @@ This means that the configuration file permissions are too broad - and they shou
  /usr/bin/wg-quick: line 32: resolvconf: command not found
  1. apt install openresolv
  2. 如果是在 shell 里执行命令，一般在 .bash_profile, .bashrc 等文件中的环境变量不会带进来，需要执行 source ~/.bashrc 等命令。或者：
-    export PATH=$PATH:/sbin:/usr/sbin   # resolvconf 在 /usr/sbin
 ```
+
+    export PATH=$PATH:/sbin:/usr/sbin   # resolvconf 在 /usr/sbin

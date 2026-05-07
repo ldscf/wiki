@@ -43,48 +43,44 @@ Below are key highlights that underscore the utility and versatility of GCC:
 ```
 
 hello.c
-```
+
   │
+
   ▼
-```
 
 [1] 预处理 (gcc -E)
-```
+
   ↓          └── 宏替换、头文件展开、条件编译
-```
 
 hello.i
-```
+
   │
+
   ▼
-```
 
 [2] 编译 (gcc -S)
-```
+
   ↓          └── 语法分析、生成汇编代码
-```
 
 hello.s
-```
+
   │
+
   ▼
-```
 
 [3] 汇编 (gcc -c)
-```
+
   ↓          └── 汇编代码 → 机器码（目标代码）
-```
 
 hello.o
-```
+
   │
+
   ▼
-```
 
 [4] 链接 (gcc)
-```
+
   ↓          └── 链接库、解析符号，生成可执行程序
-```
 
 a.out (可执行文件)
 

@@ -24,14 +24,24 @@ last_modified: '2023-05-27T14:46:02Z'
 ```
  -- clickhouse
  CREATE TABLE person(
+```
+
    idcard TEXT,
+
    name TEXT,
+
    address TEXT,
+
    tel TEXT,
+
    email TEXT,
+
    idcard_type TEXT,
+
    ct TEXT,
+
    seq INT
+```
  )
  engine = MergeTree()
  order by (idcard)

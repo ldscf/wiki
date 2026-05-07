@@ -24,10 +24,13 @@ Rust 提供了一个强大的模块系统（module system）来支持分层、�
 | 默认（无修饰） | 仅模块内可见 |
 ```
  *    pub        fn visible_in_public() {}
-     pub(crate) fn visible_in_crate() {}
-     pub(super) fn visible_in_parent() {}
-                fn only_here() {}*
 ```
+
+     pub(crate) fn visible_in_crate() {}
+
+     pub(super) fn visible_in_parent() {}
+
+                fn only_here() {}*
 
 ### 模块化方式
 
@@ -101,14 +104,14 @@ pub fn double(x: i32) -> i32 {
 ```
 
 说明：
-- main.rs
+* main.rs
 ```
  # mod math
  查找 math.rs 或 math/mod.rs
  # use math::add::add_two;
  math::add::add_two(6) 可以简写为：add_two(6)
 ```
-- 关于 math/add.rs 中的 use super::utils
+* 关于 math/add.rs 中的 use super::utils
 ```
  add 和 utils 是同一个父模块（main）下的兄弟关系模块，兄弟模块之间不能直接访问。必须通过共同的父模块 math 来访问——也就是在 math/mod.rs 中声明的 mod utils。
 ```
@@ -153,7 +156,7 @@ pub use order::OrderService;
 
 Rust 支持在模块内部定义测试模块。
  ```
-#[cfg(test)]
+1. [cfg(test)]
 mod tests {
     use super::*;
     #[test]

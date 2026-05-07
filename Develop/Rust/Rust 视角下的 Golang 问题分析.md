@@ -154,9 +154,14 @@ Rust 错误处理远优于 Go，但也更复杂。
 典型 Rust 错误处理：
 ```
   Result {
+```
+
      let data = fs::read_to_string("user.json")?;
+
      let user: User = serde_json::from_str(&data)?;
+
      Ok(user)
+```
  }
 ```
 

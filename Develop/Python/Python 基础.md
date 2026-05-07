@@ -91,8 +91,9 @@ last_modified: '2025-11-06T09:04:16Z'
 #### 建目录（多级，相当于 -p）
 ```
  if not os.path.exists(path_op):
-     os.makedirs(path_op)
 ```
+
+     os.makedirs(path_op)
 
 #### 判断文件是否存在
 ```

@@ -42,9 +42,8 @@ Bootstrap 是由 Twitter 的工程师 Mark Otto 和 Jacob Thornton 于 2011 年�
 │  └─ bootstrap.min.css
 
 └─ js/
-```
+
    └─ bootstrap.min.js
-```
 
 ```*
 

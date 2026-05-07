@@ -38,14 +38,21 @@ systemctl restart network
 ip addr
 ```
  ens192:  mtu 1500 qdisc mq state UP group default qlen 1000
-    link/ether 00:0c:29:8e:dc:be brd ff:ff:ff:ff:ff:ff
-    inet 192.168.0.182/24 brd 192.168.0.255 scope global noprefixroute dynamic ens192
-       valid_lft 86397sec preferred_lft 86397sec
-    inet 192.168.0.181/24 brd 192.168.0.255 scope global secondary noprefixroute ens192
-       valid_lft forever preferred_lft forever
-    inet6 fe80::d731:d09:95d4:867b/64 scope link noprefixroute 
-       valid_lft forever preferred_lft forever
 ```
+
+    link/ether 00:0c:29:8e:dc:be brd ff:ff:ff:ff:ff:ff
+
+    inet 192.168.0.182/24 brd 192.168.0.255 scope global noprefixroute dynamic ens192
+
+       valid_lft 86397sec preferred_lft 86397sec
+
+    inet 192.168.0.181/24 brd 192.168.0.255 scope global secondary noprefixroute ens192
+
+       valid_lft forever preferred_lft forever
+
+    inet6 fe80::d731:d09:95d4:867b/64 scope link noprefixroute 
+
+       valid_lft forever preferred_lft forever
 
 此时，如果想保留静态 IP，注释掉如下一行即可
 ```

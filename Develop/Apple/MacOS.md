@@ -4,7 +4,7 @@ categories:
 - Apple
 - Develop
 - Mac
-last_modified: '2026-02-05T01:17:18Z'
+last_modified: '2026-05-05T11:29:10Z'
 ---
 macOS 是 Mac OS X（后来称为 OS X，发音为 oh-ess-ten）的延续，由苹果开发的运行于 Macintosh 系列电脑上的操作系统，最初发布于 2001 年。基于 Unix 构建，与 Unix 和 Linux 有许多底层相似之处，如多用户支持、抢占式多任务处理以及使用终端访问等。
 
@@ -31,11 +31,26 @@ macOS 是 Mac OS X（后来称为 OS X，发音为 oh-ess-ten）的延续，由�
  # vpn: 10.10.0.100, en0: 192.168.0.121
 ```
 
-### 命令别名
+### 命令
 ```
  # .zshrc
+ # 颜色
+ export LSCOLORS="ExfxCxdxCxegedabagacad"
+ export CLICOLOR=1
+```
+ 
+```
+ # 别名
  alias ll='ls -lhG'
 ```
+
+| 位置 | 代表类型 | 建议设置 | 颜色效果 |
+|:---|:---|:---|:---|
+| 1-2 | 目录 (Directory) | Ex | 蓝色 |
+| 3-4 | 软链接 (Symlink) | fx | 青色 (浅蓝色) |
+| 5-6 | 套接字 (Socket) | cx | 绿色 |
+| 7-8 | 管道 (Pipe) | dx | 棕色/暗红 |
+| 9-10 | 可执行文件 (Executable) | Cx | 加粗绿色 |
 
 ### Tools
 

@@ -14,8 +14,12 @@ last_modified: '2025-12-11T07:52:06Z'
  // 你的原始代码：✅ 简洁明了
  let mut total_result = 0;
  for _ in 0..1000 {
+```
+
      let result = find_utf8_boundary(black_box(&data), black_box(index));
+
      total_result += result;  // 这就是最直接的写法
+```
  }
  black_box(total_result)
 ```
@@ -55,11 +59,15 @@ last_modified: '2025-12-11T07:52:06Z'
 ```
  // 版本B：过度防御
  total_result = total_result.checked_add(result)
-     .unwrap_or_else(|| {
-         eprintln!("溢出警告");
-         usize::MAX
-     });
 ```
+
+     .unwrap_or_else(|| {
+
+         eprintln!("溢出警告");
+
+         usize::MAX
+
+     });
  
 ```
  // 哪个更好读？哪个更容易维护？
@@ -70,15 +78,26 @@ last_modified: '2025-12-11T07:52:06Z'
 坚持你的简洁写法：
 ```
  group.bench_function(
+```
+
      &format!("find_utf8_boundary_at_{}", index),
+
      |b| b.iter(|| {
+
          let mut total_result = 0;
+
          for _ in 0..1000 {
+
              let result = find_utf8_boundary(black_box(&data), black_box(index));
+
              total_result += result;  // ✅ 简洁、清晰、实用
+
          }
+
          black_box(total_result)
+
      })
+```
  );
 ```
 
@@ -91,8 +110,12 @@ last_modified: '2025-12-11T07:52:06Z'
 ```
  // 或者更简单的：
  if cfg!(debug_assertions) {
+```
+
      // debug模式才检查
+
      assert!(data.len() * 1000 < usize::MAX, "调试时检查溢出");
+```
  }
 ```
 
@@ -102,11 +125,18 @@ last_modified: '2025-12-11T07:52:06Z'
 ```
  // 很多标准库代码也用 +=
  fn sum_iterator>(iter: T) -> usize {
+```
+
      let mut total = 0;
+
      for item in iter {
+
          total += item;  // 标准库也这样写！
+
      }
+
      total
+```
  }
 ```
  
@@ -135,16 +165,22 @@ last_modified: '2025-12-11T07:52:06Z'
 ```
  // 原则：先写简洁代码，有问题再优化
  fn benchmark_code() {
+```
+
      // 第1步：写最直观的代码 ✅
+
      let mut total = 0;
+
      for _ in 0..1000 {
+
          total += compute();
+
      }
-```
  
-```
      // 第2步：如果真有溢出问题，再改
+
      // （但目前看，没有）
+```
  }
 ```
 

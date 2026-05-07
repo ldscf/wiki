@@ -7,9 +7,8 @@ categories:
 last_modified: '2024-07-19T09:01:01Z'
 ---
 ![Pandas_DataStructure.png](https://mwbbs.eu.org/wiki/images/4/4d/Pandas_DataStructure.png)
-```
+
 　  　 DataFrame 是一个表格型的数据结构，它含有一组有序的列，每列可以是不同的值类型（数值、字符串、布尔型值）。DataFrame 既有行索引也有列索引，它可以被看做由 Series 组成的字典（共同用一个索引）。
-```
 
 ### pandas dataframe conversion
 
@@ -19,7 +18,10 @@ last_modified: '2024-07-19T09:01:01Z'
 ```
  d1 = {"columns":["Apple","Pear"],"data":[[12,0], [8,7], [1, 9]]}
  df2 = pd.DataFrame(d1['data'])
+```
+
     Apple  Pear
+```
  0     12     0
  1      8     7
  2      1     9
@@ -53,9 +55,8 @@ Parameters:
 ### list
 
 #### list -> dataframe
-```
+
 　　See also: dict -> dataframe
-```
 
 #### dataframe -> list
 ```

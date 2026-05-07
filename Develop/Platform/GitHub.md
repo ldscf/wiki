@@ -3,7 +3,7 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-04-26T01:54:34Z'
+last_modified: '2026-05-07T01:46:16Z'
 ---
 ### Overview
 
@@ -119,6 +119,7 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 | git show HEAD~1 --stat | 只查看倒数第二次提交的统计数据 |
 | git fetch origin | 从远程仓库获取最新的元数据 |
 | git diff --name-only HEAD origin/main | 比较差异，只列出文件名 |
+| git diff HEAD -- <文件路径> | 相比于上一次提交（HEAD）的所有修改 |
 
 #### 同步
 
@@ -153,12 +154,12 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  
  ```
 <<<<<<< HEAD
- let cache_size = 1024; 
- =======
- let cache_size = 2048; 
- >>>>>>> 7b3a1d2
- 
- 其中：以 ======= 为分隔，上面是“远程”代码，下面是“本地”修改。
+  let cache_size = 1024; 
+  =======
+  let cache_size = 2048; 
+  >>>>>>> 7b3a1d2
+  
+  其中：以 ======= 为分隔，上面是“远程”代码，下面是“本地”修改。
 ```
 ```
  # 冲突文件会变成：（用工具修改会非常方便）
@@ -263,7 +264,19 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 
 #### 冲突
 
-冲突 = 同一文件的同一位置，在不同分支被修改。
+冲突 = 同一文件的同一位置，在不同分支被修改。可以选择 Rebase（变基）或 Merge（合并）。
+
+**Rebase**: 保持提交历史呈线性，更整洁。把本地的提交先“临时搁置”，将远程的新提交拉取下来，然后再把本地的提交挨个追加到最前面。
+1. 执行变基拉取: git pull --rebase  
+
+有冲突: Git 会在冲突的地方停下。需要手动解决冲突文件，保存后运行：  
+
+> git add .  
+
+> git rebase --continue  
+
+放弃Rebase: git rebase --abort
+1. 推送: git push origin main
 
 **解决冲突其实是三方合并：**
 
@@ -282,7 +295,7 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 >>>>>>> origin/main
 ```
 
-**处理冲突**
+**更安全地处理冲突 - rebase**
 
 备份本地修改 -> 从远程更新 -> 恢复本地备份
 ```
@@ -353,7 +366,10 @@ See also: [webhook Example - MWWiki](https://github.com/ldscfe/snippets/blob/mai
 ```
  # .githooks/pre-commit 主要内容
  if python3 tools/check_doc_links.py --summary; then
+```
+
    exit 0
+```
  fi
 ```
 

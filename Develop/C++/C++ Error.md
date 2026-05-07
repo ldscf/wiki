@@ -11,7 +11,10 @@ last_modified: '2024-12-25T01:18:32Z'
 ```
  // 在字符串数值转换过程中，如果输入了非数值如：- 报错
  terminate called after throwing an instance of 'std::invalid_argument'
+```
+
   what():  stoi
+```
  Aborted (core dumped)
 ```
 
@@ -19,7 +22,10 @@ last_modified: '2024-12-25T01:18:32Z'
 ```
  # string 截取长度超过了字符串长度
  terminate called after throwing an instance of 'std::out_of_range'
+```
+
    what():  basic_string::substr: __pos (which is 1) > this->size() (which is 0)
+```
  Aborted (core dumped)
 ```
 

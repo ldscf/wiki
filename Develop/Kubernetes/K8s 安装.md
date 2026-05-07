@@ -196,29 +196,25 @@ Your Kubernetes control-plane has initialized successfully!
 ```
 
  
-```
    mkdir -p $HOME/.kube
-   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-   sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
 
+   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
+   sudo chown $(id -u):$(id -g) $HOME/.kube/config
  
 ```
  Alternatively, if you are the root user, you can run:
 ```
 
  
-```
    export KUBECONFIG=/etc/kubernetes/admin.conf
-```
-
  
 ```
  You should now deploy a pod network to the cluster.
  Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-   https://kubernetes.io/docs/concepts/cluster-administration/addons/
 ```
 
+   https://kubernetes.io/docs/concepts/cluster-administration/addons/
  
 ```
  Then you can join any number of worker nodes by running the following on each as root:
@@ -260,11 +256,14 @@ Calico 是 Tigera 公司主导的 CNI 插件，提供网络通信 + 网络安全
  #   value: "192.168.0.0/16"
  -->
  - name: CALICO_IPV4POOL_CIDR
+```
+
    value: "10.2.0.0/16"
+```
  # 查看 pod-network-cidr
  kubectl get pods -n kube-system -l component=kube-controller-manager -o yaml | grep cluster-cidr
-      - --cluster-cidr=10.2.0.0/16
 ```
+      - --cluster-cidr=10.2.0.0/16
 ```
  # 状态查看：
  watch kubectl get pods -n kube-system
@@ -309,8 +308,9 @@ Flannel vs. Calico 对比表：
 ```
  wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
  修改 net-conf.json:Network 与 pod-network-cidr 保持一致。
-   "Network": "10.2.0.0/16",
 ```
+
+   "Network": "10.2.0.0/16",
 ```
  kubectl apply -f kube-flannel.yml
 ```
@@ -390,9 +390,11 @@ kubeadm token create --print-join-command --ttl 2h
  apiVersion: v1
  kind: ServiceAccount
  metadata:
-   name: admin-user
-   namespace: kubernetes-dashboard
 ```
+
+   name: admin-user
+
+   namespace: kubernetes-dashboard
 
 ====== Creating a ClusterRoleBinding ======
 ```
@@ -400,16 +402,26 @@ kubeadm token create --print-join-command --ttl 2h
  apiVersion: rbac.authorization.k8s.io/v1
  kind: ClusterRoleBinding
  metadata:
+```
+
    name: admin-user
+```
  roleRef:
+```
+
    apiGroup: rbac.authorization.k8s.io
+
    kind: ClusterRole
+
    name: cluster-admin
+```
  subjects:
  - kind: ServiceAccount
-   name: admin-user
-   namespace: kube-system
 ```
+
+   name: admin-user
+
+   namespace: kube-system
 
 ======Creating a token======
 ```
@@ -423,10 +435,16 @@ kubeadm token create --print-join-command --ttl 2h
  apiVersion: v1
  kind: Secret
  metadata:
+```
+
    name: admin-user
+
    namespace: kube-system
+
    annotations:
+
      kubernetes.io/service-account.name: "admin-user"   
+```
  type: kubernetes.io/service-account-token  
 ```
 
@@ -494,17 +512,25 @@ kubectl -n kube-system delete clusterrolebinding admin-user
  apiVersion: v1
  kind: Service
  metadata:
-   name: redis-svc
- spec:
-   selector:
-     app: redis-pod
-   type: ClusterIP
-   ports:
-     - protocol: TCP
-       port: 6379
-       targetPort: 6379
 ```
 
+   name: redis-svc
+```
+ spec:
+```
+
+   selector:
+
+     app: redis-pod
+
+   type: ClusterIP
+
+   ports:
+     - protocol: TCP
+
+       port: 6379
+
+       targetPort: 6379
  
 =====NodePort(集群外) =====
 ```
@@ -516,18 +542,27 @@ kubectl -n kube-system delete clusterrolebinding admin-user
  apiVersion: v1
  kind: Service
  metadata:
-   name: redis-svc
- spec:
-   selector:
-     app: redis-pod
-   type: NodePort
-   ports:
-     - protocol: TCP
-       port: 6379
-       nodePort: 32379
-       targetPort: 6379
 ```
 
+   name: redis-svc
+```
+ spec:
+```
+
+   selector:
+
+     app: redis-pod
+
+   type: NodePort
+
+   ports:
+     - protocol: TCP
+
+       port: 6379
+
+       nodePort: 32379
+
+       targetPort: 6379
 
 ====pods====
 ```

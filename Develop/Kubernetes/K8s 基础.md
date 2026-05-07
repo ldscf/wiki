@@ -216,9 +216,14 @@ kubectl logs  -n ${NS} [-c ]
 ```
  env:
  - name: POD_NAME
+```
+
    valueFrom:
+
      fieldRef:
+
        fieldPath: metadata.name
+```
  ...
  subPathExpr: $(POD_NAME)
 ```
@@ -227,10 +232,13 @@ kubectl logs  -n ${NS} [-c ]
 ```
  volumes:
  - name: data
-   nfs:
-     path: 
-     server: 
 ```
+
+   nfs:
+
+     path: 
+
+     server: 
 
 #### 弹性伸缩
 ```
@@ -277,13 +285,18 @@ find . -maxdepth 1 -mtime +7 -type d
  apiVersion: v1
  kind: Pod
  metadata:
+```
+
    name: 
+```
  spec:
+```
+
    containers:
    - name: private-reg-container
+
      image: 
    
-```
 
 #### secret
 ```
@@ -311,58 +324,100 @@ find . -maxdepth 1 -mtime +7 -type d
  apiVersion: apps/v1
  kind: Deployment
  metadata:
+```
+
    labels:
+
      app: nginx
+
    name: nginx-test
+
    namespace: rds2024test
+```
  spec:
+```
+
    replicas: 3
+
    selector:
+
      matchLabels:
+
        app: nginx
+
    template:
+
      metadata:
+
        labels:
+
          app: nginx
+
      spec:
+
        containers:
        - image: nginx
+
          ports:
            - containerPort: 80
+
          name: nginx
+
          env:
          - name: POD_NAME
+
            valueFrom:
+
              fieldRef:
+
                fieldPath: metadata.name
+
          volumeMounts:
          - name: log
+
            mountPath: /var/log/nginx
+
            subPathExpr: $(POD_NAME)
+
        volumes:
        - name: log
+
          hostPath:
+
            path: /u01/kube/logs
+
            type: DirectoryOrCreate
-```
-```
+
    # nginx_s.yaml
+```
  apiVersion: v1
  kind: Service
  metadata:
+```
+
    name: nginx-svc
+
    labels:
+
      app: nginx
+
    namespace: rds2024test
+```
  spec:
+```
+
    type: NodePort
+
    selector:
+
      app: nginx
+
    ports:
    - port: 80
+
      targetPort: 80
+
      nodePort: 32080
-```
 
 ### Utility
 
@@ -409,11 +464,14 @@ imagePullSecret 资源将 Secret 提供的密码传递给 kubelet 从而在拉�
 mount: wrong fs type, bad option, bad superblock on, missing codepage or helper program, or other error
 ```
  volumes:
-   - name: data
-     nfs:
-       path: /home/nfs/disk1/rds2024dev
-       server: 192.168.0.90
 ```
+   - name: data
+
+     nfs:
+
+       path: /home/nfs/disk1/rds2024dev
+
+       server: 192.168.0.90
 - 客户端需要安装相关包
 ```
  rpc-bind nfs-utils

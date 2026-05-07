@@ -17,24 +17,30 @@ Logback 是由 Log4j 作者开发的现代化日志框架，是 SLF4J 的原生�
 ```
 
 <dependencies>
-```
+
     <!-- 日志 API 接口 -->
+
     <dependency>
+
         <groupId>org.slf4j</groupId>
+
         <artifactId>slf4j-api</artifactId>
+
         <version>2.0.9</version>
+
     </dependency>
-```
 
-
-```
     <!-- Logback 实现 -->
+
     <dependency>
+
         <groupId>ch.qos.logback</groupId>
+
         <artifactId>logback-classic</artifactId>
+
         <version>1.4.14</version>
+
     </dependency>
-```
 
 </dependencies>
 
@@ -48,46 +54,58 @@ src/main/resources/logback.xml
 ```
 
 <configuration>
-```
+
     <!-- 控制台输出 -->
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
         <encoder>
+
             <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+
         </encoder>
+
     </appender>
-```
 
-
-```
     <!-- 文件输出 + 滚动策略 -->
+
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
         <file>logs/app.log</file>
+
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
             <fileNamePattern>logs/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+
             <maxHistory>7</maxHistory>
+
         </rollingPolicy>
+
         <encoder>
+
             <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+
         </encoder>
+
     </appender>
-```
 
-
-```
     <!-- 默认日志级别 -->
+
     <root level="INFO">
+
         <appender-ref ref="CONSOLE"/>
+
         <appender-ref ref="FILE"/>
+
     </root>
-```
 
-
-```
     <!-- 指定包或类日志级别 -->
+
     <logger name="org.mybatis" level="DEBUG"/>
+
     <logger name="java.sql" level="DEBUG"/>
+
     <logger name="org.apache.kafka" level="ERROR"/>
-```
 
 </configuration>
 

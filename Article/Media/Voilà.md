@@ -44,9 +44,7 @@ Voilà（《如此》）的创作灵感来自法国歌手 Barbara Pravi（芭芭
 | Voilà, voilà. | 如此、如此 |
 | Voilà, voilà. | 如此、如此 |
 | Voilà. | 如此 |
-```
 　　Video: [15 Year Old Emma Singing Voilà - André Rieu, Maastricht - 2023](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=Voilà_Emma_2023.mp4)
-```
 
 > 
 

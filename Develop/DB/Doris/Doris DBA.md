@@ -34,7 +34,10 @@ last_modified: '2024-03-01T03:02:57Z'
  # set enable_parallel_outfile = false;
  # 对于普通路径，false=随机一个节点全量，true=每节点部分量
  SELECT   identity_code,
+```
+
           cast(identity_info as string) identity_info
+```
  FROM     bi.ti_f_identity 
  where    part = 3
  limit 30000000

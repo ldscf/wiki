@@ -19,6 +19,5 @@ last_modified: '2024-03-09T00:29:41Z'
 作曲：John Denver、Bill Danoff、Taffy Nivert Danoff
 
 演唱： John Denver
-```
+
 　　[Take Me Home, Country Roads](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=John_Denver-Take_Me_Home_Country_Roads.mp4)
-```

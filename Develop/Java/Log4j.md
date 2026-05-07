@@ -18,9 +18,14 @@ ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
 ```
  <!-- https://mvnrepository.com/artifact/log4j/log4j -->
  
+```
+
      log4j
+
      log4j
+
      1.2.17
+```
  
 ```
 
@@ -79,8 +84,12 @@ ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
 ```
 ```
  public static void log(Object log1) {
+```
+
      Logger logger = Logger.getLogger(Thread.currentThread().getStackTrace()[2].getClassName());
+
      logger.info(log1);
+```
  }
 ```
 
@@ -93,18 +102,26 @@ ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
  
 ```
  public class BASE {
+```
+
      public static final String VERSION = "v1.21";
+
      static {
+
          PropertyConfigurator.configure("config/log4j.properties");
+
      }
+
      private static final Logger logger = LoggerFactory.getLogger(BASE.class);
-```
  
-```
      public static void test(Object log1) {
+
          logger.info(log1.toString());
+
          logger.warn(log1.toString());
+
      }
+```
  }
 ```
 

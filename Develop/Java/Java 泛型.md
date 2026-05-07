@@ -14,8 +14,12 @@ Java 泛型
 #### 泛型类
 ```
  public class Box {
+```
+
      private T content;
+
      ...
+```
  }
 ```
  
@@ -28,24 +32,37 @@ Java 泛型
 ```
  private Node root;
  public , V> void insert(K key, V value) {
+```
+
      root = insert(root, key, value);
+
      ...
+```
  }
 ```
 
 #### 泛型接口
 ```
  interface Generator {
+```
+
      T generate();
+```
  }
 ```
  
 ```
  class StringGenerator implements Generator {
+```
+
      @Override
+
      public String generate() {
+
          return "Generated String";
+
      }
+```
  }
 ```
 
@@ -62,12 +79,20 @@ Comparable 是指类型 T 必须实现 Comparable 接口，即 T 之间能比较
 ### 判断泛型类型
 ```
  public static  T t1(Object t1) {
+```
+
      log(type(t1));
+
      return (T)t1;
+```
  }
  public static  A t2(A t1) {
+```
+
      log(type(t1));
+
      return t1;
+```
  }
 ```
  

@@ -28,25 +28,42 @@ Greenplum Export CSV
 ```
  # test_cross.sql
  select   create_date,
+```
+
           platform,
+
           operatingsystemversion,
+
           channelid,
+
           channelname,
+
           count(*) cs
+```
  from     ods.gio_ads_track_activation
  where    1=1
  and      date_hour_id like '202210%'
  group by create_date,
+```
+
           platform,
+
           operatingsystemversion,
+
           channelid,
-          channelname
- order by create_date,
-          platform,
-          operatingsystemversion,
-          channelid,
+
           channelname
 ```
+ order by create_date,
+```
+
+          platform,
+
+          operatingsystemversion,
+
+          channelid,
+
+          channelname
 
 ### Export
 ```

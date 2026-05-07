@@ -13,12 +13,9 @@ Hallelujah 是加拿大诗人、创作歌手 Leonard Cohen 在1985年创作的�
 其歌词充满诗意、内涵丰富，曲调缓慢忧伤、清淡而悠长。
 
 问世间情为何物，直叫人死不瞑目......
-```
+
 　　Video: [Leonard Cohen](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=/Hallelujah/Leonard_Cohen_Hallelujah_Live_In_London.mp4)
-```
-```
+
 　　Video: [Kirchliche Trauung](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=/Hallelujah/Hallelujah-KirchlicheTrauung.mp4)
-```
-```
+
 　　FLAC: [Jeff Buckley](https://<!-- template: SERVERNAME -->/mwbbs/obj.php?p=video&f=/Hallelujah/Jeff_Buckley_Hallelujah.flac)
-```

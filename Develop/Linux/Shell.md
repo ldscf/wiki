@@ -20,9 +20,14 @@ Ken Thompson 的 sh 是第一种 Unix Shell。
  source .bash_profile
  # 上述一般在 bash 环境下会调用 .bashrc，默认有如下代码：
  if [ "$BASH" ]; then
+```
+
    if [ -f ~/.bashrc ]; then
+
      . ~/.bashrc
+
    fi
+```
  fi
 ```
 
@@ -177,10 +182,17 @@ echo -e "${YELLOW}Warning: MD5 collision (diff size) for '$file'. Retained. Size
 #### 命令行参数判断
 ```
  if (( $# >= 1 )); then
+```
+
      YM=$1
+```
  else
+```
+
      echo $0 'YM=yyyymm'
+
      exit 1
+```
  fi
  YY=`echo $YM |cut -c 1-4`
 ```
@@ -188,25 +200,41 @@ echo -e "${YELLOW}Warning: MD5 collision (diff size) for '$file'. Retained. Size
 #### 输入
 ```
  if [ "$1" == "" ];then
+```
+
      echo "Not Parameter"
+```
  fi
 ```
 ```
  if [ "$1" == "" ]; then
+```
+
      CS=1
+```
  #elif … ; then
  else
+```
+
      CS=$1
+```
  fi
 ```
 
 #### 数值比较
 ```
  if ((${PS} > 0)); then
+```
+
     echo "Task: $CMD exist."
+
     exit 1
+```
  else
+```
+
     echo OK
+```
  fi
 ```
 
@@ -246,8 +274,12 @@ fi
 ```
  上一级目录
  predir="$(
+```
+
     cd ..
+
     pwd
+```
  )"
 ```
 
@@ -275,21 +307,30 @@ fi
 ```
  while read LN
  do
+```
+
      echo ${LN}
+```
  done < ${LN_NAME}
 ```
  
 ```
  cat ${LN_NAME} | while read LN
  do
+```
+
      echo $LN
+```
  done
 ```
  
 ```
  for FN in ${LN_NAME}
  do
+```
+
      echo ${FN}
+```
  done
 ```
 
@@ -297,7 +338,10 @@ fi
 ```
  for FN in ${FILENAME}*
  do
+```
+
      echo ${FN}
+```
  done
 ```
 
@@ -379,7 +423,10 @@ FN=(A B C)相当于定义了一个数组，FN[0] 的值是 A，亦可以写作 F
  CS=2
  for (( i=1; i<=${CS}; i++ ))
  do
+```
+
     echo $i
+```
  done
 ```
 

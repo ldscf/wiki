@@ -113,9 +113,8 @@ nginx.conf 配置文件分为三部分：
 events 块涉及的指令主要影响 Nginx 服务器与用户的网络连接，常用的设置包括：是否开启对多 work process 下的网络连接进行序列化，是否允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个 work process 可以同时支持的最大连接数等。如：
 
 events {
-```
+
    process          1024;     # 最大连接数，一般 512M 内存使用该配置
-```
 
 }
 
@@ -205,15 +204,20 @@ rewrite            [flag];
 访问 http://www.abc.tk，实际访问 http://127.0.0.1:8080
 ```
  server {
+```
+
    listen   80;
+
    server_name www.abc.tk;
-```
  
-```
    location / {
+
      proxy_pass http://127.0.0.1:8080/;
+
      index index.html index.htm index.php;
+
    }
+```
  }
 ```
 
@@ -232,16 +236,22 @@ proxy_redirect http://127.0.0.1:8080/ /;
 访问 http://www.mkwiki.tk，以及http://mwwiki.eu.org，实际访问 http://www.mwbbs.tk/wiki/
 ```
  server {
+```
+
      listen       80;
+
      server_name  www.mkwiki.tk mwwiki.eu.org;
+
      proxy_set_header Host $host:$server_port;
-```
  
-```
      location / {
+
          proxy_pass http://10.0.0.141:2080/wiki/;
+
          index index.html index.htm index.php;
+
      }
+```
  }
 ```
 
@@ -253,107 +263,142 @@ proxy_redirect http://127.0.0.1:8080/ /;
  
 ```
  server {
+```
+
      listen       80;
+
      server_name  mwbbs.tk www.mwbbs.tk mwbbs.eu.org;
-```
  
-```
      location / {
+
          proxy_pass http://10.0.0.141:2080/mwbbs/;
+
          index  index.html index.htm index.php;
+
      }
-```
      
-```
      location /wiki/ {
+
          proxy_pass http://10.0.0.141:2080/wiki/;
+
          #proxy_redirect off;
+
          index  index.html index.htm index.php;
+
      }
-```
  
 ```
  }
 ```
 
 显然，如果在目标端(如上面 10.0.0.141)配置了逻辑目录，如在 apache2（000-default.conf）配置了 
-```
+
     Alias /dept  "/u01/web/dept/"
+
     Alias /doc   "/u01/web/doc/"
-```
 
 那么在 Nginx 中也应该配置同样目录：
-```
+
      location /dept/ {
+
          proxy_pass http://10.0.0.141:2080/dept/;
+
          #proxy_redirect off;
+
          index  index.html index.htm index.php;
+
      }
+
      location /doc/ {
+
          proxy_pass http://10.0.0.141:2080/doc/;
+
          #proxy_redirect off;
+
          index  index.html index.htm index.php;
+
      }
-```
 ```
  在配置proxy_pass代理转发时，如果后面的 url 加 /，表示绝对根路径；如果没有 /，表示相对路径。如：
 ```
  
-```
      location /dept/ {
+
          proxy_pass http://10.0.0.141:2080;
+
          #proxy_redirect off;
+
          index  index.html index.htm index.php;
+
      }
+
      location /doc   / {
+
          proxy_pass http://10.0.0.141:2080;
+
          #proxy_redirect off;
+
          index  index.html index.htm index.php;
+
      }
-```
 
 #### 路径隐藏
 
 nginx 在转发时移除上下文(即去掉匹配路径)，如去掉：mwbbs.eu.org/bbs/index.php 中的 bbs/：
-```
+
     location ^~ /bbs/ {
+
         rewrite ^/bbs/(.*)$ /$1 permanent;
+
     }
-```
 
 #### 显式跳转
 
 访问 http://www.mkwiki.tk，以及http://mwwiki.eu.org，实际地址跳转为 http://www.mwbbs.tk/wiki/
 ```
  server {
+```
+
      listen       80;
+
      server_name  wiki.mwbbs.tk mwwiki.eu.org;
-```
  
-```
      location / {
+
          rewrite ^/(.*) http://www.mwbbs.tk/wiki/$1 permanent;
+
          index  index.html index.htm index.php;
+
      }
+```
  }
 ```
 
 #### 真实客户端 IP
 ```
  server {
+```
+
    listen   80;
+
    server_name mwbbs.eu.org;
-```
  
-```
    location / {
+
      proxy_pass http://127.0.0.1:8080/;
+
      index index.html index.htm index.php;
+
      proxy_set_header x-real-ip $remote_addr;
+
      #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
      #real_ip_header   X-Forwarded-For;
+
      #real_ip_recursive on;
+
    }
+```
  }
 ```
  ```
@@ -395,36 +440,68 @@ nginx 在转发时移除上下文(即去掉匹配路径)，如去掉：mwbbs.eu.
  worker_rlimit_nofile 10240;   # 设置一个nginx进程能打开的最大文件数 
  pid        /var/run/nginx.pid; 
  events {                      # 事件配置
+```
+
      worker_connections  1024; # 设置一个进程的最大并发连接数
+
      use epoll;                # 事件驱动类型
+```
  } 
  # http 服务相关设置 
  http {  
-     log_format  main  'remote_addr - remote_user [time_local] "request" '
-                       'status body_bytes_sent "$http_referer" '
-                       '"http_user_agent" "http_x_forwarded_for"'; 
-     access_log  /var/log/nginx/access.log  main;    #设置访问日志的位置和格式 
-     sendfile          on;      # 用于开启文件高效传输模式，一般设置为on，若nginx是用来进行磁盘IO负载应用时，可以设置为off，降低系统负载
-     tcp_nopush        on;      # 减少网络报文段数量，当有数据时，先别着急发送, 确保数据包已经装满数据, 避免了网络拥塞
-     tcp_nodelay       on;      # 提高I/O性能，确保数据尽快发送, 提高可数据传输效率                           
-     gzip              on;      # 是否开启 gzip 压缩 
-     keepalive_timeout  65;     # 设置长连接的超时时间，请求完成之后还要保持连接多久，不是请求时间多久，目的是保持长连接，减少创建连接过程给系统 带来的性能损                                    耗，类似于线程池，数据库连接池
-     types_hash_max_size 2048;  # 影响散列表的冲突率。types_hash_max_size  越大，就会消耗更多的内存，但散列key的冲突率会降低，检索速度就更快。                                             types_hash_max_size越小，消耗的内存就越小，但散列key的冲突率可能上升
-     include             /etc/nginx/mime.types;  # 关联mime类型，关联资源的媒体类型(不同的媒体类型的打开方式)
-     default_type        application/octet-stream;  # 根据文件的后缀来匹配相应的MIME类型，并写入Response  header，导致浏览器播放文件而不是下载
- # 虚拟服务器的相关设置 
-     server { 
-         listen      80;                # 设置监听的端口 
-         server_name  localhost;        # 设置绑定的主机名、域名或ip地址 
-         charset koi8-r;                # 设置编码字符 
-         location / { 
-             root  /var/www/nginx;           # 设置服务器默认网站的根目录位置 
-             index  index.html index.htm;    # 设置默认打开的文档 
-             } 
-         error_page  500 502 503 504  /50x.html; # 设置错误信息返回页面 
-             location = /50x.html { 
-             root  html;        # 这里的绝对位置是/var/www/nginx/html 
-         } 
-     } 
-  } 
 ```
+
+     log_format  main  'remote_addr - remote_user [time_local] "request" '
+
+                       'status body_bytes_sent "$http_referer" '
+
+                       '"http_user_agent" "http_x_forwarded_for"'; 
+
+     access_log  /var/log/nginx/access.log  main;    #设置访问日志的位置和格式 
+
+     sendfile          on;      # 用于开启文件高效传输模式，一般设置为on，若nginx是用来进行磁盘IO负载应用时，可以设置为off，降低系统负载
+
+     tcp_nopush        on;      # 减少网络报文段数量，当有数据时，先别着急发送, 确保数据包已经装满数据, 避免了网络拥塞
+
+     tcp_nodelay       on;      # 提高I/O性能，确保数据尽快发送, 提高可数据传输效率                           
+
+     gzip              on;      # 是否开启 gzip 压缩 
+
+     keepalive_timeout  65;     # 设置长连接的超时时间，请求完成之后还要保持连接多久，不是请求时间多久，目的是保持长连接，减少创建连接过程给系统 带来的性能损                                    耗，类似于线程池，数据库连接池
+
+     types_hash_max_size 2048;  # 影响散列表的冲突率。types_hash_max_size  越大，就会消耗更多的内存，但散列key的冲突率会降低，检索速度就更快。                                             types_hash_max_size越小，消耗的内存就越小，但散列key的冲突率可能上升
+
+     include             /etc/nginx/mime.types;  # 关联mime类型，关联资源的媒体类型(不同的媒体类型的打开方式)
+
+     default_type        application/octet-stream;  # 根据文件的后缀来匹配相应的MIME类型，并写入Response  header，导致浏览器播放文件而不是下载
+```
+ # 虚拟服务器的相关设置 
+```
+
+     server { 
+
+         listen      80;                # 设置监听的端口 
+
+         server_name  localhost;        # 设置绑定的主机名、域名或ip地址 
+
+         charset koi8-r;                # 设置编码字符 
+
+         location / { 
+
+             root  /var/www/nginx;           # 设置服务器默认网站的根目录位置 
+
+             index  index.html index.htm;    # 设置默认打开的文档 
+
+             } 
+
+         error_page  500 502 503 504  /50x.html; # 设置错误信息返回页面 
+
+             location = /50x.html { 
+
+             root  html;        # 这里的绝对位置是/var/www/nginx/html 
+
+         } 
+
+     } 
+
+  } 

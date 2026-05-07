@@ -27,12 +27,14 @@ ClickHouse 可以在任何具有 x86_64，AArch64 或 PowerPC64LE CPU 架构的 
 Password for default user is saved in file /etc/clickhouse-server/users.d/default-password.xml
 ```
  
+```
      
          
              
              ????</password_sha256_hex>
          
      
+```
  
 ```
  
@@ -65,8 +67,7 @@ Password for default user is saved in file /etc/clickhouse-server/users.d/defaul
 )
 
 for F in ${FL[*]};do
-```
+
   rm -rf $F
-```
 
 done

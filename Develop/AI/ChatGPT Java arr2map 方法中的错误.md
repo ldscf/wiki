@@ -9,14 +9,12 @@ last_modified: '2024-11-15T07:38:26Z'
 在 udf.BASE 中的 arr2map 是一个用于将 String[] 转为 map 的 Java 方法，一般用于处理 main 参数，如：
 
 Para:
-```
+
   H --host 127.0.0.1 -p 8080 --a abcd123 -b ab1 1 --c -o true
-```
 
 Output:
-```
+
   {0=H, host=127.0.0.1, p=8080, a=abcd123, b=ab1, 9=1, c=, o=true}
-```
 
 ### Question1: arr2map 的问题
 
@@ -26,52 +24,70 @@ Output:
 ```
 
 public static Map<String, String> arr2map(String[] args, String...p) {
-```
+
         String ky, val, p1;
+
         if (isnull(p) || p.length < 1 || isnull(p[0]))
+
             p1 = "- --";
+
         else
+
             p1 = p[0];
+
         String[] pa = p1.split(" ");
+
         Map<String, String> res = new LinkedHashMap<>();
-```
 
-
-```
         Arrays.sort(pa, Collections.reverseOrder());
-```
 
-
-```
         for (int i = 0; i < args.length; i++) {
+
             ky = String.valueOf(i);
+
             val = args[i];
+
             for (int j = 0; j < pa.length; j++) {
+
                 if (args[i].startsWith(pa[j])) {
+
                     ky = args[i].substring(pa[j].length());
+
                     if (isnull(ky))
+
                         ky = String.valueOf(i);
+
                     i++;
+
                     val = i < args.length ? args[i] : "";
+
                     for (int k = 0; j < pa.length; j++) {
+
                         if (i < args.length && args[i].startsWith(pa[k])) {
+
                             val = "";
+
                             i--;
+
                             break;
+
                         }
+
                     }
+
                     break;
+
                 }
+
             }
+
             res.put(ky, val);
+
         }
-```
 
-
-```
         return res;
+
     }
-```
 
 ```*
 
@@ -112,70 +128,74 @@ val = i < args.length ? args[i] : "";
 以下為修正程式碼的主要改動：
 
 1. **修正內部 `for` 迴圈的索引錯誤**：
-```
    - 更改 `j < pa.length` 的條件迴圈索引錯誤。
-```
-
 
 2. **調整鍵值解析邏輯**：
-```
    - 確保當參數以前綴開頭時，能正確解析前綴後的部分作為鍵，並將下一個參數作為值。
    - 如果下一個參數也是以前綴開頭，則將值視為空字串。
-```
-
 
 3. **改進邏輯清晰度**：
-```
    - 引入更多的條件檢查，確保鍵值映射符合規範。
-```
-
 
 以下是修正後的程式碼：
 
 ```java
 
 public static Map<String, String> arr2map(String[] args, String... p) {
-```
+
     String ky, val, p1;
+
     if (isnull(p) || p.length < 1 || isnull(p[0])) {
+
         p1 = "- --";
+
     } else {
+
         p1 = p[0];
+
     }
+
     String[] pa = p1.split(" ");
+
     Map<String, String> res = new LinkedHashMap<>();
-```
 
-
-```
     // Sort prefixes in reverse order
+
     Arrays.sort(pa, Collections.reverseOrder());
-```
 
-
-```
     for (int i = 0; i < args.length; i++) {
+
         ky = String.valueOf(i); // Default key is index
+
         val = args[i];          // Default value is argument
+
         for (int j = 0; j < pa.length; j++) {
+
             if (args[i].startsWith(pa[j])) {
+
                 ky = args[i].substring(pa[j].length()); // Extract key after prefix
+
                 if (isnull(ky)) {
+
                     ky = String.valueOf(i);
+
                 }
+
                 i++; // Move to next argument for value
+
                 val = (i < args.length && !args[i].startsWith("-")) ? args[i] : ""; // Check for valid value
+
                 break;
+
             }
+
         }
+
         res.put(ky, val);
+
     }
-```
 
-
-```
     return res;
-```
 
 }
 ```
@@ -276,13 +296,16 @@ public static Map<String, String> arr2map(String[] args, String... p) {
 ```java
 
 for (String prefix : pa) {
-```
+
     if (i < args.length && args[i].startsWith(prefix)) {
+
         val = "";
+
         i--; // Move back to treat this as a key in the next loop
+
         break;
+
     }
-```
 
 }
 ```

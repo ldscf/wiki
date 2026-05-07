@@ -79,10 +79,13 @@ MySQL DBA 基础
  show variables like '%max_connection%'
  # set global max_connections = 1000
  show status like 'Threads%'
-  : Threads_connected, 打开的连接数.
-  : Threads_running, 当前并发数，一般远低于connected数值
-  : Threads_connected, 跟show processlist结果相同，表示当前连接数
 ```
+
+  : Threads_connected, 打开的连接数.
+
+  : Threads_running, 当前并发数，一般远低于connected数值
+
+  : Threads_connected, 跟show processlist结果相同，表示当前连接数
  
 ```
  # config values

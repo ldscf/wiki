@@ -65,71 +65,72 @@ CSS 主要用于定义网页中 HTML 元素的视觉样式：
 /* 1. 卡片边框和内边距 */
 
 .card {
-```
+
   border: 1px solid #ccc;
+
   border-radius: 8px;
+
   padding: 16px;
+
   margin: 10px auto;
+
   width: 60%;
-```
 
 }
 
 /* 2. 页面标题 */
 
 #page-title {
-```
+
   text-align: center;
+
   font-size: 24px;
-```
 
 }
 
 /* 3. 所有段落 */
 
 p {
-```
+
   font-size: 14px;
+
   line-height: 1.6;
-```
 
 }
 
 /* 4. 鼠标悬停 */
 
 .read-more:hover {
-```
+
   color: blue;
+
   background-color: #e0f0ff;
-```
 
 }
 
 /* 5. 卡片中的标题样式 */
 
 .card .title {
-```
+
   color: darkblue;
+
   font-weight: bold;
-```
 
 }
 
 /* 6. 属性选择器 */
 
 a[href="#"] {
-```
+
   color: red;
-```
 
 }
 
 /* 7. 首行缩进 */
 
 .content::first-line {
-```
+
   text-indent: 2em;
-```
 
 }
 
@@ -145,42 +146,46 @@ a[href="#"] {
 <html lang="zh-CN">
 
 <head>
-```
+
   <meta charset="UTF-8" />
+
   <title>CSS 选择器练习</title>
+
   <style>
+
     /* 练习区域：在这里写 CSS */
+
   </style>
-```
 
 </head>
 
 <body>
 
-```
   <h1 id="page-title">文章列表</h1>
-```
 
-
-```
   <div class="card">
+
     <h2 class="title">第一篇文章</h2>
+
     <p class="author">作者：张三</p>
+
     <p class="content">这是一段文章内容的摘要，欢迎阅读！</p>
+
     <a href="#" class="read-more">阅读全文</a>
+
   </div>
-```
 
-
-```
   <div class="card featured">
-    <h2 class="title">第二篇文章</h2>
-    <p class="author">作者：李四</p>
-    <p class="content">第二篇文章的内容摘要，精彩继续。</p>
-    <a href="#" class="read-more">阅读全文</a>
-  </div>
-```
 
+    <h2 class="title">第二篇文章</h2>
+
+    <p class="author">作者：李四</p>
+
+    <p class="content">第二篇文章的内容摘要，精彩继续。</p>
+
+    <a href="#" class="read-more">阅读全文</a>
+
+  </div>
 
 </body>
 
@@ -198,17 +203,24 @@ a[href="#"] {
 /* 超长行信息显示省略号 */
 
 .info {
-```
+
   display: inline-block;      /* 排在一行内 */
+
   max-width: 32ch;            /* 最大宽度 32 个字符 */
+
   overflow: hidden;           /* 当内容溢出容器时，隐藏超出的部分（不换行） */
+
   text-overflow: ellipsis;    /* 当文字太长时，末尾用 ... 显示省略部分 */
+
   white-space: nowrap;        /* 禁止换行 */
+
   font-size: 10px;            /* 字体大小 */
+
   vertical-align: middle;     /* 垂直居中对齐 */
+
   margin-left: 6px;           /* 左边距 */
+
   margin-right: 6px;          /* 右边距 */
-```
 
 }
 
@@ -227,12 +239,14 @@ a[href="#"] {
 /* 图片显示 - 自动拉满父容器宽度 */
 
 .cover-img {
-```
+
   height: 160px;              /* 图片高度为 160px */
+
   width: 100%;                /* 图片自动拉满父容器宽度 */
+
   object-fit: cover;          /* 填满容器方式裁剪，保留比例 */
+
   border-radius: 6px;         /* 圆角样式 */
-```
 
 }
 

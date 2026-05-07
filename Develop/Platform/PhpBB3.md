@@ -19,7 +19,9 @@ phpbb3(3.3.5)
 #### 页面的标头部分缺少说明
 ```
  
+```
    
+```
  
 ```
 - Bing
@@ -77,9 +79,11 @@ phpbb3(3.3.5)
 #### Head
 ```
  \styles\prosilver\template\
-   overall_header.html
-   simple_header.html
 ```
+
+   overall_header.html
+
+   simple_header.html
  
 ```
  

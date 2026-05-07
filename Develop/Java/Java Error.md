@@ -114,42 +114,62 @@ yaml 文件中值包含 %，一般情况下，此条目会不读
 2.1 直接引用
 ```
  
-        <!--
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        -->
 ```
+
+        <!--
+
+        <dependency>
+
+            <groupId>org.slf4j</groupId>
+
+            <artifactId>slf4j-log4j12</artifactId>
+
+            <version>${slf4j.version}</version>
+
+        </dependency>
+
+        -->
 
 2.2 间接引用
 
 [SLF4J 官方给出的解决冲突的方法:](https://www.slf4j.org/codes.html#multiple_bindings) For example, cassandra-all version 0.8.1 declares both log4j and slf4j-log4j12 as compile-time dependencies.
 ```
  
-        <dependency>
-          <groupId> org.apache.cassandra</groupId>
-          <artifactId>cassandra-all</artifactId>
-          <version>0.8.1</version>
 ```
 
+        <dependency>
+
+          <groupId> org.apache.cassandra</groupId>
+
+          <artifactId>cassandra-all</artifactId>
+
+          <version>0.8.1</version>
          
-```
           <!-- exclusion -->
+
           <exclusions>
+
             <exclusion> 
+
               <groupId>org.slf4j</groupId>
+
               <artifactId>slf4j-log4j12</artifactId>
+
             </exclusion>
+
             <exclusion> 
+
               <groupId>log4j</groupId>
+
               <artifactId>log4j</artifactId>
+
             </exclusion>
+
           </exclusions>
+
           <!-- exclusion ok -->
+
         </dependency>
-```
 
 ### POM
 

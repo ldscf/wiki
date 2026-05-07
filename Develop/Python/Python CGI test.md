@@ -28,15 +28,19 @@ Python CGI - get post json
  
 ```
  try:
-     form = ucgi.uform()['CGI']
-     #d_form = form['CGI']
 ```
+
+     form = ucgi.uform()['CGI']
+
+     #d_form = form['CGI']
  
 ```
  except Exception as e:
-     print(e)
-     sys.exit(1)
 ```
+
+     print(e)
+
+     sys.exit(1)
  
 ```
  print(form)
@@ -48,9 +52,11 @@ Python CGI - get post json
  
 ```
  for key, value in form.items():
-     if value[:8] == '%BASE64%':
-         form[key] = usys.base64(value)
 ```
+
+     if value[:8] == '%BASE64%':
+
+         form[key] = usys.base64(value)
  
 ```
  print(form)

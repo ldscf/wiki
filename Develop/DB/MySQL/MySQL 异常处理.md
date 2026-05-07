@@ -15,14 +15,12 @@ DECLARE ... HANDLER, 必须出现在变量或条件声明的后面
 当某个错误（condition_value）发生时，执行指定的语句（statement），执行完之后再决定如何操作（action）
 
 DECLARE action HANDLER FOR condition_value [, condition_value, ...]
-```
+
   statement
-```
 
 ##### action
-```
+
    CONTINUE | EXIT  # exit 只退出当前 begin end 
-```
 
 ##### condition_value
 - mysql_error_code# MySQL 自定义的错误代码
