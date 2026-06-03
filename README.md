@@ -1,6 +1,6 @@
 # 牛奶河 Wiki
 
-个人知识库，涵盖开发技术、文学文章和美食菜谱。
+个人知识库：开发、文学和菜谱。
 
 ## 目录结构
 
@@ -43,5 +43,5 @@ wiki/
 
 ## 来源
 
-原站：[牛奶河 Wiki](http://mwbbs.eu.org/wiki/)
-备份站：[Milky Way BBS Backup](https://mwbbs.eu.org/viewtopic.php?t=103)
+- 原站：[牛奶河 Wiki](http://mwbbs.eu.org/wiki/)
+- 备份站：[Milky Way BBS Backup](https://mwbbs.eu.org/viewtopic.php?t=103)
