@@ -4,7 +4,7 @@ categories:
 - Apple
 - Develop
 - Mac
-last_modified: '2026-05-05T11:29:10Z'
+last_modified: '2026-05-19T01:55:47Z'
 ---
 macOS 是 Mac OS X（后来称为 OS X，发音为 oh-ess-ten）的延续，由苹果开发的运行于 Macintosh 系列电脑上的操作系统，最初发布于 2001 年。基于 Unix 构建，与 Unix 和 Linux 有许多底层相似之处，如多用户支持、抢占式多任务处理以及使用终端访问等。
 
@@ -125,6 +125,18 @@ textutil 是一个系统自带的，用于处理文稿的命令，允许将任�
 #### 触摸板手势异常
 
 打开【Activity Monitor / 活动监视器】，找到【Dock / 程序坞】将其强制退出。该方法可使 Dock 进程重启，触摸板手势异常亦随之消失。
+
+#### obsidian
+
+打开和编辑缓慢，占内存大几百 M，可以删除如下目录
+```
+ /Users/ldscf/Library/Application\ Support/obsidian
+```
+
+app.json 打开报错（Cmd + Option + I，可以看到）
+```
+ <笔记目录>/.obsidian/app.json
+```
 
 ### QA
 

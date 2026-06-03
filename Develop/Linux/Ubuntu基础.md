@@ -3,7 +3,7 @@ source_title: Ubuntu基础
 categories:
 - Linux
 - Ubuntu
-last_modified: '2026-01-02T13:32:34Z'
+last_modified: '2026-05-12T12:17:00Z'
 ---
 Ubuntu（乌班图） 是由南非人马克·沙特尔沃思(Mark Shuttleworth)创办的基于Debian Linux的操作系统。名称来自非洲南部祖鲁语或豪萨语的“ubuntu"一词，意思是“人性”“我的存在是因为大家的存在"，是非洲传统的一种价值观。
 
@@ -214,14 +214,25 @@ iptables/1.8.7 Failed to initialize nft: Protocol not supported.
 
 #### thinclient_drives
 
-通过 xrdp 远程连接，解压 .bz2 文件时，出现无权限的目录：
+通常是远程桌面/瘦客户端软件自动挂载出来的目录，常见于：xrdp。
 ```
- d????????? ? ?  ?     ?            ? thinclient_drives/
+ # /etc/xrdp/xrdp.ini
+ rdpdr=false
+ drdynvc=false
 ```
-
-此时无法使用和删除
+ 
 ```
- umount thinclient_drives
+ # /etc/xrdp/sesman.ini
+ EnableFuseMount=false
 ```
-
-即可正常
+ 
+```
+ systemctl restart xrdp
+ systemctl restart xrdp-sesman
+```
+ 
+```
+ # 清除 - 需要用户未登录状态
+ # umount /home/bi/thinclient_drives
+ rm -rf /home/bi/thinclient_drives
+```

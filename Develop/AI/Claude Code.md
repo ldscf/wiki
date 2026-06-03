@@ -4,13 +4,34 @@ categories:
 - AI
 - Develop
 - Tools
-last_modified: '2026-05-01T03:42:29Z'
+last_modified: '2026-06-02T09:00:21Z'
 ---
 Claude Code 是一个代理编码工具，可以读取代码库、编辑文件、运行命令。帮助构建功能、修复错误和自动化开发任务。能理解整个代码库、跨多个文件和工具工作以完成任务。可在终端、IDE、桌面应用和浏览器中使用。
 
 以下是针对 macOS / Ubuntu 22.04，使用 [free-claude-code](https://github.com/Alishahryar1/free-claude-code) 开源项目，实现免费使用 Claude Code。
 
 ### 安装
+
+#### 官网
+
+2026/6 以后，可以直接命令安装，并启动一个 Web。macOS/Linux:
+```
+ curl -fsSL "https://github.com/Alishahryar1/free-claude-code/blob/main/scripts/install.sh?raw=1" | sh
+```
+ 
+```
+ # Start Proxy, localhost, 8082
+ fcc-server
+```
+ 
+```
+ # Claude code
+ fcc-claude
+```
+```
+ # 配置文件
+ ~/.fcc/.env
+```
 
 #### uv
 
@@ -34,9 +55,19 @@ uv 是快速的 Python 包管理器，项目强制使用。
  -. OR .-
  npm install -g @anthropic-ai/claude-code
 ```
+ 
+```
+ # .zshrc
+ # -> export PATH="$HOME/.local/bin:$PATH"
+```
 ```
  # 验证
  claude --version
+```
+```
+ # 升级
+ 官方原生脚本安装，会自动升级。下面命令可以显示当前的更新状态、版本号以及最近一次后台更新尝试的结果
+ claude doctor
 ```
 
 #### free-claude-code
@@ -145,6 +176,23 @@ claude-free
 #### VSCode
 
 使用类似于 Cline
+
+### 模型兼容
+
+#### DeepSeek
+ ```
+
+# 一般写在 .zshrc / .bashrc 中：
+alias claude-ds='ANTHROPIC_BASE_URL="https://api.deepseek.com/anthropic" \
+ANTHROPIC_AUTH_TOKEN="sk-354e477e737b45e1b44cb01afae30fca" \
+ANTHROPIC_MODEL="deepseek-v4-pro[1m]" \
+ANTHROPIC_DEFAULT_OPUS_MODEL="deepseek-v4-pro[1m]" \
+ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4-pro[1m]" \
+ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4-flash" \
+CLAUDE_CODE_SUBAGENT_MODEL="deepseek-v4-flash" \
+CLAUDE_CODE_EFFORT_LEVEL="max" \
+claude'
+```
 
 ### 附录
 

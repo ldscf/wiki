@@ -3,20 +3,63 @@ source_title: 多用户RUST开发
 categories:
 - Develop
 - Rust
-last_modified: '2026-05-04T12:19:38Z'
+last_modified: '2026-05-25T03:08:57Z'
 ---
 多个用户均使用同一个 GitHub 账号、Rust 环境及项目。
 
 ### Root 执行一次
 
+#### Rust安装与共享配置
+```
+ # 安装
+ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+ 
+```
+ #导出工具链
+ mkdir -p /opt/rust
+ cp -a /root/.rustup/toolchains /opt/rust/
+ cp -a /root/.cargo/bin /opt/rust/
+```
+ 
+```
+ chmod -R 755 /opt/rust
+```
+ 
+```
+ # root 下执行
+ export RUSTUP_HOME=/opt/rust/rustup
+ export PATH=/opt/rust/bin:$PATH
+```
+ 
+```
+ rustup default stable
+```
+```
+ # /etc/profile.d/cargo_shared.sh
+ export RUSTUP_HOME=/opt/rust/rustup
+ export PATH="/opt/rust/bin:$PATH"
+```
+ 
+```
+ export CARGO_TARGET_DIR="/u01/github/rust_target"
+ umask 002
+```
+```
+ # 所有编译 rust 的用户，均加入 bi group，且目录 /u01/github/rust_target 权限如下：
+ chown -R :bi /u01/github/rust_target
+ find /u01/github/rust_target -type d -exec chmod 2775 {} \;
+ find /u01/github/rust_target -type f -exec chmod 664 {} \;
+```
+
 #### Project
 * **设置项目根目录所属组**
 ```
- chgrp -R bi /u01/github/SRDS
+ chgrp -R bi /u01/github/
 ```
 * **赋予 2775 权限** (SGID 确保新文件继承 bi 组)
 ```
- sudo chmod -R 2775 /u01/github/SRDS
+ sudo chmod -R 2775 /u01/github/
 ```
 * **配置 ACL 默认权限**：让未来产生的所有文件（含 target 内的编译产物）自动对组开放 rwx
 ```
@@ -41,34 +84,6 @@ last_modified: '2026-05-04T12:19:38Z'
 * **将用户加入 bi 组**
 ```
  usermod -aG bi ${U}
-```
-* **注入环境变量到 .bashrc**
-```
- # /home/${U}/.bashrc
-```
- 
-```
- # --- Rust Environment Sharing ---
- # 指向 bi 用户已经安装好的路径
- export RUSTUP_HOME=/home/bi/.rustup
- export CARGO_HOME=/home/bi/.cargo
-```
- 
-```
- # 将 Cargo 二进制路径加入 PATH
- export PATH="$CARGO_HOME/bin:$PATH"
-```
- 
-```
- # --- Collaboration Settings ---
- # 确保该用户创建的文件，组内成员默认可写
- umask 002
-```
- 
-```
- # --- share target ---
- # 使用相同依赖库目录
- export CARGO_TARGET_DIR=/u01/github/rust_target
 ```
 
 ### 每用户一次

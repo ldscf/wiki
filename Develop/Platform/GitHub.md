@@ -3,7 +3,7 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-05-07T01:46:16Z'
+last_modified: '2026-05-26T05:59:08Z'
 ---
 ### Overview
 
@@ -146,32 +146,11 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  git push
 ```
 ```
- # 冲突
- git pull --rebase origin main
- git push origin main     # 如果有冲突，Git 会停下来等待处理
- git rebase --continue    # 继续流程，如果还有下一个冲突，会再次停下来
-```
- 
- ```
-<<<<<<< HEAD
-  let cache_size = 1024; 
-  =======
-  let cache_size = 2048; 
-  >>>>>>> 7b3a1d2
-  
-  其中：以 ======= 为分隔，上面是“远程”代码，下面是“本地”修改。
-```
-```
- # 冲突文件会变成：（用工具修改会非常方便）
-```
-
-#### Deploy Key
-
-在 GitHub 中，Deploy Key（部署密钥） 通常是针对单个仓库的，不允许同一个 Deploy Key 用于多个仓库。
-
-访问账号下的所有私有仓库：
-```
- 在 Settings -> SSH and GPG keys 中增加公钥。
+ # 多行提交信息
+ git commit -m "$(cat <<'EOF'
+ ...
+ EOF
+ )"
 ```
 
 #### 数字签名
@@ -210,10 +189,9 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  git commit --allow-empty -S -m "test: verify ssh commit signing"
 ```
 
-#### 去除文件&目录
-
-.gitignore
+#### 去除
 ```
+ # .gitignore
  .DS_Store
  .idea
  target/
@@ -225,8 +203,14 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  # 已 git add 的文件，在 .gitignore 中标识无效
  # 删除远程文件/目录
  git rm -r --cached 目录名/
- git commit -m "删除远程多余的目录/文件"
+ git commit -m ""
  git push
+```
+
+#### 忽略
+```
+ git update-index --skip-worktree 
+ git update-index --no-skip-worktree 
 ```
 
 #### 分支
@@ -242,6 +226,23 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 创建并切换
 ```
  git switch -c      # [常用] 创建新分支并立即切换过去
+```
+
+删除分支
+```
+ git branch -a                       # 查看所有分支（本地 + 远程），如：remotes/origin/codex/review-readme.md-and-plan-pkg-005
+ git push origin --delete $RN        # 不能删除当前正在使用的分支，如：RN=codex/review-readme.md-and-plan-pkg-005
+```
+
+修改分支名称
+```
+ git branch -m             # 将本地当前分支原地重命名为新名字
+ git push -u origin        # 将改名后的本地分支推送到云端，绑定为全新的上游追踪分支
+```
+ 
+```
+ # 把云端旧名字的分支抹去。**** 这是个强破坏力的命令，需要谨慎确认
+ # git push origin --delete 
 ```
 
 ##### 文件恢复
@@ -340,6 +341,54 @@ git checkout main
 
 git branch -D ${LOCAL_BRANCH}
 
+#### 本地历史修剪与重构
+
+在项目未推送到远端（Push）之前，开发者拥有本地提交历史的**绝对控制权**。为了保持主分支（如 [main](#main) / [master](#master)）的生命周期线索清晰，提倡在 Push 前对本地的零碎提交进行“格式化与重组”。
+
+##### 核心原理：地基原则
+
+执行交互式变基时，指定的 Commit 哈希值在 Git 底层被称为**地基（Parent Commit）**。
+
+变基命令：git rebase -i 
+* **重要铁律**：输入的  将作为不可撼动的墙砖，它**不会**出现在编辑清单里。出现在清单里的，是它**之后**的所有提交。
+* **安全边界**：只要地基节点是已经 Push 的公共节点，重写其后的本地历史是**绝对安全**的，不会对远端造成任何冲突。
+
+##### 场景一：修改历史提交信息（Reword）
+
+当需要将早期某个未 Push 的提交信息重构，或者修正错别字时使用。
+1. **定位地基**：查到该错误提交的**前一个**稳定节点的哈希值（假设为 208409a）。
+1. **开启变基**：
+1. : git rebase -i 208409a
+1. **标记节点**：在弹出的 Vim 编排清单中，找到需要修改的那一行，将开头的 pick 改为 reword（或简写为 r）。
+1. * 示例：
+1. *: reword 8dd600a doc: 新增研发立项管理需求规格说明书
+  1. **保存退出**：按 Esc，输入 :wq 回车。
+  1. **注入新信息**：在随后弹出的新窗口中，直接修改，保存退出即可。
+
+##### 场景二：多节点局部折叠（Squash）
+
+当本地存在连续几个零碎的、同业务上下文的提交（如多次小型的文档修正），希望将其物理融合成一个高质量的单一节点时使用。
+1. **开启变基**：同样退后一步，引入这批提交之前的合法节点作为支撑点：
+1. : git rebase -i 208409a
+1. **执行编排**：在清单中，保持最旧的那个节点为 pick（作为地基座），将后续需要吞并的节点全部改为 squash（或简写为 s）。
+1. * **折叠逻辑**：带有 squash 标记的节点会全量融入它的**上一行**。
+1. * 清单配置示例：
+1. *: pick 8dd600a doc: add R&D project initiation specs  
+
+squash c74fb83 doc: Create project initiation detailed design document.  
+
+squash 1a66ccc feat: add R&D project initiation management module  
+
+pick 117baf2 feat: v2 R&D project management upgrade
+1. *: *(注：上面的配置会将 c74fb83 和 1a66ccc 物理融合进 8dd600a 中，而最新的 117baf2 保持原样。)*
+1. **合并注释**：保存清单后，Git 会弹出最终的注释整合窗口。使用 # 注释掉或直接删除过期的临时提交日志，仅保留最终合并节点的内容，保存退出。
+
+##### 规范审计
+
+重构完成后，必须在终端执行以下审计命令，确保历史树拓扑结构与签名完全符合预期再执行推送：
+- git log -n 5 --oneline （检查节点数量与说明文字）
+- git log --pretty=format:"%h - %an, %ae : %s" -n 5 （审计作者签名，防止混入 [AI 缺省测试 ID](#AI_Agent)）
+
 ### Hooks
 
 #### Webhooks
@@ -430,6 +479,14 @@ Host github.com
  fi
 ```
 
+#### 提交多行文本
+```
+ git commit -m "$(cat <<'EOF'
+ ...
+ EOF
+ )"
+```
+
 #### 放弃本地未暂存的修改
 ```
  # 撤销本地修改，还未 git add
@@ -456,6 +513,17 @@ Host github.com
  git reset --hard HEAD~1
 ```
 
+#### 修改提交
+
+使用前提：只有当这个 Commit 是你自己独占的（或者是分支的最后一次提交）时，才能用 --amend。
+```
+ # 可以增减一些文件
+ # git add <增文件>
+ # git rm --cached <减文件>
+ git commit --amend
+ git push origin main --force-with-lease
+```
+
 #### 强制推送
 ```
  git push -f origin <你的分支名>
@@ -467,14 +535,6 @@ Host github.com
 - perf：性能优化
 - refactor：重构
 - chore：不属于以上情况时，通常归类为 chore
-
-#### 提交多行文本
-```
- git commit -m "$(cat <<'EOF'
- ...
- EOF
- )"
-```
 
 ### collaborator
 
