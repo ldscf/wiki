@@ -8,7 +8,7 @@ last_modified: '2026-01-20T02:58:26Z'
 ---
 此脚本用于检查特定的 TCP 端口是否在监听。如果某个端口不可用，则使用相应的脚本重启服务。
 
-定时任务可以放在 crontab 中，macOS 下也可以使用 [[LaunchAgent]]。
+定时任务可以放在 crontab 中，macOS 下也可以使用 [LaunchAgent](#LaunchAgent)。
 
 ### 参数
 1. 端口配置 (PORTS)：(1080 23389 23390 23391)
@@ -16,7 +16,7 @@ last_modified: '2026-01-20T02:58:26Z'
 1. 日志记录 (LOG)：$HOME/log/port_monitor.log
 
 ### 说明
-- 将手动执行的脚本与自动化/系统级的脚本（如定时任务）分开存放，参考 [[wikipedia:Filesystem_Hierarchy_Standard|FHS (Filesystem Hierarchy Standard)]] 标准。
+- 将手动执行的脚本与自动化/系统级的脚本（如定时任务）分开存放，参考 [FHS (Filesystem Hierarchy Standard)](#wikipedia:Filesystem_Hierarchy_Standard) 标准。
 - 在 Shell 脚本中，如果将 else 下代码全部注释掉，脚本会报错。加入一个冒号 :（代表空操作 No-op）可以避免语法错误。
  ```
 #!/bin/bash

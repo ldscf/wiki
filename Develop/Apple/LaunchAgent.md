@@ -4,86 +4,85 @@ categories:
 - Apple
 - Develop
 - Mac
-last_modified: '2025-12-30T07:20:43Z'
+last_modified: '2026-06-29T07:57:23Z'
 ---
-LaunchAgent 是 macOS 中 launchd 进程管理体系的一部分，用于为“当前登录用户”管理和启动后台任务或用户级服务。
-- 随用户登录而加载（仅对当前用户生效、登录后自动加载）
-- 运行在用户权限（非 root）
-- 适合启动 GUI 相关、用户态脚本、常驻辅助进程
+launchd 是 macOS 核心的初始化及进程管理框架（类似于 Linux 的 systemd），统一取代了传统的 rc.d、cron、init 和 xinetd。在 launchd 体系中，服务通过 Property List (.plist) 配置文件进行定义。
 
-采用 launchd 统一管理进程，取代了传统的 rc.d / cron / init / xinetd，专注于“用户会话内”的自动化任务。
+### 概述
 
-**launchd 体系**
+launchd 将常驻任务主要划分为 LaunchAgent（用户级）和 LaunchDaemon（系统级）：
 
-| 类型 | 作用域 | 权限 | 是否随用户 |
-|:---|:---|:---|:---|
-| **LaunchAgent** | 用户级 | 当前用户 | 是 |
-| LaunchDaemon | 系统级 | root | 否 |
-| StartupItem（已废弃） | 系统级 | root | 否 |
-LaunchAgent 以 **plist 文件** 的形式存在。
-1. 用户下路径：~/Library/LaunchAgents/
-1. 全部用户下路径：/Library/LaunchAgents/
+| 类型 | 配置文件存放路径 | 作用域与生命周期 | 运行权限 | 适用场景 |
+|:---|:---|:---|:---|:---|
+| LaunchAgent (用户专属) | ~/Library/LaunchAgents/ | 仅在当前用户登录会话期间加载与运行 | 当前登录用户权限 | 用户态脚本、SSH 隧道、桌面辅助进程 |
+| LaunchAgent (全局用户) | /Library/LaunchAgents/ | 任意用户登录时，在其各自的用户会话中加载 | 当前登录用户权限 | 动态加载的全局环境配置或用户辅助工具 |
+| LaunchDaemon (系统全局) | /Library/LaunchDaemons/ | 系统开机时加载，与用户是否登录无关 | root 或指定系统用户 | 数据库、Web 服务器、全局网络代理等底层服务 |
 
-### Example
+### Dynamic SSH Tunneling
 
-检查 1080 端口是否激活。若无，则初始化一个新的 Shell 会话以建立。
+在处理诸如 SSH 动态端口转发（SOCKS5 隧道）等需要常驻的进程时，传统的做法是通过 cron 或自定义 Shell 脚本每隔 60 秒轮询（如调用 lsof -i :1080）来检查端口并拉起服务。这种方式存在感知延迟高、频繁唤醒 CPU 导致资源浪费等问题。
 
-#### 监控脚本
+更具工程严谨性的设计是利用 launchd 自身的守护机制：
+1. 通过 KeepAlive: true 让 launchd 捕获进程退出信号，实现秒级自动拉起。
+1. 将 SSH 连接逻辑整合到用户本地 SSH 客户端配置中，实现参数与服务管理层的低复杂度解耦。
+
+#### 基础设施层
+
+为了规避在 .plist 中硬编码长参数，在 ~/.ssh/config 配置：
  ```
-LOG="$HOME/log/mc2_1080_monitor.log"
-CMD="$HOME/bin/mc2_1080.sh"
 
-# Check if port 1080 is active; if not, attempt to start the service
-if ! lsof -i :1080 > /dev/null; then
-    echo "$(date): [ACTION] Port 1080 is inactive, attempting to start service." >> "$LOG"
-    
-    # Execute the script and capture both stdout and stderr
-    sh "$CMD" >> "$LOG" 2>&1
-    
-    # Check the exit status ($?) of the script execution
-    if [ $? -eq 0 ]; then
-        echo "$(date): [SUCCESS] ${CMD} executed successfully" >> "$LOG"
-    else
-        echo "$(date): [ERROR] ${CMD} failed to execute with exit code $?" >> "$LOG"
-    fi
-#else
-
-#    echo "$(date): [INFO] Port 1080 is running" >> "$LOG"
-fi
+# mc1.en 1080
+Host proxy-mc1-en
+    HostName mc1.en
+    User bi
+    DynamicForward 1080
+    Compression yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
 ```
 
-#### LaunchAgent 配置
+#### 服务配置层
+
+在 ~/Library/LaunchAgents/local.ssh.proxy.plist 中定义服务。利用 launchd 原生接管标准流：
  ```
 
-# /Users/lds = /Users/$(whoami)
-
-# ~/Library/LaunchAgents/com.user.check1080.plist
+# mc1.en 1080
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDsPropertyList-1.0.dtd">
     Label
-    com.user.check1080
+    local.ssh.proxy
     ProgramArguments
     
-        /bin/bash
-        /Users/lds/scripts/check_1080.sh
+        /usr/bin/ssh
+        -N
+        proxy-mc1-en
     
     RunAtLoad
     
-    StartInterval
-    60
+    KeepAlive
+    
     StandardOutPath
-    /Users/lds/log/check1080.log
+    /Users/ldscfe/Library/Logs/ssh-proxy.log
     StandardErrorPath
-    /Users/lds/log/check1080.err
+    /Users/ldscfe/Library/Logs/ssh-proxy.err
 ```
 
-#### 启动任务
+### 命令
+
+macOS 使用 launchctl 工具与 launchd 进行交互。
+ ```
+
+# PL_PATH="$HOME/Library/LaunchAgents/local.ssh.proxy.plist"
+
+# 1. 激活并启动服务（设置开机自启并立刻运行）
+launchctl bootstrap gui/$(id -u) "$PL_PATH"
+
+# 2. 停止服务并解除自启
+launchctl bootout gui/$(id -u) "$PL_PATH"
+
+# 3. 检查服务运行状态与 PID
+launchctl list | grep local.ssh.proxy
+launchctl print gui/$(id -u)/local.ssh.proxy   # 完整运行状态
 ```
- launchctl load $PL
-```
- 
-```
- # PL="~/Library/LaunchAgents/com.user.check1080.plist"
- # 停止监控: launchctl unload $PL
- # 查看状态: launchctl list | grep check1080      # 返回数字是 0，说明执行成功
-```
+
+*注：launchctl list 返回结果的第一个字段如果为数字，代表当前运行的进程 PID；如果显示 - 且无报错，通常代表服务已成功运行完毕并正常退出（如非持续性定时任务）。若第二列显示非零数字，则代表上一次退出的非正常错误码（Exit Code）。*

@@ -36,7 +36,7 @@ last_modified: '2025-04-29T07:55:19Z'
  ```
 flowchart TB
      B(Begin) --> I1{IF}
-     I1 -- Y --> C1[[Content1]]
+     I1 -- Y --> C1[Content1](#Content1)
      I1 -- N --> C2(Content2)
      C1 --> E((END))
      C2 --> E

@@ -18,7 +18,7 @@ last_modified: '2025-12-27T03:18:20Z'
 
 1897 年，家住纽约曼哈顿上城西侧，时年八岁的小女孩弗吉尼娅·欧汉伦（Virginia O’Hanlon）问父亲：是否真的有圣诞老人？父亲告诉她：向《纽约太阳报》( The New York Sun)写信问问，便会得知真相。于是弗吉尼娅写了一封短信，寄给报社。
 
-编辑弗朗西斯·丘奇（[[wikipedia:Francis_Pharcellus_Church|Francis P. Church]]）收到来信后，决定用报纸的社评予以回复。丘奇曾是美国南北战争时期的一名战地记者，看到过很多血腥场面，并同时感到社会中普遍的绝望情绪。他希望利用回答这一孩子的简单提问之际，亦能对其更深层次的哲理进行一些探讨。
+编辑弗朗西斯·丘奇（[Francis P. Church](#wikipedia:Francis_Pharcellus_Church)）收到来信后，决定用报纸的社评予以回复。丘奇曾是美国南北战争时期的一名战地记者，看到过很多血腥场面，并同时感到社会中普遍的绝望情绪。他希望利用回答这一孩子的简单提问之际，亦能对其更深层次的哲理进行一些探讨。
 
 于是在 1897 年 9 月 21 日，报纸刊出由丘奇撰写的题为《真的有圣诞老人吗？》社评。（出现在第六版社论区）这篇感人至深的短文迅速引起了读者的注意，被争相传阅。特别是其中“是的，弗吉尼娅，真的有圣诞老人”一句，广为流传，成为这篇短文的代名词。
 
@@ -85,7 +85,7 @@ No Santa Claus! Thank God! he lives, and he lives forever. A thousand years from
 1. ...view and picture the supernal beauty and glory beyond. “Supernal” 是一个带有宗教色彩的词，意为“天上的、超凡的、神圣的”。
 
 ### 参考
-1. [[wikipedia:Yes,_Virginia,_there_is_a_Santa_Claus|Wikipedia - Yes, Virginia, there is a Santa Claus]]
+1. [Wikipedia - Yes, Virginia, there is a Santa Claus](#wikipedia:Yes,_Virginia,_there_is_a_Santa_Claus)
 1. ['Is there a Santa Claus?': How a child's letter inspired the classic 'Yes, Virginia' response](https://www.washingtonpost.com/history/2018/12/22/is-there-santa-claus-how-childs-letter-inspired-classic-yes-virginia-response)
 1. [知乎：1897年《太阳报》编辑给8岁女孩的回信真的那么好吗？](https://www.zhihu.com/question/27248247)
 

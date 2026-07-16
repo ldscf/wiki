@@ -24,7 +24,7 @@ https://docs.together.ai/docs/rate-limits
 | 账户状态 | 每分钟限制 (RPM) | 每日请求上限 (RPD) |
 | 未充值的用户 (Tier 0) | 20 RPM | 50 次请求/天 |
 | 已充值 ≥ $10 的用户 | 20 RPM | 1000 次请求/天 |
-省钱方案：OpenRouter 上的 DeepSeek R1 或 Claude 3.5 Haiku 价格极其低廉（几块钱能写上万行代码）。用付费模型，[[VSCode#Cline|Cline]] 运行起来会像“丝滑的自动驾驶”，而用免费模型则像“走走停停的烂车”。
+省钱方案：OpenRouter 上的 DeepSeek R1 或 Claude 3.5 Haiku 价格极其低廉（几块钱能写上万行代码）。用付费模型，[Cline](#VSCode) 运行起来会像“丝滑的自动驾驶”，而用免费模型则像“走走停停的烂车”。
 
 #### Free Model
 

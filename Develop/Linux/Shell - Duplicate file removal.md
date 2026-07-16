@@ -30,7 +30,7 @@ if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
 fi
 
 # Set working directory
-if [ -n "$1" ] && [[ "$1" != "N" ]]; then
+if [ -n "$1" ] && [ "$1" != "N" ](#_"$1"_!=_"N"_); then
     directory="$1"
     if [ ! -d "$directory" ]; then
         echo "Error: Directory '$directory' not found." >&2    # stderr

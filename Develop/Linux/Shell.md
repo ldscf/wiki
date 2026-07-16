@@ -251,10 +251,10 @@ else
     echo "$2 == N"
 fi
 
-# [[ ... ]] 是 Bash 语法，提供更强大的字符串匹配和更少的意外行为
+# [ ... ](#_..._) 是 Bash 语法，提供更强大的字符串匹配和更少的意外行为
 
-## 可以进行不区分大小写的比较: if [[ "${2,,}" != "n" ]]; then
-if [[ "$2" != "N" ]]; then
+## 可以进行不区分大小写的比较: if [ "${2,,}" != "n" ](#_"${2,,}"_!=_"n"_); then
+if [ "$2" != "N" ](#_"$2"_!=_"N"_); then
     echo "$2 <> N"
 else
     echo "$2 == N"
@@ -433,18 +433,18 @@ FN=(A B C)相当于定义了一个数组，FN[0] 的值是 A，亦可以写作 F
 #### 字符串 子串
 ```
  # 包含
- [[ $string =~ $sub]]
+ [ $string =~ $sub](#_$string_=~_$sub)
  # 开头
- [[ $string = $sub*]]
+ [ $string = $sub*](#_$string_=_$sub*)
  # 结束
- [[ $string = *$sub]]
+ [ $string = *$sub](#_$string_=_*$sub)
 ```
  
 ```
  # 正则
- [[ $string =~ ^.*$sub.*$]]
- [[ $string =~ ^$sub.*$]]
- [[ $string =~ ^.*$sub$]]
+ [ $string =~ ^.*$sub.*$](#_$string_=~_^.*$sub.*$)
+ [ $string =~ ^$sub.*$](#_$string_=~_^$sub.*$)
+ [ $string =~ ^.*$sub$](#_$string_=~_^.*$sub$)
 ```
 
 #### 字符串 按分隔符取段

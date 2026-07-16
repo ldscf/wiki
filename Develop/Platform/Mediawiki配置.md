@@ -188,7 +188,7 @@ $wgObjectCaches['db-replicated'] = [
 
 当用户将鼠标悬停在一个页面和分别的引用时，[弹窗（Popups）扩展](https://www.mediawiki.org/wiki/Extension:Popups)会预览一篇文章的内容，对于引用，还会显示引用的完整内容。
 
-This extension has a hard dependency on **[[Mediawiki帮助#扩展:TextExtracts|Extension:TextExtracts]]** and **Extension:PageImages** when used with the default mwApiPlain gateway. 
+This extension has a hard dependency on **[Extension:TextExtracts](#Mediawiki帮助)** and **Extension:PageImages** when used with the default mwApiPlain gateway. 
 
 [Popups 1.39 Download](https://extdist.wmflabs.org/dist/extensions/Popups-REL1_39-fedc2c6.tar.gz)
 

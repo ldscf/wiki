@@ -5,7 +5,7 @@ categories:
 - Platform
 last_modified: '2024-12-02T07:58:42Z'
 ---
-Jenkins 是一个开源的、可扩展的自动化服务器，广泛用于[[CI CD|持续集成和持续交付]]的流水线中。
+Jenkins 是一个开源的、可扩展的自动化服务器，广泛用于[持续集成和持续交付](#CI_CD)的流水线中。
 
 ### 概述
 
@@ -61,7 +61,7 @@ Jenkins Pipeline 是一种用于实现持续交付的工具插件，它提供了
 
 # Stage: 流水线被划分为多个阶段，每个阶段代表一个特定的构建步骤，如构建、测试、部署等（可嵌套）
 
-# Step : 每个 stage 由多个 step 组成，step 是最小的执行单元，如运行 [[Shell基础|shell 脚本(Linux Shell)]]、执行 script 脚本(Jenkins script)等
+# Step : 每个 stage 由多个 step 组成，step 是最小的执行单元，如运行 [shell 脚本(Linux Shell)](#Shell基础)、执行 script 脚本(Jenkins script)等
 
 #### parallel
  ```
@@ -143,7 +143,7 @@ pipeline {
                 }
                 sh '''
                     html_file_name=$(find /home/test/report_dir -name src-mig*.html)
-                    if [[ ${html_file_name} ]]; then 
+                    if [ ${html_file_name} ](#_${html_file_name}_); then 
                         mv ${html_file_name} /home/test/htmlreports/SourceCodeScanningReport.html
                     fi
                 '''
@@ -176,7 +176,7 @@ pipeline {
                     sh '''
                      cd /home/test
                      file_name=$(find  ./ -name *.tar.gz)
-                        if [[ ${file_name} ]]; then 
+                        if [ ${file_name} ](#_${file_name}_); then 
                             mv ${file_name} /home/jenkins/workspace/TongRDS_2.2/report_dir/${file_name}
                         fi 
                     '''
@@ -205,7 +205,7 @@ pipeline {
                                         ''')
                     sh '''
                         html_file_name=$(find /home/test/report_dir -name pkg-mig*.html)
-                        if [[ ${html_file_name} ]]; then 
+                        if [ ${html_file_name} ](#_${html_file_name}_); then 
                             mv ${html_file_name} /home/test/htmlreports/SoftwareMigrationAssessment.html
                         fi
                         '''

@@ -359,4 +359,4 @@ v2.2.224 读以前版本的数据文件报错：
 
 Spring Assistant 1.05 版本的更新时间是：Jun 09, 2023
 
-P.S. 不使用插件 IDEA CE 一样可以开发 Spring Boot 程序。See Also: [[Spring_Boot_微服务极简化开发]]
+P.S. 不使用插件 IDEA CE 一样可以开发 Spring Boot 程序。See Also: [Spring_Boot_微服务极简化开发](#Spring_Boot_微服务极简化开发)

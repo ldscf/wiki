@@ -6,7 +6,7 @@ categories:
 - Web
 last_modified: '2024-04-28T05:45:47Z'
 ---
-Nginx 是一个高性能的 HTTP 和反向代理 web 服务器，同时也提供了 IMAP/POP3/SMTP 服务。Nginx 是由伊戈尔·赛索耶夫（[[wikipedia:Igor_Sysoev|Igor Sysoev]]）2002年在俄罗斯访问量第二的 Rambler.ru 站点（Рамблер）时开发的。
+Nginx 是一个高性能的 HTTP 和反向代理 web 服务器，同时也提供了 IMAP/POP3/SMTP 服务。Nginx 是由伊戈尔·赛索耶夫（[Igor Sysoev](#wikipedia:Igor_Sysoev)）2002年在俄罗斯访问量第二的 Rambler.ru 站点（Рамблер）时开发的。
 
 源代码以类BSD许可证的形式发布，因它的高并发、稳定性、低系统资源占用、丰富的功能集、简单的配置文件而闻名。
 

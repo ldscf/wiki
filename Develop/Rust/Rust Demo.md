@@ -126,7 +126,7 @@ edition = "2021"
 u_other = { path = "crates/other" }                      **# u_other，需要与 crates/other/Cargo.toml 中的包名一致。**
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
-[[bin]]
+[bin](#bin)
 name = "demo"
 path = "src/main.rs"
 ```

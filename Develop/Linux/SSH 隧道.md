@@ -3,7 +3,7 @@ source_title: SSH 隧道
 categories:
 - Develop
 - Linux
-last_modified: '2026-01-04T03:08:37Z'
+last_modified: '2026-06-23T06:26:37Z'
 ---
 SSH 隧道（SSH Tunneling），也称 SSH 端口转发，是 SSH 协议中极具威力的功能。它通过加密的 SSH 连接传输其他网络协议的数据，常用于安全通信、绕过防火墙限制以及访问内网服务。
 
@@ -98,6 +98,13 @@ AllowTcpForwarding yes
 ```
 
 ### Example
+
+#### 本地端口转发
+
+把远程主机的资源拉到当前的本地机器。localhost 可以换成任何 209 能访问的主机。
+```
+ ssh -f -N -L 18082:localhost:18082 root@192.168.0.209
+```
 
 #### 连接保持
 1. 网络设备超时：防火墙/NAT 设备通常会在 5-30 分钟无流量后清除会话

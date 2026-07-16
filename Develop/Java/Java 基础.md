@@ -107,7 +107,7 @@ Java 的访问控制是停留在编译层的，也就是它不会在 .class 文�
  System.out.println(test4.VERSION);
 ```
 
-See also: [[Java Hello]]
+See also: [Java Hello](#Java_Hello)
 
 ### 源文件声明规则
 - 一个源文件中只能有一个 public 类，多个非 public 类

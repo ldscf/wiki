@@ -23,7 +23,7 @@ Markdown 是一种轻量级标记语言，排版语法简洁，让人们更多�
 - 块引用包含其他元素: (> -, > 1)，并非所有元素都可以包含
 - 保留列表连续性的同时在列表中添加另一种元素: 将该元素缩进四个空格或一个制表符
 
-### [[LaTeX]]
+### [LaTeX](#LaTeX)
 ```
  $LaTex 内容$
  $\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$
@@ -31,7 +31,7 @@ Markdown 是一种轻量级标记语言，排版语法简洁，让人们更多�
 
 $$\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
 
-### [[UML#PlantUML_Example | plantUML]]
+### [ plantUML](#UML)
  ```
 
 ## 入门

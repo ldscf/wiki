@@ -409,7 +409,7 @@ Char/varchar support added as of Hive 0.14.0..
 | binary | unbase64(string str) | Converts the argument from a base 64 string to BINARY. (As of Hive 0.12.0.). |
 | string | upper(string A) ucase(string A) | Returns the string resulting from converting all characters of A to upper case. For example, upper('fOoBaR') results in 'FOOBAR'.. |
 | colspan="1" | string | colspan="1" | initcap(string A) | colspan="1" | Returns string, with the first letter of each word in uppercase, all other letters in lowercase. Words are delimited by whitespace. (As of Hive 1.1.0.). |
-| colspan="1" | int | colspan="1" | [[Levenshtein distance | levenshtein]](string A, string B) | colspan="1" | Returns the [[Levenshtein distance]] between two strings (as of Hive 1.2.0). For example, levenshtein('kitten', 'sitting') results in 3.. |
+| colspan="1" | int | colspan="1" | [ levenshtein](#Levenshtein_distance_)(string A, string B) | colspan="1" | Returns the [Levenshtein distance](#Levenshtein_distance) between two strings (as of Hive 1.2.0). For example, levenshtein('kitten', 'sitting') results in 3.. |
 | colspan="1" | string | colspan="1" | soundex(string A) | colspan="1" | Returns soundex code of the string (as of Hive 1.2.0). For example, soundex('Miller') results in M460.. |
 
 ### **聚合函数**

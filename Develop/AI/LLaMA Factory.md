@@ -5,7 +5,7 @@ categories:
 - Develop
 last_modified: '2025-01-23T08:32:40Z'
 ---
-LLaMA-Factory 是一个开源项目，它提供了一套全面的工具和脚本，用于微调、服务和基准测试 LLaMA 模型。[[Ollama|LLaMA]] 是 Meta AI 开发的一组基础语言模型。
+LLaMA-Factory 是一个开源项目，它提供了一套全面的工具和脚本，用于微调、服务和基准测试 LLaMA 模型。[LLaMA](#Ollama) 是 Meta AI 开发的一组基础语言模型。
 
 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)提供以下内容：
 - 数据预处理和标记化的脚本

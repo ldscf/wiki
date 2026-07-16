@@ -5,7 +5,7 @@ categories:
 - Develop
 - OtherDB
 - Redis
-last_modified: '2026-03-16T01:10:54Z'
+last_modified: '2026-07-01T01:08:51Z'
 ---
 [Redis](https://redis.io/)(Remote Dictionary Server, 远程字典服务)，是一个开源的使用 ANSI C 语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value 数据库。
 
@@ -100,13 +100,19 @@ echo 'export PATH="/opt/homebrew/opt/redis@6.2/bin:$PATH"' >> ~/.zshrc
 
 ##### Passwd
 ```
- redis-cli 
+ redis-cli -h 192.168.0.10 -p 6379
+```
+```
  # 认证密码
  auth "密码"
  # 查看密码
  config get requirepass
+```
+```
  # 修改密码
  config set requirepass "密码"
+ # 将修改同步到配置文件
+ config rewrite
 ```
 
 ##### 参数

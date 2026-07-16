@@ -57,7 +57,7 @@ wallet_*.zip 文件解压放入 TNS_ADMIN
 
 ### Run DBeaver With a Wallet
 
-See Also: [[DBeaver#Run DBeaver With a Datafuse jar|DBeaver]]
+See Also: [DBeaver](#DBeaver)
 
 ### Keep OracleDB
 

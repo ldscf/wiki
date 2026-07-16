@@ -35,9 +35,9 @@ last_modified: '2024-05-29T09:07:04Z'
 - 在第 40 届世界圣诞老人大会上，丹麦(The Kingdom of Denmark)属地格陵兰岛(Greenland)被确认为圣诞老人真正的故乡
 - 芬兰圣诞老人的信箱：Santa's Post Office Fin - 96930 Arctic Circle, Finland
 - 加拿大邮局每年会回复超过 100 万封来自世界各地寄给圣诞老人的信件，地址是：Santa Claus, North Pole H0H 0H0, Canada
-- 一百多年前，有孩子写信给纽约太阳报问“[[Is there a Santa Claus|是否真的有圣诞老人？]]”
+- 一百多年前，有孩子写信给纽约太阳报问“[是否真的有圣诞老人？](#Is_there_a_Santa_Claus)”
 
-#### [[北美防空司令部追踪圣诞老人]]
+#### [北美防空司令部追踪圣诞老人](#北美防空司令部追踪圣诞老人)
 
 北美防空司令部(NORAD)的前身美国大陆防空司令部 (CONAD) 在 1955 年就开始追踪圣诞老人了。1958 年，NORAD 取代了 CONAD，接管每年在全世界范围内追踪圣诞老人行踪的任务。
 

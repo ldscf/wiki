@@ -5,7 +5,7 @@ categories:
 - Develop
 last_modified: '2025-02-27T06:29:50Z'
 ---
-Ollama 是为了快速部署 [[LLaMA]] 大模型而诞生的，目前在 https://ollama.com/library 列出了可以支持部署的 LLM。
+Ollama 是为了快速部署 [LLaMA](#LLaMA) 大模型而诞生的，目前在 https://ollama.com/library 列出了可以支持部署的 LLM。
 
 ### Ollama
 
@@ -111,11 +111,11 @@ removing any unused layers
 success
 ```
 
-[[LLaMA]]
+[LLaMA](#LLaMA)
 
 Llama-3:8b(占用存储 4.7G) 可在一台 6T CPU/12G RAM 主机上运行，单个 chat 会将全部 CPU 跑满，内存占用 0.5G。而此环境所能使用的最大模型是 llava:13b，这是一个 8G 的模型，使用中内存占用约 2G。llama3.1:70b(39G): Error: llama runner process has terminated: signal: aborted (core dumped) 
 
-[[DeepSeek]]
+[DeepSeek](#DeepSeek)
 
 deepseek-r1:14b(占用存储 9.0G) 可在一台 6T CPU/16G RAM 主机上运行，内存占用 9 G 左右。
 

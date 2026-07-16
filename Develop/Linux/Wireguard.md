@@ -116,7 +116,7 @@ update-rc.d wireguard defaults
 
 ### 客户端
 
-[Windows 下载](https://www.wireguard.com/install/)（Mac/IOS 从 App Store 下载） wireguard，扫描 **[二维码](../../Article/科学/二维码)** 或导入从服务端创建的客户端文件即可。
+[Windows 下载](https://www.wireguard.com/install/)（Mac/IOS 从 App Store 下载） wireguard，扫描 **[二维码](#二维码)** 或导入从服务端创建的客户端文件即可。
 
 Ubuntu 安装：
 ```

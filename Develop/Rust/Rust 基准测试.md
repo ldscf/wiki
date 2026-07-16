@@ -26,10 +26,10 @@ license = "MIT OR Apache-2.0"
 publish = false                                  # 不发布基准测试 crate
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
-[[bench]]
+[bench](#bench)
 name = "main"
 harness = false                                  # 禁用默认的 bench harness
-[[bench]]
+[bench](#bench)
 name = "find_utf8_boundary"                      # 单独文件，且需要通过 --bench 执行。
 harness = false
 ```

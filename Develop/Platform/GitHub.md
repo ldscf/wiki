@@ -3,7 +3,7 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-05-26T05:59:08Z'
+last_modified: '2026-06-27T02:44:31Z'
 ---
 ### Overview
 
@@ -72,6 +72,8 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  git config --global color.ui true
  # 自动判断提交位置（clone 多个库）
  git config --global push.default matching
+ # 默认编辑器
+ git config --global core.editor "vim"
 ```
  
 ```
@@ -485,6 +487,28 @@ Host github.com
  ...
  EOF
  )"
+```
+
+#### 问题排查
+
+安全暂存当前所有改动
+```
+ git stash -u        # `-u` (or `--include-untracked`) 包括未追踪的新建文件
+ # 此时的代码状态正好处于那个“未 push 的 commit”
+ git stash apply     # 恢复，并保留。
+```
+
+回退本地 Commit
+```
+ git reset --soft HEAD~1
+ # Commit 里的代码变成“未提交的绿字”，可以用 `git diff` 查看改了哪些行
+```
+
+回到旧版本
+```
+ git log -5 --oneline                 # 查看历史记录
+ git switch --detach     # 此时会处于一个“分离头指针（Detached HEAD）”状态，这非常适合做只读测试
+ git switch main                      # 返回主线
 ```
 
 #### 放弃本地未暂存的修改

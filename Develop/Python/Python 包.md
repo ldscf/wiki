@@ -62,7 +62,7 @@ last_modified: '2025-11-07T00:53:39Z'
 
 | Package | Install | Import | Memo |
 | YAML | pyyaml | yaml | 配置文件、数据存储和数据传输 |
-| BeautifulSoup | BeautifulSoup4 | bs4 | 解析和导航 HTML/XML 结构，将 HTML 文档转换成一个 [[DOM]] 树形结构 |
+| BeautifulSoup | BeautifulSoup4 | bs4 | 解析和导航 HTML/XML 结构，将 HTML 文档转换成一个 [DOM](#DOM) 树形结构 |
 
 #### 支持的安装包版本
 ```

@@ -55,11 +55,11 @@ print(cos_sim)
 
 # model
 model = SentenceTransformer('BAAI/bge-large-zh-v1.5')
-#>>> tensor([[0.6472]])
+#>>> tensor([0.6472](#0.6472))
 model = SentenceTransformer('uer/sbert-base-chinese-nli')
-#>>> tensor([[0.6135]])
+#>>> tensor([0.6135](#0.6135))
 model = SentenceTransformer('distiluse-base-multilingual-cased')
-#>>> tensor([[0.6646]])
+#>>> tensor([0.6646](#0.6646))
 
 # 导出模型
 
@@ -84,8 +84,8 @@ print(cos_sim)
 ```
 ```
  # result
- tensor([[0.8960]])
- tensor([[0.1019]])
+ tensor([0.8960](#0.8960))
+ tensor([0.1019](#0.1019))
 ```
 
 ### 向量搜索
@@ -117,9 +117,9 @@ df['sentence'].iloc[I[0]]
  Name: sentence, dtype: object
  >>> 
  >>> D
- array([[341.92676, 638.62585, 787.46716, 848.5363 , 861.7328 ]], dtype=float32)
+ array([341.92676, 638.62585, 787.46716, 848.5363 , 861.7328 ](#341.92676,_638.62585,_787.46716,_848.5363_,_861.7328_), dtype=float32)
  >>> I
- array([[6, 3, 4, 7, 5]])
+ array([6, 3, 4, 7, 5](#6,_3,_4,_7,_5))
 ```
 ```
  # demo.txt

@@ -62,4 +62,4 @@ random 中出现，下列代码有很大机率出现错误。
 
 error while loading shared libraries: libcrypto.so.3: cannot open shared object file: No such file or directory
 
-需要 openssl 3，安装参见 [[openssl]]
+需要 openssl 3，安装参见 [openssl](#openssl)
