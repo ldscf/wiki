@@ -3,15 +3,16 @@ source_title: DeepSeek
 categories:
 - AI
 - Develop
-last_modified: '2025-02-12T07:26:30Z'
+last_modified: '2026-08-05T01:27:28Z'
 ---
-DeepSeek 是杭州深度求索人工智能基础技术研究有限公司（2023/7/17日成立）使用数据蒸馏技术生成的 LLM 产品。
-
-2024 年 1 月 5 日，发布第一个大模型 DeepSeek LLM
-
-2024 年 12 月 26 日，正式上线 DeepSeek-V3 首个版本并同步开源 
-
-2025 年 2 月 6 日，DeepSeek-R1、V3、Coder 等系列模型，已陆续上线国家超算互联网平台。澳大利亚政府以所谓“担心安全风险”为由，已禁止在所有政府设备中使用DeepSeek
+DeepSeek 是由杭州深度求索人工智能基础技术研究有限公司（2023/7/17 成立）推出的大语言模型产品系列。公司由幻方量化（High-Flyer）创始人梁文锋创办并担任CEO，总部位于杭州，专注于高效、开源的大模型研发，强调数据蒸馏、混合专家（MoE）架构和强化学习等技术路径。
+- 2023 年公司正式成立。11 月 2 日发布首个公开模型系列 DeepSeek Coder；11月29日发布 DeepSeek LLM（7B/67B 等规模）。
+- 2024 年 1 月 5 日，发布第一个大模型 DeepSeek LLM
+- 2024 年 12 月 26 日，正式上线 DeepSeek-V3 首个版本并同步开源
+- 2025 年 1 月 20 日，正式发布并开源推理模型 DeepSeek-R1。该模型在数学、代码和复杂推理任务上表现可与 OpenAI o1 媲美，且完全开源（MIT 许可）、训练成本极低（官方称约数百万美元量级），迅速引起全球 AI 圈关注。
+- 2025 年 2 月 6 日，DeepSeek-R1、V3、Coder 等系列模型，已陆续上线国家超算互联网平台。澳大利亚政府以所谓“担心安全风险”为由，已禁止在所有政府设备中使用DeepSeek。
+- 2026 年 4 月 24 日 以 Preview 形式正式发布并开源（MIT 许可），权重可在 Hugging Face 等平台获取。
+- 2026 年 7 月 31 日，发布 DeepSeek-V4-Flash-0731（正式版/官方版本），结构与参数规模与 Preview 完全一致，仅通过后训练大幅强化 Agent 能力。在多项 Agent/代码相关基准（如 Terminal Bench、Toolathlon、DeepSWE、DSBench 等）上显著超越此前的 V4-Pro Preview，并原生支持 Responses API 格式、针对 Codex 优化。API 已进入公开 beta。V4-Pro 的正式版当时仍待后续发布。
 
 ### DeepSeek-R1
 
@@ -31,3 +32,14 @@ DeepSeek-R1 蒸馏模型包括多个不同参数规模的版本，如：14b-qwen
 自研 MoE 模型，671B 参数，激活 37B，采用FP8，在 14.8T token 上进行了预训练。DeepSeek-V3的应用场景包括聊天和编码场景、多语言自动翻译、图像生成和AI绘画等，暂不支持多模态输入输出。
 
 在“大模型竞技场”的最新榜单中，DeepSeek-V3 进入前十。
+
+### DeepSeek-V4
+
+| 型号 | 总参数 | 激活参数 | 上下文长度 | 主要定位 |
+|:---|:---|:---|:---|:---|
+| DeepSeek-V4-Pro | 1.6T | 49B | 1M tokens | 旗舰能力（最大推理/知识/复杂 Agent） |
+| DeepSeek-V4-Flash | 284B | 13B | 1M tokens | 高效/低成本（速度与性价比优先） |
+- 最大输出可达约 384K tokens。
+- 精度：预训练多为 FP8 混合；后训练版本采用 FP4（MoE 专家）+ FP8 混合。
+- 预训练数据量超过 32T tokens。
+- 仍以文本输入/输出为主（与 V3 系列类似）。

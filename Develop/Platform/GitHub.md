@@ -3,7 +3,7 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-06-27T02:44:31Z'
+last_modified: '2026-07-27T06:17:25Z'
 ---
 ### Overview
 
@@ -131,89 +131,142 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 | git pull | 总是尝试合并到当前所在的分支 |
 | git pull origin main | 拉取并合并远程代码 |
 
-#### 增加
+#### 提交
 ```
- git status           # 查看文件状态
+ # git add $FN            # 指定文件
+ git add .                # 所有文件
+ git commit -m "......"   # 提交信息
 ```
  
 ```
- git add $FN
- git add .            # 所有
-```
-
-#### 提交
-```
- # 需要 git add
- git commit -m "comment content"
- git push
+ git push                 # 推送到远程
 ```
 ```
  # 多行提交信息
  git commit -m "$(cat <<'EOF'
- ...
+ ... ...
  EOF
  )"
 ```
 
-#### 数字签名
+#### 撤销与重置
 
-在 GitHub 的 PR 页面中，提交记录旁边的绿色 Verified 标志代表这个提交（Commit）拥有一个有效的数字签名（通常是 GPG、SSH 或 S/MIME 签名）。Git 默认并不要求对提交进行数字签名。
+##### 无破坏性操作
 
-**GitHub**
-1. 点击右上角个人信息 -> Settings -> (Access) SSH and GPG keys，点击 New SSH key（不要去点下方的 New GPG keys）
-1. Key type: 必须选择 "Signing Key"（默认是 Authentication Key，负责登录）
-1. Key: 粘贴 cat ~/.ssh/id_rsa_mc3.pub 内容
+此类操作不会物理抹杀未提交的代码，或仅在暂存区/指针层面变动，随时可通过反向命令或 git reflog 无损恢复。
 
-**本机**
+###### 撤销暂存区状态
 ```
- # 使用 SSH 模式签名
- git config --global gpg.format ssh
-```
- 
-```
- # 设置公钥路径（.ssh 目录下有私钥（id_rsa），或已加载 ssh-add ~/.ssh/id_rsa_mc3）
- git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
- # 设置公钥文件，一样可以：读取私钥 -> 推导出公钥 -> 签名
- # 问题：私钥在 ssh-agent、硬件 token，或者多人共用、CI/CD情况下，直接使用私钥文件不安全
-```
- 
-```
- # 开启数字签名（默认关闭）
- git config --global commit.gpgsign true
-```
-```
- # 有可能需要设置帐号的正确信息
- git config --global user.name ldscfe
- git config --global user.email ldscfe@gmail.com
-```
-```
- # 创建一个空提交并签名
- git commit --allow-empty -S -m "test: verify ssh commit signing"
+ git restore --staged 
+ 说明：将文件从“暂存区（Index）”撤回至“工作区（Working Directory）”。文件内容完全保留，无任何数据丢失风险。
 ```
 
-#### 去除
+###### 修改最后一次提交（仅限本地未推送）
 ```
- # .gitignore
+ git commit --amend
+```
+```
+ 说明：修改提交信息，或配合 git add 或 git rm --cached 使用。旧的 Commit 依然存放在本地 git reflog 中，随时可救回。
+```
+```
+ git add 
+ git commit --amend --no-edit          # 将新增文件附加到上次提交
+```
+
+###### 清除远程追踪但保留本地文件
+
+当临时文件（如日志、IDE 配置）已被 git add 甚至推送到远程，此时直接修改 .gitignore 是无效的：
+ ```
+1. 在项目根目录的 .gitignore 中补充过滤规则：
  .DS_Store
- .idea
  target/
- log/
- src/test/
-```
+ ...
  
-```
- # 已 git add 的文件，在 .gitignore 中标识无效
- # 删除远程文件/目录
- git rm -r --cached 目录名/
- git commit -m ""
+ 2. 仅从 Git 索引（暂存区/远程追踪）中移除，物理保留本地文件：
+ git rm -r --cached <目录名或文件名>
+ 
+ 3. 提交变动并推送至远程：
+ git commit -m "chore: remove tracked build artifacts and update .gitignore"
  git push
 ```
 
-#### 忽略
+说明：此操作只抹除了 Git 对该路径的索引追踪，不会删除本地磁盘上的文件。
+
+###### 抹掉最后一次提交
+
+物理丢弃：
 ```
- git update-index --skip-worktree 
- git update-index --no-skip-worktree 
+ git reset --hard HEAD~1
+ 找回：因为该提交进入过 Git 数据库，30 天内仍可通过 git reflog 找回 Commit ID 恢复
 ```
+  1. 查找历史记录，查找该提交的哈希值（如：f95ec8d）
+
+     git reflog
+  2. 恢复旧提交
+
+     git reset --hard f95ec8d
+
+撤销提交，但保留修改：
+```
+ git reset --soft HEAD~1
+ 只是撤回 Commit，把里面写的代码重新退回到本地工作区（相当于 git add xxx，但未 commit）
+```
+
+##### 有破坏性操作
+
+此类操作会彻底物理抹除未提交的代码、强制清空未跟踪文件，或重写已共享的远程主干历史。
+
+###### 将指定文件恢复至历史版本
+```
+ git restore --source HEAD~1 
+ 说明：用上一次 Commit 中的特定文件覆盖当前工作区文件。
+```
+
+###### 强制放弃本地未暂存/未跟踪的修改
+```
+ git restore  或 git restore :/
+ 破坏性：高
+ 说明：直接丢弃工作区中所有未暂存的修改。由于这些修改从未提交到版本库，一旦覆盖，磁盘代码物理消失，reflog 无法救回。
+```
+```
+ git clean -fd
+ 破坏性：极高
+ 说明：强制物理删除所有未被 Git 追踪的新建文件（-f）和空目录（-d）。不经过回收站，直接从文件系统抹除。
+```
+
+###### 强行回退分支指针并丢弃所有修改
+```
+ git reset --hard HEAD~1
+ 破坏性：极高
+ 说明：将 HEAD 指针、暂存区和工作区物理重置到上一版本。所有处于未提交状态的草稿代码将彻底丢失；已提交的 Commit 可通过 reflog 挽回。
+```
+
+###### 强制推送覆盖远程历史
+```
+ git push -f origin 
+ 破坏性：灾难级
+ 说明：盲目强推。直接用本地历史无差别覆盖远程服务器历史，可能导致团队其他人推送到远程的代码被物理蒸发。
+```
+```
+ git push origin main --force-with-lease
+ 破坏性：中高（带有防御锁）
+ 说明：带有安全拦截的强制推送。若远程主干有他人新增的 Commit 则拒绝覆盖。虽比 -f 安全，但依然属于重写远程共享历史的高危行为。
+```
+
+##### 操作安全分类速查表
+
+| 命令 | 操作对象 | 破坏性等级 | 救回可能性 (reflog / 恢复) |
+|:---|:---|:---|:---|
+| git restore --staged | 暂存区 | 🟢 无 | 100%（代码保留在工作区） |
+| git rm -r --cached | Git 索引（追踪状态） | 🟢 无 | 100%（本地物理文件不受影响） |
+| git commit --amend | 本地 Commit | 🟢 无/低 | 100%（可通过 git reflog 找回） |
+| git reset --hard HEAD~1 | HEAD~1 本地当前提交的前一次提交 | 🟢 低 | 100%（可通过 git reflog 找回） |
+| git push --force-with-lease | 远程分支历史 | 🔴 高 | 🟢 若触发安全拦截则无损 |
+| git restore --source | 工作区单个文件 | 🔴 高 | ❌ 不可恢复（未提交代码物理消失） |
+| git restore :/ | 工作区所有修改 | 🔴 高 | ❌ 不可恢复（未提交代码物理消失） |
+| git clean -fd | 未跟踪的新文件 | 🔴 极高 | ❌ 不可恢复（磁盘直接物理抹除） |
+| git reset --hard | 指针 + 暂存区 + 工作区 | 🔴 极高 | ⚠️ 未提交代码丢弃 |
+| git push -f | 远程分支历史 | 🔴 灾难级 | ⚠️ 需依赖他人本地副本手动恢复 |
 
 #### 分支
 
@@ -291,11 +344,10 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 **Git 会在文件里插入标记：**
  ```
 <<<<<<< HEAD
-你的代码（本地）
-
-###### 
-远程代码
->>>>>>> origin/main
+ 你的代码（本地）
+ =======
+ 远程代码
+ >>>>>>> origin/main
 ```
 
 **更安全地处理冲突 - rebase**
@@ -314,19 +366,12 @@ git clone git@github-ldscf:ldscfe/DocAI.git
  git stash clear     # 清空
 ```
 
-#### 命令禁用
-
-例如：禁用 push
-- 状态: git remote -v
-- 禁用: git remote set-url --push origin DISABLE
-- 恢复: git config --unset remote.origin.pushurl
-
 #### 验证 PR
 
 在本地创建一个隔离的环境来运行代码。本地代码先与远程主线拉齐。
  ```
 git checkout main
-git pull origin main
+ git pull origin main
 ```
 1. 获取远程更改，在本地创建临时测试分支  
 
@@ -352,18 +397,20 @@ git branch -D ${LOCAL_BRANCH}
 执行交互式变基时，指定的 Commit 哈希值在 Git 底层被称为**地基（Parent Commit）**。
 
 变基命令：git rebase -i 
-* **重要铁律**：输入的  将作为不可撼动的墙砖，它**不会**出现在编辑清单里。出现在清单里的，是它**之后**的所有提交。
-* **安全边界**：只要地基节点是已经 Push 的公共节点，重写其后的本地历史是**绝对安全**的，不会对远端造成任何冲突。
+
+***重要铁律**：输入的  将作为不可撼动的墙砖，它**不会**出现在编辑清单里。出现在清单里的，是它**之后**的所有提交。
+
+***安全边界**：只要地基节点是已经 Push 的公共节点，重写其后的本地历史是**绝对安全**的，不会对远端造成任何冲突。
 
 ##### 场景一：修改历史提交信息（Reword）
 
 当需要将早期某个未 Push 的提交信息重构，或者修正错别字时使用。
 1. **定位地基**：查到该错误提交的**前一个**稳定节点的哈希值（假设为 208409a）。
 1. **开启变基**：
-1. : git rebase -i 208409a
+1. :git rebase -i 208409a
 1. **标记节点**：在弹出的 Vim 编排清单中，找到需要修改的那一行，将开头的 pick 改为 reword（或简写为 r）。
 1. * 示例：
-1. *: reword 8dd600a doc: 新增研发立项管理需求规格说明书
+1. *:reword 8dd600a doc: 新增研发立项管理需求规格说明书
   1. **保存退出**：按 Esc，输入 :wq 回车。
   1. **注入新信息**：在随后弹出的新窗口中，直接修改，保存退出即可。
 
@@ -371,10 +418,10 @@ git branch -D ${LOCAL_BRANCH}
 
 当本地存在连续几个零碎的、同业务上下文的提交（如多次小型的文档修正），希望将其物理融合成一个高质量的单一节点时使用。
 1. **开启变基**：同样退后一步，引入这批提交之前的合法节点作为支撑点：
-1. : git rebase -i 208409a
+1. :git rebase -i 208409a
 1. **执行编排**：在清单中，保持最旧的那个节点为 pick（作为地基座），将后续需要吞并的节点全部改为 squash（或简写为 s）。
 1. * **折叠逻辑**：带有 squash 标记的节点会全量融入它的**上一行**。
-1. * 清单配置示例：
+1. *清单配置示例：
 1. *: pick 8dd600a doc: add R&D project initiation specs  
 
 squash c74fb83 doc: Create project initiation detailed design document.  
@@ -382,14 +429,63 @@ squash c74fb83 doc: Create project initiation detailed design document.
 squash 1a66ccc feat: add R&D project initiation management module  
 
 pick 117baf2 feat: v2 R&D project management upgrade
-1. *: *(注：上面的配置会将 c74fb83 和 1a66ccc 物理融合进 8dd600a 中，而最新的 117baf2 保持原样。)*
+1. *:*(注：上面的配置会将 c74fb83 和 1a66ccc 物理融合进 8dd600a 中，而最新的 117baf2 保持原样。)*
 1. **合并注释**：保存清单后，Git 会弹出最终的注释整合窗口。使用 # 注释掉或直接删除过期的临时提交日志，仅保留最终合并节点的内容，保存退出。
 
 ##### 规范审计
 
-重构完成后，必须在终端执行以下审计命令，确保历史树拓扑结构与签名完全符合预期再执行推送：
+重构完成后，必须在终端执行以下审计命令，确保历史树拓扑结构与签名完全符合预期再执行推送： 
 - git log -n 5 --oneline （检查节点数量与说明文字）
 - git log --pretty=format:"%h - %an, %ae : %s" -n 5 （审计作者签名，防止混入 [AI 缺省测试 ID](#AI_Agent)）
+
+#### 数字签名
+
+在 GitHub 的 PR 页面中，提交记录旁边的绿色 Verified 标志代表这个提交（Commit）拥有一个有效的数字签名（通常是 GPG、SSH 或 S/MIME 签名）。Git 默认并不要求对提交进行数字签名。
+
+**GitHub**
+1. 点击右上角个人信息 -> Settings -> (Access) SSH and GPG keys，点击 New SSH key（不要去点下方的 New GPG keys）
+1. Key type: 必须选择 "Signing Key"（默认是 Authentication Key，负责登录）
+1. Key: 粘贴 cat ~/.ssh/id_rsa_mc3.pub 内容
+
+**本机**
+```
+ # 使用 SSH 模式签名
+ git config --global gpg.format ssh
+```
+ 
+```
+ # 设置公钥路径（.ssh 目录下有私钥（id_rsa），或已加载 ssh-add ~/.ssh/id_rsa_mc3）
+ git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
+ # 设置公钥文件，一样可以：读取私钥 -> 推导出公钥 -> 签名
+ # 问题：私钥在 ssh-agent、硬件 token，或者多人共用、CI/CD情况下，直接使用私钥文件不安全
+```
+ 
+```
+ # 开启数字签名（默认关闭）
+ git config --global commit.gpgsign true
+```
+```
+ # 有可能需要设置帐号的正确信息
+ git config --global user.name ldscfe
+ git config --global user.email ldscfe@gmail.com
+```
+```
+ # 创建一个空提交并签名
+ git commit --allow-empty -S -m "test: verify ssh commit signing"
+```
+
+#### 忽略
+```
+ git update-index --skip-worktree 
+ git update-index --no-skip-worktree 
+```
+
+#### 命令禁用
+
+例如：禁用 push 
+- 状态: git remote -v
+- 禁用: git remote set-url --push origin DISABLE
+- 恢复: git config --unset remote.origin.pushurl
 
 ### Hooks
 
@@ -439,23 +535,22 @@ See also: [webhook Example - MWWiki](https://github.com/ldscfe/snippets/blob/mai
 **Local**
  ```
 git config --global user.name ldscfe
-git config --global user.email ldscfe@gmail.com
-git config --global color.ui true
-git config --global push.default matching
-git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_mc3"
-
-# 使用 SSH 模式签名
-git config --global gpg.format ssh
-git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
-git config --global commit.gpgsign true
-
-# 443 端口: GitHub 提供了一个备用端口，以备 22 端口不通畅的环境使用。
-
-# .ssh/config
-Host github.com
-    Hostname ssh.github.com
-    Port 443
-    User git
+ git config --global user.email ldscfe@gmail.com
+ git config --global color.ui true
+ git config --global push.default matching
+ git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_mc3"
+ 
+ # 使用 SSH 模式签名
+ git config --global gpg.format ssh
+ git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
+ git config --global commit.gpgsign true
+ 
+ # 443 端口: GitHub 提供了一个备用端口，以备 22 端口不通畅的环境使用。
+ # .ssh/config
+ Host github.com
+     Hostname ssh.github.com
+     Port 443
+     User git
 ```
 
 #### 提交脚本
@@ -463,22 +558,22 @@ Host github.com
 提交前展示提交内容，Y/y 确认后提交。
  ```
 #!/bin/bash
- 
- echo "--- Current Git Status ---"
- git status
- echo "--------------------------"
- 
- read -p "Confirm commit? (y/n): " confirm
- 
- if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
-     DT=$(date '+%Y/%m/%d %H:%M:%S')
-     git add .
-     git commit -m "User-defined class libraries, $DT"
-     git push
-     echo "Process completed successfully!"
- else
-     echo "Operation cancelled by user."
- fi
+  
+  echo "--- Current Git Status ---"
+  git status
+  echo "--------------------------"
+  
+  read -p "Confirm commit? (y/n): " confirm
+  
+  if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
+      DT=$(date '+%Y/%m/%d %H:%M:%S')
+      git add .
+      git commit -m "User-defined class libraries, $DT"
+      git push
+      echo "Process completed successfully!"
+  else
+      echo "Operation cancelled by user."
+  fi
 ```
 
 #### 提交多行文本
