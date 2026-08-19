@@ -5,7 +5,7 @@ categories:
 - Help
 last_modified: '2026-05-11T15:11:36Z'
 ---
-![Chrome-Logo-History.jpg](images/5/59/Chrome-Logo-History.jpg)
+![Chrome-Logo-History.jpg](https://mwbbs.eu.org/wiki/images/5/59/Chrome-Logo-History.jpg)
 
 Google Chrome 的诞生和发展是现代互联网历史上的一个重要事件，它深刻地改变了浏览器市场格局和 Web 技术的发展方向。
 
