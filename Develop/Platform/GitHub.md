@@ -3,7 +3,7 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-07-27T06:17:25Z'
+last_modified: '2026-08-17T02:09:42Z'
 ---
 ### Overview
 
@@ -286,7 +286,34 @@ git clone git@github-ldscf:ldscfe/DocAI.git
 删除分支
 ```
  git branch -a                       # 查看所有分支（本地 + 远程），如：remotes/origin/codex/review-readme.md-and-plan-pkg-005
- git push origin --delete $RN        # 不能删除当前正在使用的分支，如：RN=codex/review-readme.md-and-plan-pkg-005
+ git push origin --delete $RN        # 不能删除本地当前正在使用的分支，对于远程分支，有权限即可删除
+```
+ 
+```
+ # 在执行删除远程旧分支之前，确保远程没有本地漏掉的代码：
+ # 1. 先抓取远程最新状态
+ git fetch origin
+```
+ 
+```
+ # 2. 检查远程旧分支是否有你本地没有的 Commit
+ git log HEAD..origin/$RN --oneline
+```
+ ```
+在清理本地分支时，简单的 git branch --no-merged 仅比对 Commit Hash。若分支通过 cherry-pick、rebase 或 Squash Merge 合并进主干，Hash 会改变，导致 Git 误判为“未合并”。
+
+# 1. 查看已完全合并至 main 的分支（可安全删除）
+git branch --merged main
+
+# 2. 查看 Hash 未对齐的“未合并”分支
+git branch --no-merged main
+
+# 3. 终极诊断：检测分支代码内容是否已物理存在于 main 中
+git cherry -v main <分支名>
+
+# 结果判定法则:
+-（减号）：代表该提交的内容已 100% 存在于 main 中（Hash 不同但代码已合并）。可放心执行 git branch -D <分支名> 物理粉碎。
++（加号）：代表该提交包含 main 中不存在的独占代码。强删会导致代码丢失，需先推送云端备份或进行 cherry-pick。
 ```
 
 修改分支名称
@@ -535,22 +562,23 @@ See also: [webhook Example - MWWiki](https://github.com/ldscfe/snippets/blob/mai
 **Local**
  ```
 git config --global user.name ldscfe
- git config --global user.email ldscfe@gmail.com
- git config --global color.ui true
- git config --global push.default matching
- git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_mc3"
- 
- # 使用 SSH 模式签名
- git config --global gpg.format ssh
- git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
- git config --global commit.gpgsign true
- 
- # 443 端口: GitHub 提供了一个备用端口，以备 22 端口不通畅的环境使用。
- # .ssh/config
- Host github.com
-     Hostname ssh.github.com
-     Port 443
-     User git
+git config --global user.email ldscfe@gmail.com
+git config --global color.ui true
+git config --global push.default matching
+git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa_mc3"
+
+# 使用 SSH 模式签名
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_rsa_mc3.pub
+git config --global commit.gpgsign true
+
+# 443 端口: GitHub 提供了一个备用端口，以备 22 端口不通畅的环境使用。
+
+# .ssh/config
+Host github.com
+    Hostname ssh.github.com
+    Port 443
+    User git
 ```
 
 #### 提交脚本
