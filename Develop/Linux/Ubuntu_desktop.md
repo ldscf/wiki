@@ -3,7 +3,7 @@ source_title: Ubuntu desktop
 categories:
 - Linux
 - Ubuntu
-last_modified: '2026-01-02T14:05:19Z'
+last_modified: '2026-08-26T06:26:55Z'
 ---
 ### Xrdp
 
@@ -12,22 +12,14 @@ Port: 3389, 3350
 #### Install
 ```
  # xfce4 传统风格
- apt install xrdp xorgxrdp
- apt install xfce4 xfce4-goodies
+ apt install xrdp xorgxrdp xfce4
+ echo "startxfce4" > ~/.xsession    # 用哪个用户就在哪个用户下执行
 ```
  
 ```
- # GNOME Shell 桌面
- # apt install ubuntu-desktop
- # apt install xrdp
+ systemctl enable xrdp
+ systemctl start xrdp
 ```
- 
-```
- # restart
- systemctl restart xrdp
-```
-
-重安装可解决忽然连接不上/黑屏等问题。
 ```
  # Remove xrdp
  apt update
@@ -46,7 +38,7 @@ Port: 3389, 3350
  # 无公网端口，安全性等同于 SSH
  port=127.0.0.1:3389
  # 在本地客户端上运行
- ssh -L 23389:127.0.0.1:3389 bi@server
+ ssh -L 23389:127.0.0.1:3389 bi@mc3.en
 ```
 
 #### Error
@@ -267,4 +259,28 @@ ln -s /etc/apparmor.d/usr.bin.firefox /etc/apparmor.d/disable/
 1. 禁用下次系统启动时加载这个配置文件
 apparmor_parser -R /etc/apparmor.d/usr.bin.firefox
 1. 用于从内核中立即卸载一个已经加载的 AppArmor 配置文件。
+```
+
+#### Chrome
+
+在国内某些云主机上安装 Chrome 时，在图形终端打开 Chrome 无反应，主要是沙盒的原因。
+
+Ubuntu 24.04 默认开了 kernel.apparmor_restrict_unprivileged_userns=1，Chrome 创建用户命名空间会被挡。
+
+**no-sandbox**
+```
+ google-chrome --no-sandbox
+```
+
+-.或者.-
+
+**全局关掉限制**
+```
+ echo 'kernel.apparmor_restrict_unprivileged_userns = 0' | tee /etc/sysctl.d/20-apparmor-donotrestrict.conf
+ sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+```
+
+然后重新登录 rds 用户
+```
+ google-chrome
 ```

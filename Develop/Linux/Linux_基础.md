@@ -3,7 +3,7 @@ source_title: Linux 基础
 categories:
 - Develop
 - Linux
-last_modified: '2026-03-31T02:30:13Z'
+last_modified: '2026-08-26T02:37:30Z'
 ---
 以下命令及参数，均在 Centos7 环境下测试通过。
 
@@ -12,6 +12,8 @@ last_modified: '2026-03-31T02:30:13Z'
 #### SSH
 ```
  # /etc/ssh/sshd_config
+ # 生效
+ sshd -t && sudo systemctl reload ssh
 ```
 
 **无 22 登录**
@@ -33,7 +35,7 @@ last_modified: '2026-03-31T02:30:13Z'
  # UsePAM yes
 ```
 
-**只允许某用户密码登录**
+**允许某用户密码登录**
 ```
  PasswordAuthentication no
  ...
@@ -56,6 +58,27 @@ last_modified: '2026-03-31T02:30:13Z'
  # 允许密钥登录
  RSAAuthentication yes
  PubkeyAuthentication yes
+```
+
+##### SSH 禁止密码登录
+```
+ #/etc/ssh/sshd_config
+ PasswordAuthentication no
+```
+
+Ubuntu 22.04 默认在 /etc/ssh/sshd_config 的顶部引入了配置目录：
+```
+ Include /etc/ssh/sshd_config.d/*.conf
+```
+
+所以
+```
+ grep -i "PasswordAuthentication" /etc/ssh/sshd_config.d/*.conf
+```
+ 
+```
+ # Fix, 如果上面有文件 yes
+ sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' ${FN}
 ```
 
 #### DNS

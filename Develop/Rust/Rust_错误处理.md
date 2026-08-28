@@ -3,11 +3,11 @@ source_title: Rust 错误处理
 categories:
 - Develop
 - Rust
-last_modified: '2025-12-08T01:43:28Z'
+last_modified: '2026-08-24T05:56:23Z'
 ---
 Box vs anyhow::Result 对比分析
 
-## 1. 基础语法对比
+### 基础语法对比
 ```
  // 方式1：标准库方式
  fn main() -> Result<(), Box> {
@@ -36,9 +36,9 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 2. 详细对比分析
+### 详细对比分析
 
-### 标准库方式：Box
+#### 标准库方式：Box
 ```
  fn std_lib_example() -> Result<(), Box> {
 ```
@@ -72,7 +72,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-### anyhow方式：anyhow::Result
+#### anyhow方式：anyhow::Result
 ```
  use anyhow::{Result, Context};
 ```
@@ -106,9 +106,9 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 3. 优缺点详细对比
+### 优缺点详细对比
 
-### Box 的优点
+#### Box 的优点
 
 **1. 零依赖，标准库支持**
 ```
@@ -170,7 +170,7 @@ Box vs anyhow::Result 对比分析
 
          Ok(content) => println!("Config: {}", content),
 
-         Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+         Err(e) if e.kind() === std::io::ErrorKind::NotFound => {
 
              println!("Config file not found, using defaults");
 
@@ -245,7 +245,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-### anyhow::Result 的优点
+#### anyhow::Result 的优点
 
 **1. 简洁的语法**
 ```
@@ -420,7 +420,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 4. 性能对比
+### 性能对比
 ```
  use std::error::Error;
  use std::time::Instant;
@@ -470,9 +470,9 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 5. 实际项目选择建议
+### 实际项目选择建议
 
-### 使用 Box 的场景
+#### 使用 Box 的场景
 
 **库（Library）开发**
 ```
@@ -521,7 +521,7 @@ Box vs anyhow::Result 对比分析
 
          Ok(content) => process(&content),
 
-         Err(e) if e.kind() == io::ErrorKind::PermissionDenied => {
+         Err(e) if e.kind() === io::ErrorKind::PermissionDenied => {
 
              eprintln!("Permission denied! Need to run as admin.");
 
@@ -538,7 +538,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-### 使用 anyhow::Result 的场景
+#### 使用 anyhow::Result 的场景
 
 **应用程序（Application）开发**
 ```
@@ -620,7 +620,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 6. 混合使用策略
+### 混合使用策略
 ```
  // 在实际项目中可以混合使用
  use anyhow::{Result as AnyhowResult, Context};
@@ -689,7 +689,7 @@ Box vs anyhow::Result 对比分析
  }
 ```
 
-## 7. 总结对比表格
+### 总结对比表格
 
 | 特性 | Box | anyhow::Result |
 |:---|:---|:---|
@@ -703,9 +703,9 @@ Box vs anyhow::Result 对比分析
 | **宏支持** | 有限 | 丰富（anyhow!, bail!, ensure!） |
 | **性能** | 较好 | 非常好（经过优化） |
 
-## 8. 现代最佳实践
+### 现代最佳实践
 
-### 2024年推荐做法
+#### 2024年推荐做法
 ```
  // 库 crate
  pub mod lib {

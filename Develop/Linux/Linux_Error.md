@@ -3,8 +3,56 @@ source_title: Linux Error
 categories:
 - Develop
 - Linux
-last_modified: '2025-07-08T01:03:27Z'
+last_modified: '2026-08-27T05:30:59Z'
 ---
+### nsswitch.conf
+
+Name Service Switch 是 Linux 系统中控制系统名称服务查询顺序的核心配置文件。
+
+它决定了当系统需要查找用户密码、主机名、网络服务、组信息等系统数据库时，应该按什么顺序、去哪些数据源（如本地文件、DNS、LDAP、NIS 等）进行检索。
+
+#### 典型配置示例
+
+在标准的 Ubuntu / Debian 系统常见内容如下：
+ ```
+
+# /etc/nsswitch.conf
+passwd:         files systemd
+group:          files systemd
+shadow:         files
+gshadow:        files
+hosts:          files dns
+networks:       files
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+```
+
+格式：数据库: 服务模块1 [条件] 服务模块2 ...
+
+| 数据库 (Database) | 控制的系统查找行为 | 常用模块与默认查询顺序 |
+|:---|:---|:---|
+| hosts | 解析主机名与 IP 地址（如 ping 或 ssh 时） | files dns （先查 /etc/hosts，查不到再查 DNS） |
+| passwd | 获取系统用户账号信息 | files systemd（先查 /etc/passwd） |
+| group | 获取系统用户组信息 | files systemd（先查 /etc/group） |
+| shadow | 获取加密的用户密码信息 | files（查 /etc/shadow） |
+| services | 查找网络服务与端口对应表 | files（查 /etc/services） |
+
+#### SSSD
+
+接入集中式身份认证（LDAP / SSSD / Active Directory）
+
+在企业级内网服务器或跳板机中，如果要让 Linux 支持 LDAP/域账号登录，通常会修改 `nsswitch.conf` 追加 `sss` 模块：
+
+```text
+
+passwd:         files sss
+
+group:          files sss
+
+shadow:         files sss
+
 ### YUM
  ```
 yum install -y yum-utils device-mapper-persistent-data lvm2
