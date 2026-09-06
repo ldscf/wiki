@@ -4,7 +4,7 @@ categories:
 - AI
 - Develop
 - Tools
-last_modified: '2026-08-03T07:08:28Z'
+last_modified: '2026-09-04T08:49:17Z'
 ---
 Claude Code 是一个代理编码工具，可以读取代码库、编辑文件、运行命令。帮助构建功能、修复错误和自动化开发任务。能理解整个代码库、跨多个文件和工具工作以完成任务。可在终端、IDE、桌面应用和浏览器中使用。
 
@@ -58,7 +58,13 @@ uv 是快速的 Python 包管理器，项目强制使用。
  
 ```
  # .zshrc
- # -> export PATH="$HOME/.local/bin:$PATH"
+ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+ # .bashrc
+ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+```
+ 
+```
+ source ~/.bashrc
 ```
 ```
  # 验证

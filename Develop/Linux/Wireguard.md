@@ -4,7 +4,7 @@ categories:
 - Develop
 - Linux
 - Platform
-last_modified: '2026-04-06T04:26:06Z'
+last_modified: '2026-09-04T08:20:21Z'
 ---
 WireGuard 是一种实现加密虚拟专用网络（VPN）的通信协议和免费开源软件，通过 UDP 传递流量，旨在比 IPsec 和 OpenVPN 这两种常见的隧道协议具有更好的性能和更强大的功能，其设计目标是易于使用、高速性能和低攻击面。
 
@@ -18,7 +18,11 @@ WireGuard 是一种实现加密虚拟专用网络（VPN）的通信协议和免�
 
 #### wireguard
 ```
- apt install openresolv
+ # apt install openresolv
+ # 从 Ubuntu 23.10 开始，openresolv 和旧的 resolvconf 已经被官方仓库移除了。使用系统自带的 systemd-resolved 即可：
+ systemctl status systemd-resolved
+```
+```
  apt install wireguard
 ```
 
@@ -116,7 +120,7 @@ update-rc.d wireguard defaults
 
 ### 客户端
 
-[Windows 下载](https://www.wireguard.com/install/)（Mac/IOS 从 App Store 下载） wireguard，扫描 **[二维码](#二维码)** 或导入从服务端创建的客户端文件即可。
+[Windows 下载](https://www.wireguard.com/install/)（Mac/IOS 从 App Store 下载） wireguard，扫描 **[二维码](../../Article/科学/二维码)** 或导入从服务端创建的客户端文件即可。
 
 Ubuntu 安装：
 ```
