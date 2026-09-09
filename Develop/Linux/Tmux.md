@@ -3,7 +3,8 @@ source_title: Tmux
 categories:
 - Develop
 - Linux
-last_modified: '2026-06-03T07:01:56Z'
+- Tools
+last_modified: '2026-09-07T02:10:19Z'
 ---
 在通过 SSH 远程连接服务器运行程序（如 Claude CLI 或长期脚本）时，网络不稳定常导致连接断开、前台进程被迫中止。Tmux 通过在服务器上维持一个独立的后台服务，可实现「断线留存、重连恢复」。
 
@@ -12,8 +13,8 @@ last_modified: '2026-06-03T07:01:56Z'
 | 操作系统 | 安装命令 |
 |:---|:---|
 | **macOS** | brew install tmux |
-| **Ubuntu / Debian** | sudo apt install tmux |
-| **CentOS / RHEL / Rocky** | sudo dnf install tmux |
+| **Ubuntu / Debian** | apt install tmux |
+| **CentOS / RHEL / Rocky** | dnf install tmux |
 > **验证安装**：tmux -V
 
 修复：终端中触摸板上下滑动 -> 缓冲区滚动
@@ -46,4 +47,4 @@ last_modified: '2026-06-03T07:01:56Z'
 * **查看当前所有后台会话**：tmux ls
 * **关闭指定名字的会话**：tmux kill-session -t claude
 
-> **小贴士**：Tmux 所有的快捷键都需要先按 **前缀键** Ctrl + b 唤醒。例如：分离会话是 Ctrl + b ➡️ d；如果未来需要分屏，左右分屏是 Ctrl + b ➡️ %。
+> **小贴士**：Tmux 所有的快捷键都需要先按 **前缀键** Ctrl + b 唤醒。例如：分离会话是 Ctrl + b, d；如果未来需要分屏，左右分屏是 Ctrl + b, %。
