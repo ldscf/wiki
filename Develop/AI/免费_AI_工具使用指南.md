@@ -3,7 +3,7 @@ source_title: 免费 AI 工具使用指南
 categories:
 - AI
 - Develop
-last_modified: '2026-07-21T02:38:43Z'
+last_modified: '2026-09-16T02:12:30Z'
 ---
 本文整理适合个人开发者使用的免费 AI 工具。
 
@@ -326,3 +326,7 @@ OpenCode / Agnes Code
 | Claude Code 类方案 | Free-Claude |
 | GUI Agent | Agnes Code |
 | 模型服务 | NVIDIA NIM |
+
+### Github无法访问
+
+可以通过 [SOCKS_代理](../Platform/GitHub#SOCKS_代理)

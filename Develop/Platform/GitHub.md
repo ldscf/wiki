@@ -3,8 +3,10 @@ source_title: GitHub
 categories:
 - Develop
 - Platform
-last_modified: '2026-08-17T02:09:42Z'
+last_modified: '2026-09-16T02:12:14Z'
 ---
+GitHub 是目前全球最大的代码托管与协作平台，由 Git（分布式版本控制系统）衍生而来，成立于 2008 年，2018 年被微软收购。
+
 ### Overview
 
 #### GitHub Person
@@ -27,6 +29,14 @@ last_modified: '2026-08-17T02:09:42Z'
   - 免费(个人)版支持无限个数的私有(或公有)仓库, 每月2000分钟的自动构建时长, 单仓库最大 500M.
   - 查看详情: https://github.com/pricing
   - CI/CD，全称：持续集成 (Continuous Integration) ，持续部署 (Continuous Deployment) ，是开发流程的自动化利器
+
+#### SOCKS 代理
+
+使用本地的 SOCKS 代理（1080 端口）访问
+```
+ ssh -C -f -N -g -D 1080 bi@mc0.en
+ export ALL_PROXY=socks5h://127.0.0.1:1080
+```
 
 ### Git
 1. 当前机器 .ssh 中有 id_rsa 或指定私钥文件
